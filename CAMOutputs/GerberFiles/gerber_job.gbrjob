@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2020-05-31T03:46:08Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.6.1"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "SAME54-board"
+        },
+        "Owner": "wolffkris7 wolffkris7 <wolffkris7@gmail.com>",
+        "Size": {
+            "X": 70.79,
+            "Y": 119.37
+        }
+    }
+}
