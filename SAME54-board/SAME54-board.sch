@@ -12042,6 +12042,9 @@ Source: http://www.commcon.com/main</description>
 <part name="GND8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="JP7" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X17" device="" package3d_urn="urn:adsk.eagle:package:22490/2"/>
 <part name="P+8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="P+9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="R10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M1206" package3d_urn="urn:adsk.eagle:package:23566/2" value="1k"/>
+<part name="P+10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -12069,6 +12072,13 @@ Source: http://www.commcon.com/main</description>
 </instance>
 <instance part="P+8" gate="VCC" x="182.88" y="271.78" smashed="yes">
 <attribute name="VALUE" x="180.34" y="269.24" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R10" gate="G$1" x="218.44" y="193.04" smashed="yes" rot="R90">
+<attribute name="NAME" x="216.9414" y="189.23" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="221.742" y="189.23" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="P+10" gate="VCC" x="218.44" y="203.2" smashed="yes">
+<attribute name="VALUE" x="215.9" y="200.66" size="1.778" layer="96" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -12208,9 +12218,15 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA30"/>
 <wire x1="68.58" y1="180.34" x2="68.58" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="68.58" y1="203.2" x2="142.24" y2="203.2" width="0.1524" layer="91"/>
-<wire x1="142.24" y1="203.2" x2="142.24" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="142.24" y1="182.88" x2="195.58" y2="182.88" width="0.1524" layer="91"/>
-<label x="195.58" y="182.88" size="1.778" layer="95"/>
+<wire x1="142.24" y1="203.2" x2="142.24" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="177.8" x2="185.42" y2="177.8" width="0.1524" layer="91"/>
+<label x="195.58" y="177.8" size="1.778" layer="95"/>
+<pinref part="R10" gate="G$1" pin="1"/>
+<wire x1="185.42" y1="177.8" x2="195.58" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="218.44" y1="187.96" x2="218.44" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="218.44" y1="182.88" x2="185.42" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="185.42" y1="182.88" x2="185.42" y2="177.8" width="0.1524" layer="91"/>
+<junction x="185.42" y="177.8"/>
 </segment>
 </net>
 <net name="SWDIO" class="0">
@@ -12218,9 +12234,9 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA31"/>
 <wire x1="66.04" y1="180.34" x2="66.04" y2="205.74" width="0.1524" layer="91"/>
 <wire x1="66.04" y1="205.74" x2="144.78" y2="205.74" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="205.74" x2="144.78" y2="180.34" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="180.34" x2="195.58" y2="180.34" width="0.1524" layer="91"/>
-<label x="195.58" y="180.34" size="1.778" layer="95"/>
+<wire x1="144.78" y1="205.74" x2="144.78" y2="175.26" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="175.26" x2="195.58" y2="175.26" width="0.1524" layer="91"/>
+<label x="195.58" y="175.26" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TRACEDATA[3]" class="0">
@@ -12228,9 +12244,9 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC24"/>
 <wire x1="96.52" y1="180.34" x2="96.52" y2="210.82" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="210.82" x2="147.32" y2="210.82" width="0.1524" layer="91"/>
-<wire x1="147.32" y1="210.82" x2="147.32" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="147.32" y1="172.72" x2="195.58" y2="172.72" width="0.1524" layer="91"/>
-<label x="195.58" y="172.72" size="1.778" layer="95"/>
+<wire x1="147.32" y1="210.82" x2="147.32" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="167.64" x2="195.58" y2="167.64" width="0.1524" layer="91"/>
+<label x="195.58" y="167.64" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TRACEDATA[2]" class="0">
@@ -12238,9 +12254,9 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC25"/>
 <wire x1="93.98" y1="180.34" x2="93.98" y2="213.36" width="0.1524" layer="91"/>
 <wire x1="93.98" y1="213.36" x2="149.86" y2="213.36" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="213.36" x2="149.86" y2="170.18" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="170.18" x2="195.58" y2="170.18" width="0.1524" layer="91"/>
-<label x="195.58" y="170.18" size="1.778" layer="95"/>
+<wire x1="149.86" y1="213.36" x2="149.86" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="165.1" x2="195.58" y2="165.1" width="0.1524" layer="91"/>
+<label x="195.58" y="165.1" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TRACEDATA[1]" class="0">
@@ -12248,9 +12264,9 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC26"/>
 <wire x1="91.44" y1="180.34" x2="91.44" y2="215.9" width="0.1524" layer="91"/>
 <wire x1="91.44" y1="215.9" x2="152.4" y2="215.9" width="0.1524" layer="91"/>
-<wire x1="152.4" y1="215.9" x2="152.4" y2="167.64" width="0.1524" layer="91"/>
-<wire x1="152.4" y1="167.64" x2="195.58" y2="167.64" width="0.1524" layer="91"/>
-<label x="195.58" y="167.64" size="1.778" layer="95"/>
+<wire x1="152.4" y1="215.9" x2="152.4" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="162.56" x2="195.58" y2="162.56" width="0.1524" layer="91"/>
+<label x="195.58" y="162.56" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TRACECLK" class="0">
@@ -12258,9 +12274,9 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC27"/>
 <wire x1="88.9" y1="180.34" x2="88.9" y2="218.44" width="0.1524" layer="91"/>
 <wire x1="88.9" y1="218.44" x2="154.94" y2="218.44" width="0.1524" layer="91"/>
-<wire x1="154.94" y1="218.44" x2="154.94" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="154.94" y1="162.56" x2="195.58" y2="162.56" width="0.1524" layer="91"/>
-<label x="195.58" y="162.56" size="1.778" layer="95"/>
+<wire x1="154.94" y1="218.44" x2="154.94" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="157.48" x2="195.58" y2="157.48" width="0.1524" layer="91"/>
+<label x="195.58" y="157.48" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TRACEDATA[0]" class="0">
@@ -12268,9 +12284,9 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC28"/>
 <wire x1="86.36" y1="180.34" x2="86.36" y2="220.98" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="220.98" x2="157.48" y2="220.98" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="220.98" x2="157.48" y2="165.1" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="165.1" x2="195.58" y2="165.1" width="0.1524" layer="91"/>
-<label x="195.58" y="165.1" size="1.778" layer="95"/>
+<wire x1="157.48" y1="220.98" x2="157.48" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="160.02" x2="195.58" y2="160.02" width="0.1524" layer="91"/>
+<label x="195.58" y="160.02" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SWO" class="0">
@@ -12278,9 +12294,9 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PB30"/>
 <wire x1="63.5" y1="180.34" x2="63.5" y2="208.28" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="208.28" x2="160.02" y2="208.28" width="0.1524" layer="91"/>
-<wire x1="160.02" y1="208.28" x2="160.02" y2="177.8" width="0.1524" layer="91"/>
-<wire x1="160.02" y1="177.8" x2="195.58" y2="177.8" width="0.1524" layer="91"/>
-<label x="195.58" y="177.8" size="1.778" layer="95"/>
+<wire x1="160.02" y1="208.28" x2="160.02" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="172.72" x2="195.58" y2="172.72" width="0.1524" layer="91"/>
+<label x="195.58" y="172.72" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -12900,6 +12916,11 @@ Source: http://www.commcon.com/main</description>
 <wire x1="182.88" y1="269.24" x2="182.88" y2="264.16" width="0.1524" layer="91"/>
 <wire x1="182.88" y1="264.16" x2="200.66" y2="264.16" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="P+10" gate="VCC" pin="VCC"/>
+<pinref part="R10" gate="G$1" pin="2"/>
+<wire x1="218.44" y1="200.66" x2="218.44" y2="198.12" width="0.1524" layer="91"/>
+</segment>
 </net>
 </nets>
 </sheet>
@@ -13068,6 +13089,9 @@ Source: http://www.commcon.com/main</description>
 </instance>
 <instance part="GND8" gate="1" x="20.32" y="68.58" smashed="yes">
 <attribute name="VALUE" x="17.78" y="66.04" size="1.778" layer="96"/>
+</instance>
+<instance part="P+9" gate="VCC" x="45.72" y="175.26" smashed="yes">
+<attribute name="VALUE" x="43.18" y="172.72" size="1.778" layer="96" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -13458,14 +13482,6 @@ Source: http://www.commcon.com/main</description>
 <junction x="71.12" y="165.1"/>
 </segment>
 </net>
-<net name="VDDIO" class="0">
-<segment>
-<label x="144.78" y="167.64" size="1.778" layer="95"/>
-<wire x1="144.78" y1="167.64" x2="104.14" y2="167.64" width="0.1524" layer="91"/>
-<pinref part="C9" gate="G$1" pin="1"/>
-<wire x1="104.14" y1="165.1" x2="104.14" y2="167.64" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="VSW" class="0">
 <segment>
 <wire x1="144.78" y1="165.1" x2="132.08" y2="165.1" width="0.1524" layer="91"/>
@@ -13555,32 +13571,12 @@ Source: http://www.commcon.com/main</description>
 <pinref part="C7" gate="G$1" pin="1"/>
 <wire x1="144.78" y1="172.72" x2="114.3" y2="172.72" width="0.1524" layer="91"/>
 <wire x1="88.9" y1="180.34" x2="88.9" y2="165.1" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="180.34" x2="88.9" y2="180.34" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="180.34" x2="88.9" y2="180.34" width="0.1524" layer="91"/>
 <junction x="88.9" y="180.34"/>
 <wire x1="114.3" y1="172.72" x2="114.3" y2="180.34" width="0.1524" layer="91"/>
 <wire x1="114.3" y1="180.34" x2="88.9" y2="180.34" width="0.1524" layer="91"/>
-<pinref part="FL1" gate="G$1" pin="1"/>
-<wire x1="48.26" y1="170.18" x2="45.72" y2="170.18" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="170.18" x2="45.72" y2="180.34" width="0.1524" layer="91"/>
-<pinref part="FL1" gate="G$1" pin="2"/>
-<wire x1="48.26" y1="167.64" x2="45.72" y2="167.64" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="167.64" x2="45.72" y2="170.18" width="0.1524" layer="91"/>
-<junction x="45.72" y="170.18"/>
-<pinref part="FL1" gate="G$1" pin="3"/>
-<wire x1="48.26" y1="165.1" x2="45.72" y2="165.1" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="165.1" x2="45.72" y2="167.64" width="0.1524" layer="91"/>
-<junction x="45.72" y="167.64"/>
-<pinref part="FL1" gate="G$1" pin="4"/>
-<wire x1="48.26" y1="162.56" x2="45.72" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="162.56" x2="45.72" y2="165.1" width="0.1524" layer="91"/>
-<junction x="45.72" y="165.1"/>
-<pinref part="C5" gate="G$1" pin="1"/>
-<wire x1="45.72" y1="160.02" x2="45.72" y2="162.56" width="0.1524" layer="91"/>
-<junction x="45.72" y="162.56"/>
 <pinref part="C4" gate="G$1" pin="1"/>
 <wire x1="38.1" y1="160.02" x2="38.1" y2="180.34" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="180.34" x2="45.72" y2="180.34" width="0.1524" layer="91"/>
-<junction x="45.72" y="180.34"/>
 <pinref part="P+4" gate="VCC" pin="VCC"/>
 <wire x1="38.1" y1="180.34" x2="38.1" y2="182.88" width="0.1524" layer="91"/>
 <junction x="38.1" y="180.34"/>
@@ -13600,6 +13596,38 @@ Source: http://www.commcon.com/main</description>
 <pinref part="C10" gate="G$1" pin="1"/>
 <wire x1="114.3" y1="160.02" x2="114.3" y2="162.56" width="0.1524" layer="91"/>
 <label x="144.78" y="162.56" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="VDDIO" class="0">
+<segment>
+<pinref part="FL1" gate="G$1" pin="1"/>
+<wire x1="48.26" y1="170.18" x2="45.72" y2="170.18" width="0.1524" layer="91"/>
+<pinref part="FL1" gate="G$1" pin="2"/>
+<wire x1="48.26" y1="167.64" x2="45.72" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="167.64" x2="45.72" y2="170.18" width="0.1524" layer="91"/>
+<junction x="45.72" y="167.64"/>
+<pinref part="FL1" gate="G$1" pin="3"/>
+<wire x1="48.26" y1="165.1" x2="45.72" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="165.1" x2="45.72" y2="167.64" width="0.1524" layer="91"/>
+<junction x="45.72" y="165.1"/>
+<pinref part="FL1" gate="G$1" pin="4"/>
+<wire x1="48.26" y1="162.56" x2="45.72" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="162.56" x2="45.72" y2="165.1" width="0.1524" layer="91"/>
+<junction x="45.72" y="162.56"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<wire x1="45.72" y1="160.02" x2="45.72" y2="162.56" width="0.1524" layer="91"/>
+<pinref part="P+9" gate="VCC" pin="VCC"/>
+<wire x1="45.72" y1="172.72" x2="45.72" y2="170.18" width="0.1524" layer="91"/>
+<junction x="45.72" y="170.18"/>
+<label x="144.78" y="167.64" size="1.778" layer="95"/>
+<wire x1="144.78" y1="167.64" x2="104.14" y2="167.64" width="0.1524" layer="91"/>
+<pinref part="C9" gate="G$1" pin="1"/>
+<wire x1="104.14" y1="165.1" x2="104.14" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="167.64" x2="73.66" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="167.64" x2="73.66" y2="160.02" width="0.1524" layer="91"/>
+<junction x="104.14" y="167.64"/>
+<wire x1="73.66" y1="160.02" x2="45.72" y2="160.02" width="0.1524" layer="91"/>
+<junction x="45.72" y="160.02"/>
 </segment>
 </net>
 </nets>
