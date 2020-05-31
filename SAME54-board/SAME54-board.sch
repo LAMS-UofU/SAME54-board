@@ -12058,20 +12058,20 @@ Source: http://www.commcon.com/main</description>
 <instance part="GND1" gate="1" x="40.64" y="43.18" smashed="yes">
 <attribute name="VALUE" x="38.1" y="40.64" size="1.778" layer="96"/>
 </instance>
-<instance part="JP1" gate="A" x="220.98" y="116.84" smashed="yes">
-<attribute name="NAME" x="214.63" y="150.495" size="1.778" layer="95"/>
-<attribute name="VALUE" x="214.63" y="81.28" size="1.778" layer="96"/>
+<instance part="JP1" gate="A" x="175.26" y="116.84" smashed="yes">
+<attribute name="NAME" x="168.91" y="150.495" size="1.778" layer="95"/>
+<attribute name="VALUE" x="168.91" y="81.28" size="1.778" layer="96"/>
 </instance>
-<instance part="JP2" gate="A" x="-12.7" y="124.46" smashed="yes" rot="R180">
-<attribute name="NAME" x="-6.35" y="90.805" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-6.35" y="160.02" size="1.778" layer="96" rot="R180"/>
+<instance part="JP2" gate="A" x="0" y="124.46" smashed="yes" rot="R180">
+<attribute name="NAME" x="6.35" y="90.805" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="6.35" y="160.02" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="JP7" gate="G$1" x="203.2" y="246.38" smashed="yes">
-<attribute name="NAME" x="196.85" y="267.335" size="1.778" layer="95"/>
-<attribute name="VALUE" x="196.85" y="218.44" size="1.778" layer="96"/>
+<instance part="JP7" gate="G$1" x="172.72" y="246.38" smashed="yes">
+<attribute name="NAME" x="166.37" y="267.335" size="1.778" layer="95"/>
+<attribute name="VALUE" x="166.37" y="218.44" size="1.778" layer="96"/>
 </instance>
-<instance part="P+8" gate="VCC" x="182.88" y="271.78" smashed="yes">
-<attribute name="VALUE" x="180.34" y="269.24" size="1.778" layer="96" rot="R90"/>
+<instance part="P+8" gate="VCC" x="160.02" y="269.24" smashed="yes">
+<attribute name="VALUE" x="157.48" y="266.7" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="R10" gate="G$1" x="218.44" y="193.04" smashed="yes" rot="R90">
 <attribute name="NAME" x="216.9414" y="189.23" size="1.778" layer="95" rot="R90"/>
@@ -12341,7 +12341,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="43.18" y1="134.62" x2="40.64" y2="134.62" width="0.1524" layer="91"/>
 <junction x="40.64" y="134.62"/>
 <pinref part="JP7" gate="G$1" pin="2"/>
-<wire x1="200.66" y1="261.62" x2="40.64" y2="261.62" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="261.62" x2="40.64" y2="261.62" width="0.1524" layer="91"/>
 <wire x1="40.64" y1="261.62" x2="40.64" y2="182.88" width="0.1524" layer="91"/>
 <junction x="40.64" y="182.88"/>
 </segment>
@@ -12349,49 +12349,49 @@ Source: http://www.commcon.com/main</description>
 <net name="N$29" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PA20"/>
-<wire x1="218.44" y1="147.32" x2="119.38" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="147.32" x2="119.38" y2="147.32" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="1"/>
 </segment>
 </net>
 <net name="N$30" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB21"/>
-<wire x1="119.38" y1="144.78" x2="218.44" y2="144.78" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="144.78" x2="172.72" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="2"/>
 </segment>
 </net>
 <net name="N$31" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB20"/>
-<wire x1="119.38" y1="142.24" x2="218.44" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="142.24" x2="172.72" y2="142.24" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="3"/>
 </segment>
 </net>
 <net name="N$32" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB19"/>
-<wire x1="218.44" y1="139.7" x2="119.38" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="139.7" x2="119.38" y2="139.7" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="4"/>
 </segment>
 </net>
 <net name="N$33" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB18"/>
-<wire x1="119.38" y1="137.16" x2="218.44" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="137.16" x2="172.72" y2="137.16" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="5"/>
 </segment>
 </net>
 <net name="N$34" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB17"/>
-<wire x1="218.44" y1="134.62" x2="119.38" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="134.62" x2="119.38" y2="134.62" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="6"/>
 </segment>
 </net>
 <net name="N$35" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB16"/>
-<wire x1="119.38" y1="132.08" x2="218.44" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="132.08" x2="172.72" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="7"/>
 </segment>
 </net>
@@ -12399,7 +12399,7 @@ Source: http://www.commcon.com/main</description>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PC21"/>
 <wire x1="119.38" y1="124.46" x2="127" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="218.44" y1="129.54" x2="127" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="129.54" x2="127" y2="129.54" width="0.1524" layer="91"/>
 <wire x1="127" y1="129.54" x2="127" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="8"/>
 </segment>
@@ -12409,7 +12409,7 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC20"/>
 <wire x1="119.38" y1="121.92" x2="129.54" y2="121.92" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="121.92" x2="129.54" y2="127" width="0.1524" layer="91"/>
-<wire x1="129.54" y1="127" x2="218.44" y2="127" width="0.1524" layer="91"/>
+<wire x1="129.54" y1="127" x2="172.72" y2="127" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="9"/>
 </segment>
 </net>
@@ -12418,13 +12418,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC19"/>
 <wire x1="119.38" y1="119.38" x2="132.08" y2="119.38" width="0.1524" layer="91"/>
 <wire x1="132.08" y1="119.38" x2="132.08" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="132.08" y1="124.46" x2="218.44" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="124.46" x2="172.72" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="10"/>
 </segment>
 </net>
 <net name="N$39" class="0">
 <segment>
-<wire x1="218.44" y1="121.92" x2="134.62" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="121.92" x2="134.62" y2="121.92" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PC18"/>
 <wire x1="134.62" y1="121.92" x2="134.62" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="134.62" y1="116.84" x2="119.38" y2="116.84" width="0.1524" layer="91"/>
@@ -12436,13 +12436,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC17"/>
 <wire x1="119.38" y1="114.3" x2="137.16" y2="114.3" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="114.3" x2="137.16" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="119.38" x2="218.44" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="119.38" x2="172.72" y2="119.38" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="12"/>
 </segment>
 </net>
 <net name="N$41" class="0">
 <segment>
-<wire x1="218.44" y1="116.84" x2="139.7" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="116.84" x2="139.7" y2="116.84" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PC16"/>
 <wire x1="139.7" y1="116.84" x2="139.7" y2="111.76" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="111.76" x2="119.38" y2="111.76" width="0.1524" layer="91"/>
@@ -12454,13 +12454,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA19"/>
 <wire x1="119.38" y1="109.22" x2="142.24" y2="109.22" width="0.1524" layer="91"/>
 <wire x1="142.24" y1="109.22" x2="142.24" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="142.24" y1="114.3" x2="218.44" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="114.3" x2="172.72" y2="114.3" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="14"/>
 </segment>
 </net>
 <net name="N$43" class="0">
 <segment>
-<wire x1="218.44" y1="111.76" x2="144.78" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="111.76" x2="144.78" y2="111.76" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PA18"/>
 <wire x1="144.78" y1="111.76" x2="144.78" y2="106.68" width="0.1524" layer="91"/>
 <wire x1="144.78" y1="106.68" x2="119.38" y2="106.68" width="0.1524" layer="91"/>
@@ -12472,7 +12472,7 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA17"/>
 <wire x1="119.38" y1="104.14" x2="147.32" y2="104.14" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="104.14" x2="147.32" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="147.32" y1="109.22" x2="218.44" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="109.22" x2="172.72" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="16"/>
 </segment>
 </net>
@@ -12481,7 +12481,7 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA16"/>
 <wire x1="119.38" y1="101.6" x2="149.86" y2="101.6" width="0.1524" layer="91"/>
 <wire x1="149.86" y1="101.6" x2="149.86" y2="106.68" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="106.68" x2="218.44" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="106.68" x2="172.72" y2="106.68" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="17"/>
 </segment>
 </net>
@@ -12494,7 +12494,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="127" y1="81.28" x2="160.02" y2="81.28" width="0.1524" layer="91"/>
 <wire x1="160.02" y1="81.28" x2="160.02" y2="104.14" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="18"/>
-<wire x1="160.02" y1="104.14" x2="218.44" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="104.14" x2="172.72" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$47" class="0">
@@ -12506,7 +12506,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="129.54" y1="83.82" x2="157.48" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="83.82" x2="157.48" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="19"/>
-<wire x1="157.48" y1="101.6" x2="218.44" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="101.6" x2="172.72" y2="101.6" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$49" class="0">
@@ -12516,7 +12516,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="104.14" y1="66.04" x2="132.08" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="132.08" y1="66.04" x2="132.08" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="20"/>
-<wire x1="218.44" y1="99.06" x2="132.08" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="99.06" x2="132.08" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$50" class="0">
@@ -12526,7 +12526,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="134.62" y1="63.5" x2="101.6" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="63.5" x2="101.6" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="21"/>
-<wire x1="218.44" y1="96.52" x2="134.62" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="96.52" x2="134.62" y2="96.52" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$51" class="0">
@@ -12536,7 +12536,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="99.06" y1="60.96" x2="137.16" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="60.96" x2="137.16" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="22"/>
-<wire x1="218.44" y1="93.98" x2="137.16" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="93.98" x2="137.16" y2="93.98" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$52" class="0">
@@ -12546,7 +12546,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="139.7" y1="58.42" x2="96.52" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="58.42" x2="96.52" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="23"/>
-<wire x1="218.44" y1="91.44" x2="139.7" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="91.44" x2="139.7" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$53" class="0">
@@ -12556,7 +12556,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="93.98" y1="55.88" x2="152.4" y2="55.88" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="55.88" x2="152.4" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="24"/>
-<wire x1="218.44" y1="88.9" x2="152.4" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="88.9" x2="152.4" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$54" class="0">
@@ -12566,7 +12566,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="154.94" y1="53.34" x2="91.44" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="91.44" y1="53.34" x2="91.44" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="JP1" gate="A" pin="25"/>
-<wire x1="218.44" y1="86.36" x2="154.94" y2="86.36" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="86.36" x2="154.94" y2="86.36" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$48" class="0">
@@ -12575,7 +12575,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="88.9" y1="78.74" x2="88.9" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="88.9" y1="63.5" x2="27.94" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="63.5" x2="27.94" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="27.94" y1="93.98" x2="-10.16" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="93.98" x2="2.54" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="1"/>
 </segment>
 </net>
@@ -12585,7 +12585,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="86.36" y1="78.74" x2="86.36" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="66.04" x2="30.48" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="30.48" y1="66.04" x2="30.48" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="30.48" y1="96.52" x2="-10.16" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="30.48" y1="96.52" x2="2.54" y2="96.52" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="2"/>
 </segment>
 </net>
@@ -12595,7 +12595,7 @@ Source: http://www.commcon.com/main</description>
 <wire x1="78.74" y1="78.74" x2="78.74" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="68.58" x2="33.02" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="68.58" x2="33.02" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="33.02" y1="99.06" x2="-10.16" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="99.06" x2="2.54" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="3"/>
 </segment>
 </net>
@@ -12605,84 +12605,84 @@ Source: http://www.commcon.com/main</description>
 <wire x1="76.2" y1="78.74" x2="76.2" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="71.12" x2="35.56" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="71.12" x2="35.56" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="101.6" x2="-10.16" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="101.6" x2="2.54" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="4"/>
 </segment>
 </net>
 <net name="N$1" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PC07"/>
-<wire x1="43.18" y1="104.14" x2="-10.16" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="104.14" x2="2.54" y2="104.14" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="5"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PC06"/>
-<wire x1="-10.16" y1="106.68" x2="43.18" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="106.68" x2="43.18" y2="106.68" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="6"/>
 </segment>
 </net>
 <net name="N$5" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PC05"/>
-<wire x1="43.18" y1="109.22" x2="-10.16" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="109.22" x2="2.54" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="7"/>
 </segment>
 </net>
 <net name="N$6" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PA07"/>
-<wire x1="-10.16" y1="111.76" x2="43.18" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="111.76" x2="43.18" y2="111.76" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="8"/>
 </segment>
 </net>
 <net name="N$8" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PA06"/>
-<wire x1="43.18" y1="114.3" x2="-10.16" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="114.3" x2="2.54" y2="114.3" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="9"/>
 </segment>
 </net>
 <net name="N$9" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PA05"/>
-<wire x1="-10.16" y1="116.84" x2="43.18" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="116.84" x2="43.18" y2="116.84" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="10"/>
 </segment>
 </net>
 <net name="N$10" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PA04"/>
-<wire x1="43.18" y1="119.38" x2="-10.16" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="119.38" x2="2.54" y2="119.38" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="11"/>
 </segment>
 </net>
 <net name="N$11" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB09"/>
-<wire x1="-10.16" y1="121.92" x2="43.18" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="121.92" x2="43.18" y2="121.92" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="12"/>
 </segment>
 </net>
 <net name="N$12" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB08"/>
-<wire x1="43.18" y1="124.46" x2="-10.16" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="124.46" x2="2.54" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="13"/>
 </segment>
 </net>
 <net name="N$13" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB07"/>
-<wire x1="-10.16" y1="127" x2="43.18" y2="127" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="127" x2="43.18" y2="127" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="14"/>
 </segment>
 </net>
 <net name="N$14" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB06"/>
-<wire x1="43.18" y1="129.54" x2="-10.16" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="129.54" x2="2.54" y2="129.54" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="15"/>
 </segment>
 </net>
@@ -12691,13 +12691,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PB05"/>
 <wire x1="43.18" y1="137.16" x2="33.02" y2="137.16" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="137.16" x2="33.02" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="33.02" y1="132.08" x2="-10.16" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="132.08" x2="2.54" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="16"/>
 </segment>
 </net>
 <net name="N$16" class="0">
 <segment>
-<wire x1="-10.16" y1="134.62" x2="30.48" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="134.62" x2="30.48" y2="134.62" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PB04"/>
 <wire x1="30.48" y1="134.62" x2="30.48" y2="139.7" width="0.1524" layer="91"/>
 <wire x1="30.48" y1="139.7" x2="43.18" y2="139.7" width="0.1524" layer="91"/>
@@ -12709,13 +12709,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA03"/>
 <wire x1="43.18" y1="142.24" x2="27.94" y2="142.24" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="142.24" x2="27.94" y2="137.16" width="0.1524" layer="91"/>
-<wire x1="27.94" y1="137.16" x2="-10.16" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="137.16" x2="2.54" y2="137.16" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="18"/>
 </segment>
 </net>
 <net name="N$18" class="0">
 <segment>
-<wire x1="-10.16" y1="139.7" x2="25.4" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="139.7" x2="25.4" y2="139.7" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PA02"/>
 <wire x1="25.4" y1="139.7" x2="25.4" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="25.4" y1="144.78" x2="43.18" y2="144.78" width="0.1524" layer="91"/>
@@ -12727,13 +12727,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC03"/>
 <wire x1="43.18" y1="147.32" x2="22.86" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="22.86" y1="147.32" x2="22.86" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="142.24" x2="-10.16" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="142.24" x2="2.54" y2="142.24" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="20"/>
 </segment>
 </net>
 <net name="N$20" class="0">
 <segment>
-<wire x1="-10.16" y1="144.78" x2="20.32" y2="144.78" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="144.78" x2="20.32" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="20.32" y1="144.78" x2="20.32" y2="149.86" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PC02"/>
 <wire x1="20.32" y1="149.86" x2="43.18" y2="149.86" width="0.1524" layer="91"/>
@@ -12745,13 +12745,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PC01"/>
 <wire x1="43.18" y1="152.4" x2="17.78" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="152.4" x2="17.78" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="17.78" y1="147.32" x2="-10.16" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="147.32" x2="2.54" y2="147.32" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="22"/>
 </segment>
 </net>
 <net name="N$22" class="0">
 <segment>
-<wire x1="-10.16" y1="149.86" x2="15.24" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="149.86" x2="15.24" y2="149.86" width="0.1524" layer="91"/>
 <wire x1="15.24" y1="149.86" x2="15.24" y2="154.94" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PC00"/>
 <wire x1="15.24" y1="154.94" x2="43.18" y2="154.94" width="0.1524" layer="91"/>
@@ -12763,13 +12763,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA01"/>
 <wire x1="43.18" y1="157.48" x2="12.7" y2="157.48" width="0.1524" layer="91"/>
 <wire x1="12.7" y1="157.48" x2="12.7" y2="152.4" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="152.4" x2="-10.16" y2="152.4" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="152.4" x2="2.54" y2="152.4" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="24"/>
 </segment>
 </net>
 <net name="N$58" class="0">
 <segment>
-<wire x1="-10.16" y1="154.94" x2="10.16" y2="154.94" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="154.94" x2="10.16" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="10.16" y1="154.94" x2="10.16" y2="160.02" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PA00"/>
 <wire x1="10.16" y1="160.02" x2="43.18" y2="160.02" width="0.1524" layer="91"/>
@@ -12781,13 +12781,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA21"/>
 <wire x1="119.38" y1="149.86" x2="139.7" y2="149.86" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="149.86" x2="139.7" y2="223.52" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="223.52" x2="200.66" y2="223.52" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="223.52" x2="170.18" y2="223.52" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="17"/>
 </segment>
 </net>
 <net name="N$25" class="0">
 <segment>
-<wire x1="200.66" y1="226.06" x2="137.16" y2="226.06" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="226.06" x2="137.16" y2="226.06" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PA22"/>
 <wire x1="137.16" y1="226.06" x2="137.16" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="152.4" x2="119.38" y2="152.4" width="0.1524" layer="91"/>
@@ -12799,13 +12799,13 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA23"/>
 <wire x1="119.38" y1="154.94" x2="134.62" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="134.62" y1="154.94" x2="134.62" y2="228.6" width="0.1524" layer="91"/>
-<wire x1="134.62" y1="228.6" x2="200.66" y2="228.6" width="0.1524" layer="91"/>
+<wire x1="134.62" y1="228.6" x2="170.18" y2="228.6" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="15"/>
 </segment>
 </net>
 <net name="N$27" class="0">
 <segment>
-<wire x1="200.66" y1="231.14" x2="132.08" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="231.14" x2="132.08" y2="231.14" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PA24"/>
 <wire x1="132.08" y1="231.14" x2="132.08" y2="157.48" width="0.1524" layer="91"/>
 <wire x1="132.08" y1="157.48" x2="119.38" y2="157.48" width="0.1524" layer="91"/>
@@ -12817,7 +12817,7 @@ Source: http://www.commcon.com/main</description>
 <pinref part="IC1" gate="G$1" pin="PA25"/>
 <wire x1="119.38" y1="160.02" x2="129.54" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="160.02" x2="129.54" y2="233.68" width="0.1524" layer="91"/>
-<wire x1="129.54" y1="233.68" x2="200.66" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="129.54" y1="233.68" x2="170.18" y2="233.68" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="13"/>
 </segment>
 </net>
@@ -12825,14 +12825,14 @@ Source: http://www.commcon.com/main</description>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB22"/>
 <wire x1="106.68" y1="180.34" x2="106.68" y2="236.22" width="0.1524" layer="91"/>
-<wire x1="106.68" y1="236.22" x2="200.66" y2="236.22" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="236.22" x2="170.18" y2="236.22" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="12"/>
 </segment>
 </net>
 <net name="N$65" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB23"/>
-<wire x1="200.66" y1="238.76" x2="104.14" y2="238.76" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="238.76" x2="104.14" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="238.76" x2="104.14" y2="180.34" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="11"/>
 </segment>
@@ -12841,7 +12841,7 @@ Source: http://www.commcon.com/main</description>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB24"/>
 <wire x1="101.6" y1="180.34" x2="101.6" y2="241.3" width="0.1524" layer="91"/>
-<wire x1="101.6" y1="241.3" x2="200.66" y2="241.3" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="241.3" x2="170.18" y2="241.3" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="10"/>
 </segment>
 </net>
@@ -12849,14 +12849,14 @@ Source: http://www.commcon.com/main</description>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB25"/>
 <wire x1="99.06" y1="180.34" x2="99.06" y2="243.84" width="0.1524" layer="91"/>
-<wire x1="99.06" y1="243.84" x2="200.66" y2="243.84" width="0.1524" layer="91"/>
+<wire x1="99.06" y1="243.84" x2="170.18" y2="243.84" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="9"/>
 </segment>
 </net>
 <net name="N$68" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PA27"/>
-<wire x1="200.66" y1="246.38" x2="83.82" y2="246.38" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="246.38" x2="83.82" y2="246.38" width="0.1524" layer="91"/>
 <wire x1="83.82" y1="246.38" x2="83.82" y2="180.34" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="8"/>
 </segment>
@@ -12865,14 +12865,14 @@ Source: http://www.commcon.com/main</description>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB31"/>
 <wire x1="60.96" y1="180.34" x2="60.96" y2="248.92" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="248.92" x2="200.66" y2="248.92" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="248.92" x2="170.18" y2="248.92" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="7"/>
 </segment>
 </net>
 <net name="N$60" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB00"/>
-<wire x1="200.66" y1="251.46" x2="58.42" y2="251.46" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="251.46" x2="58.42" y2="251.46" width="0.1524" layer="91"/>
 <wire x1="58.42" y1="251.46" x2="58.42" y2="180.34" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="6"/>
 </segment>
@@ -12881,14 +12881,14 @@ Source: http://www.commcon.com/main</description>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB01"/>
 <wire x1="55.88" y1="180.34" x2="55.88" y2="254" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="254" x2="200.66" y2="254" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="254" x2="170.18" y2="254" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="5"/>
 </segment>
 </net>
 <net name="N$62" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB03"/>
-<wire x1="200.66" y1="259.08" x2="50.8" y2="259.08" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="259.08" x2="50.8" y2="259.08" width="0.1524" layer="91"/>
 <wire x1="50.8" y1="259.08" x2="50.8" y2="180.34" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="3"/>
 </segment>
@@ -12897,7 +12897,7 @@ Source: http://www.commcon.com/main</description>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB02"/>
 <wire x1="53.34" y1="180.34" x2="53.34" y2="256.54" width="0.1524" layer="91"/>
-<wire x1="53.34" y1="256.54" x2="200.66" y2="256.54" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="256.54" x2="170.18" y2="256.54" width="0.1524" layer="91"/>
 <pinref part="JP7" gate="G$1" pin="4"/>
 </segment>
 </net>
@@ -12913,8 +12913,8 @@ Source: http://www.commcon.com/main</description>
 <segment>
 <pinref part="P+8" gate="VCC" pin="VCC"/>
 <pinref part="JP7" gate="G$1" pin="1"/>
-<wire x1="182.88" y1="269.24" x2="182.88" y2="264.16" width="0.1524" layer="91"/>
-<wire x1="182.88" y1="264.16" x2="200.66" y2="264.16" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="266.7" x2="160.02" y2="264.16" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="264.16" x2="170.18" y2="264.16" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+10" gate="VCC" pin="VCC"/>
