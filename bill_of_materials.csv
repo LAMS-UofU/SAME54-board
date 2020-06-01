@@ -1,0 +1,10 @@
+Part,Quantity,Mouser Part #,Manufacturer Part #,Manufacturer,Description,Datasheet
+IC1,1,556-ATSAME54N20AAUT,ATSAME54N20A-AUT,Microchip,ARM Microcontrollers - MCU 120MHZ 1024KB FLASH 100 TQFP PKG IN 85C,https://www.mouser.com/ds/2/268/60001507A-1130176.pdf
+"C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11",11,603-AS1206KKX7YBB104 ,AS1206KKX7RYBB104 ,Yageo,"Multilayer Ceramic Capacitors MLCC - SMD/SMT 1206, 0.1uF 10% 250V AEC-Q200 ",https://www.mouser.com/datasheet/2/447/yageodocoutput-1313910.pdf
+FL1,1,81-BLA31AG221SN4D,BLA31AG221SN4D,Murata Electronics,"Murata Power Solutions Ferrite Bead, 3.2 x 1.6 x 0.8mm (3216), 220 impedance at 100 MHz",https://componentsearchengine.com/Datasheets/1/BLA31AG221SN4D.pdf
+J1,1,523-GSD09002SEU,GSD09002SEU,Amphenol,"Memory Card Connectors SD, 9 pos, 15U",https://www.arrow.com/en/products/gsd09002seu/amphenol
+J2,1,992-CON-SOCJ-2155,CON-SOCJ-2155,Gravitech,DC Power Connectors Power Jack/Connector 2.1mm x 5.5mm,http://www.produktinfo.conrad.com/datenblaetter/1500000-1599999/001582350-da-01-en-DC_EINBAUBUCHSE__SCHALTER_GESCHLOSSEN.pdf
+"JP1,JP2,JP4,JP7",3,649-68001-121HLF ,68001-121HLF ,Amphenol FCI,"20-pin header, 2.54mm spacing",https://www.mouser.com/datasheet/2/18/68000-1266375.pdf
+"R1,R2,R3,R4,R5,R6,R7,R8,R9,R10",10,71-CRCW120610K0FKEAC ,CRCW120610K0FKEAC,Vishay Semiconductors,"Thick Film Resistors - SMD 1206, 1/4Watt 10Kohms 1% Commercial Use ",https://www.mouser.com/datasheet/2/427/crcwce3-1223726.pdf
+L1,1,,,,,
+S1,1,612-LL3301BF065QJ,LL3301BF065QJ,E-Switch,Pushbutton Switches 50mA 12VDC F065 9.5mm J-Lead,http://spec_sheets.e-switch.com/specs/P010455.pdf
