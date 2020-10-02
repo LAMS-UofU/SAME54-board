@@ -144,7 +144,7 @@ examples/driver_examples.d examples/driver_examples.o: \
  ../hal/include/hal_usart_sync.h ../hal/include/hal_io.h \
  ../hal/include/hpl_usart_sync.h ../hal/include/hpl_usart.h \
  ../hal/include/hal_mci_sync.h ../hal/include/hpl_mci_sync.h \
- ../hal/utils/include/utils.h ../servo.h
+ ../hal/utils/include/utils.h ../servo.h ../lidar.h
 
 ../examples/driver_examples.h:
 
@@ -513,3 +513,5 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 ../hal/utils/include/utils.h:
 
 ../servo.h:
+
+../lidar.h:

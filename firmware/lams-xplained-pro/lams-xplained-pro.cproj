@@ -728,10 +728,10 @@
     <Compile Include="hpl\sercom\hpl_sercom.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hpl\tc\tc_lite.c">
+    <Compile Include="hpl\tc\tc_lite.c.bak">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hpl\tc\tc_lite.h">
+    <Compile Include="hpl\tc\tc_lite.h.bak">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hri\hri_ac_e54.h">
@@ -851,6 +851,12 @@
     <Compile Include="hri\hri_wdt_e54.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="lidar.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="lidar.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -919,6 +925,7 @@
     <Folder Include="hpl\doc_lite\" />
     <Folder Include="hpl\gclk\" />
     <Folder Include="hpl\mclk\" />
+    <Folder Include="hpl\tc" />
     <Folder Include="hpl\osc32kctrl\" />
     <Folder Include="hpl\oscctrl\" />
     <Folder Include="hpl\pm\" />
@@ -926,7 +933,6 @@
     <Folder Include="hpl\ramecc\" />
     <Folder Include="hpl\sdhc\" />
     <Folder Include="hpl\sercom\" />
-    <Folder Include="hpl\tc\" />
     <Folder Include="hri\" />
     <Folder Include="sd_mmc\" />
     <Folder Include="stdio_redirect\" />

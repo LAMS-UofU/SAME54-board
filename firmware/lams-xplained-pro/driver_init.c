@@ -11,40 +11,12 @@
 #include <utils.h>
 #include <hal_init.h>
 
-struct usart_sync_descriptor LIDAR_USART;
-
 struct usart_sync_descriptor STDIO_IO;
-
 struct mci_sync_desc SDHC_IO_BUS;
-
-void LIDAR_USART_PORT_init(void)
-{
-
-	gpio_set_pin_function(PA04, PINMUX_PA04D_SERCOM0_PAD0);
-
-	gpio_set_pin_function(PA05, PINMUX_PA05D_SERCOM0_PAD1);
-}
-
-void LIDAR_USART_CLOCK_init(void)
-{
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM0_GCLK_ID_CORE, CONF_GCLK_SERCOM0_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM0_GCLK_ID_SLOW, CONF_GCLK_SERCOM0_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-
-	hri_mclk_set_APBAMASK_SERCOM0_bit(MCLK);
-}
-
-void LIDAR_USART_init(void)
-{
-	LIDAR_USART_CLOCK_init();
-	usart_sync_init(&LIDAR_USART, SERCOM0, (void *)NULL);
-	LIDAR_USART_PORT_init();
-}
 
 void STDIO_IO_PORT_init(void)
 {
-
 	gpio_set_pin_function(PB25, PINMUX_PB25D_SERCOM2_PAD0);
-
 	gpio_set_pin_function(PB24, PINMUX_PB24D_SERCOM2_PAD1);
 }
 
@@ -349,33 +321,6 @@ void SDHC_IO_BUS_init(void)
 	SDHC_IO_BUS_CLOCK_init();
 	mci_sync_init(&SDHC_IO_BUS, SDHC1);
 	SDHC_IO_BUS_PORT_init();
-}
-
-void SERVO_PWM_PORT_init(void)
-{
-
-	gpio_set_pin_function(PA07, PINMUX_PA07E_TC1_WO1);
-}
-
-void SERVO_PWM_CLOCK_init(void)
-{
-	hri_mclk_set_APBAMASK_TC1_bit(MCLK);
-	hri_gclk_write_PCHCTRL_reg(GCLK, TC1_GCLK_ID, CONF_GCLK_TC1_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-}
-
-void LIDAR_PWM_PORT_init(void)
-{
-
-	gpio_set_pin_function(PB08, PINMUX_PB08E_TC4_WO0);
-
-	gpio_set_pin_function(PB09, PINMUX_PB09E_TC4_WO1);
-}
-
-void LIDAR_PWM_CLOCK_init(void)
-{
-	hri_mclk_set_APBCMASK_TC4_bit(MCLK);
-
-	hri_gclk_write_PCHCTRL_reg(GCLK, TC4_GCLK_ID, CONF_GCLK_TC4_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
 }
 
 void system_init(void)

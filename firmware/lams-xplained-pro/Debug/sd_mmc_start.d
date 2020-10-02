@@ -143,7 +143,8 @@ sd_mmc_start.d sd_mmc_start.o: .././sd_mmc_start.c .././atmel_start.h \
  ../hal/include/hal_usart_sync.h ../hal/include/hal_io.h \
  ../hal/include/hpl_usart_sync.h ../hal/include/hpl_usart.h \
  ../hal/include/hal_mci_sync.h ../hal/include/hpl_mci_sync.h \
- ../hal/utils/include/utils.h .././servo.h .././stdio_start.h \
+ ../hal/utils/include/utils.h .././servo.h .././lidar.h \
+ .././stdio_start.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
@@ -537,6 +538,8 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 ../hal/utils/include/utils.h:
 
 .././servo.h:
+
+.././lidar.h:
 
 .././stdio_start.h:
 

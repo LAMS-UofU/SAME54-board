@@ -62,7 +62,7 @@ hpl\sdhc\hpl_sdhc.c
 
 hpl\sercom\hpl_sercom.c
 
-hpl\tc\tc_lite.c
+lidar.c
 
 main.c
 

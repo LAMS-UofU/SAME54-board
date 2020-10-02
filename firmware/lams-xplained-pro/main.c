@@ -1,6 +1,7 @@
 #include <atmel_start.h>
 #include "smart_eeprom.h"
 #include "servo.h"
+#include "lidar.h"
 
 
 uint8_t menu_txt[] = "\r\n******** Enter choice ******** \r\n \
@@ -57,9 +58,9 @@ int main(void)
 				SERVO_menu();
 				break;
 			
-			//case 4:
-				//LIDAR_menu();
-				//break;
+			case 4:
+				LIDAR_menu();
+				break;
 			
 			default:
 				printf("\r\nInvalid option \r\n");

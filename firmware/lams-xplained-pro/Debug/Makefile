@@ -51,6 +51,7 @@ SUBDIRS :=  \
 ../hpl/doc_lite/ \
 ../hpl/gclk/ \
 ../hpl/mclk/ \
+../hpl/tc \
 ../hpl/osc32kctrl/ \
 ../hpl/oscctrl/ \
 ../hpl/pm/ \
@@ -58,7 +59,6 @@ SUBDIRS :=  \
 ../hpl/ramecc/ \
 ../hpl/sdhc/ \
 ../hpl/sercom/ \
-../hpl/tc/ \
 ../hri/ \
 ../sd_mmc/ \
 ../stdio_redirect/ \
@@ -97,7 +97,7 @@ C_SRCS +=  \
 ../hpl/ramecc/hpl_ramecc.c \
 ../hpl/sdhc/hpl_sdhc.c \
 ../hpl/sercom/hpl_sercom.c \
-../hpl/tc/tc_lite.c \
+../lidar.c \
 ../main.c \
 ../sd_mmc/sd_mmc.c \
 ../sd_mmc_start.c \
@@ -146,7 +146,7 @@ hpl/pm/hpl_pm.o \
 hpl/ramecc/hpl_ramecc.o \
 hpl/sdhc/hpl_sdhc.o \
 hpl/sercom/hpl_sercom.o \
-hpl/tc/tc_lite.o \
+lidar.o \
 main.o \
 sd_mmc/sd_mmc.o \
 sd_mmc_start.o \
@@ -188,7 +188,7 @@ hpl/pm/hpl_pm.o \
 hpl/ramecc/hpl_ramecc.o \
 hpl/sdhc/hpl_sdhc.o \
 hpl/sercom/hpl_sercom.o \
-hpl/tc/tc_lite.o \
+lidar.o \
 main.o \
 sd_mmc/sd_mmc.o \
 sd_mmc_start.o \
@@ -230,7 +230,7 @@ hpl/pm/hpl_pm.d \
 hpl/ramecc/hpl_ramecc.d \
 hpl/sdhc/hpl_sdhc.d \
 hpl/sercom/hpl_sercom.d \
-hpl/tc/tc_lite.d \
+lidar.d \
 main.d \
 sd_mmc/sd_mmc.d \
 sd_mmc_start.d \
@@ -272,7 +272,7 @@ hpl/pm/hpl_pm.d \
 hpl/ramecc/hpl_ramecc.d \
 hpl/sdhc/hpl_sdhc.d \
 hpl/sercom/hpl_sercom.d \
-hpl/tc/tc_lite.d \
+lidar.d \
 main.d \
 sd_mmc/sd_mmc.d \
 sd_mmc_start.d \
@@ -509,7 +509,7 @@ hpl/sercom/hpl_sercom.o: ../hpl/sercom/hpl_sercom.c
 	@echo Finished building: $<
 	
 
-hpl/tc/tc_lite.o: ../hpl/tc/tc_lite.c
+./lidar.o: .././lidar.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
