@@ -6,7 +6,7 @@
 
 ![Block Diagram](block-diagram.png)
 
-LiDAR: Tx (Pxxx) / Rx (Pxxx) / PWM (Pxxx)
+LiDAR: Tx (PA04) / Rx (PA05) / PWM (PB09)
 
 Servo: PWM (PA07)
 
