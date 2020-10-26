@@ -1,7 +1,7 @@
 {
     "author": {
-        "email": "wolffkris7@gmail.com",
-        "name": "wolffkris7 wolffkris7"
+        "email": "kris.wolff@utah.edu",
+        "name": "Kristopher Wolff"
     },
     "description": {
         "EN": "EAGLE default 2 layer CAM job."
@@ -192,8 +192,9 @@
                     "filename_format": "%PREFIX/silkscreen_top.gbr",
                     "layers": [
                         21,
-                        25,
-                        200
+                        200,
+                        201,
+                        25
                     ],
                     "milling": false,
                     "name": "Silkscreen Top",
@@ -276,7 +277,7 @@
             ]
         }
     ],
-    "timestamp": "2020-05-30T22:02:53",
+    "timestamp": "2020-10-25T18:43:40",
     "type": "EAGLE CAM job",
     "units": "metric",
     "version": "9.2.0"
