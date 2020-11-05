@@ -110,8 +110,7 @@ void SERVO_menu(void)
 				printf("%d", servo_angle);
 			
 				if (servo_angle < 0 || servo_angle > 180) {
-					printf("\r\nERROR: Invalid angle. Angle must be between 0 and 180\r\n", 
-						   servo_angle);
+					printf("\r\nERROR: Invalid angle. Angle must be between 0 and 180\r\n");
 					break;
 				}
 			

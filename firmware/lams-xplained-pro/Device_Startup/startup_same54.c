@@ -28,6 +28,7 @@
  */
 
 #include "same54.h"
+#include "lidar.h"
 
 /* Initialize segments */
 extern uint32_t _sfixed;
@@ -104,10 +105,10 @@ void EVSYS_3_Handler         ( void ) __attribute__ ((weak, alias("Dummy_Handler
 void EVSYS_4_Handler         ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* EVSYS_EVD_10, EVSYS_EVD_11, EVSYS_EVD_4, EVSYS_EVD_5, EVSYS_EVD_6, EVSYS_EVD_7, EVSYS_EVD_8, EVSYS_EVD_9, EVSYS_OVR_10, EVSYS_OVR_11, EVSYS_OVR_4, EVSYS_OVR_5, EVSYS_OVR_6, EVSYS_OVR_7, EVSYS_OVR_8, EVSYS_OVR_9 */
 void PAC_Handler             ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void RAMECC_Handler          ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void SERCOM0_0_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_0 */
-void SERCOM0_1_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_1 */
-void SERCOM0_2_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_2 */
-void SERCOM0_3_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_3, SERCOM0_4, SERCOM0_5, SERCOM0_6 */
+void SERCOM0_0_Handler		 ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_0 */
+void SERCOM0_1_Handler		 ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_1 */
+void SERCOM0_2_Handler		 ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_2 */
+void SERCOM0_3_Handler		 ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_3 */
 void SERCOM1_0_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM1_0 */
 void SERCOM1_1_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM1_1 */
 void SERCOM1_2_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM1_2 */
@@ -304,10 +305,10 @@ const DeviceVectors exception_table = {
         .pvReserved43           = (void*) (0UL),                  /* 43 Reserved */
         .pvReserved44           = (void*) (0UL),                  /* 44 Reserved */
         .pfnRAMECC_Handler      = (void*) RAMECC_Handler,         /* 45 RAM ECC */
-        .pfnSERCOM0_0_Handler   = (void*) SERCOM0_0_Handler,      /* 46 SERCOM0_0 */
-        .pfnSERCOM0_1_Handler   = (void*) SERCOM0_1_Handler,      /* 47 SERCOM0_1 */
-        .pfnSERCOM0_2_Handler   = (void*) SERCOM0_2_Handler,      /* 48 SERCOM0_2 */
-        .pfnSERCOM0_3_Handler   = (void*) SERCOM0_3_Handler,      /* 49 SERCOM0_3, SERCOM0_4, SERCOM0_5, SERCOM0_6 */
+        .pfnSERCOM0_0_Handler   = (void*) SERCOM0_0_Handler,	  /* 46 SERCOM0_0 */
+        .pfnSERCOM0_1_Handler   = (void*) SERCOM0_1_Handler,	  /* 47 SERCOM0_1 */
+        .pfnSERCOM0_2_Handler   = (void*) SERCOM0_2_Handler,	  /* 48 SERCOM0_2 */
+        .pfnSERCOM0_3_Handler   = (void*) SERCOM0_3_Handler,	  /* 49 SERCOM0_3, SERCOM0_4, SERCOM0_5, SERCOM0_6 */
         .pfnSERCOM1_0_Handler   = (void*) SERCOM1_0_Handler,      /* 50 SERCOM1_0 */
         .pfnSERCOM1_1_Handler   = (void*) SERCOM1_1_Handler,      /* 51 SERCOM1_1 */
         .pfnSERCOM1_2_Handler   = (void*) SERCOM1_2_Handler,      /* 52 SERCOM1_2 */

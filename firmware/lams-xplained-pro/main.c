@@ -3,6 +3,7 @@
 #include "servo.h"
 #include "lidar.h"
 
+extern volatile uint8_t lidar_timer;
 
 uint8_t menu_txt[] = "\r\n******** Enter choice ******** \r\n \
 1. Reset device\r\n \
@@ -12,14 +13,13 @@ uint8_t menu_txt[] = "\r\n******** Enter choice ******** \r\n \
 
 
 /**
-  * Hardfault Handler
+  * HardFault Handler
   */
 void HardFault_Handler(void)
 {
 	printf("\r\n!!!!!!!! In HardFault_Handler !!!!!!!!\r\n");
 	while (1);
 }
-
 
 int main(void)
 {

@@ -113,7 +113,31 @@ Device_Startup/startup_same54.d Device_Startup/startup_same54.o: \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/instance/trng.h \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/instance/usb.h \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/instance/wdt.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/pio/same54p20a.h
+ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/pio/same54p20a.h \
+ ../lidar.h ../atmel_start_pins.h ../hal/include/hal_gpio.h \
+ ../hal/include/hpl_gpio.h ../hal/utils/include/compiler.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h \
+ ../hal/utils/include/parts.h ../hri/hri_e54.h \
+ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/sam.h \
+ ../hri/hri_ac_e54.h ../hal/include/hal_atomic.h ../hri/hri_adc_e54.h \
+ ../hri/hri_aes_e54.h ../hri/hri_can_e54.h ../hri/hri_ccl_e54.h \
+ ../hri/hri_cmcc_e54.h ../hri/hri_dac_e54.h ../hri/hri_dmac_e54.h \
+ ../hri/hri_dsu_e54.h ../hri/hri_eic_e54.h ../hri/hri_evsys_e54.h \
+ ../hri/hri_freqm_e54.h ../hri/hri_gclk_e54.h ../hri/hri_gmac_e54.h \
+ ../hri/hri_hmatrixb_e54.h ../hri/hri_i2s_e54.h ../hri/hri_icm_e54.h \
+ ../hri/hri_mclk_e54.h ../hri/hri_nvmctrl_e54.h \
+ ../hri/hri_osc32kctrl_e54.h ../hri/hri_oscctrl_e54.h \
+ ../hri/hri_pac_e54.h ../hri/hri_pcc_e54.h ../hri/hri_pdec_e54.h \
+ ../hri/hri_pm_e54.h ../hri/hri_port_e54.h ../hri/hri_qspi_e54.h \
+ ../hri/hri_ramecc_e54.h ../hri/hri_rstc_e54.h ../hri/hri_rtc_e54.h \
+ ../hri/hri_sdhc_e54.h ../hri/hri_sercom_e54.h ../hri/hri_supc_e54.h \
+ ../hri/hri_tc_e54.h ../hri/hri_tcc_e54.h ../hri/hri_trng_e54.h \
+ ../hri/hri_usb_e54.h ../hri/hri_wdt_e54.h \
+ ../hal/utils/include/err_codes.h ../hpl/port/hpl_gpio_base.h \
+ ../hal/utils/include/utils_assert.h ../Config/hpl_port_config.h \
+ ../hal/include/hal_usart_sync.h ../hal/include/hal_io.h \
+ ../hal/include/hpl_usart_sync.h ../hal/include/hpl_usart.h
 
 C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/same54.h:
 
@@ -342,3 +366,117 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/instance/wdt.h:
 
 C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/pio/same54p20a.h:
+
+../lidar.h:
+
+../atmel_start_pins.h:
+
+../hal/include/hal_gpio.h:
+
+../hal/include/hpl_gpio.h:
+
+../hal/utils/include/compiler.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h:
+
+../hal/utils/include/parts.h:
+
+../hri/hri_e54.h:
+
+C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include/sam.h:
+
+../hri/hri_ac_e54.h:
+
+../hal/include/hal_atomic.h:
+
+../hri/hri_adc_e54.h:
+
+../hri/hri_aes_e54.h:
+
+../hri/hri_can_e54.h:
+
+../hri/hri_ccl_e54.h:
+
+../hri/hri_cmcc_e54.h:
+
+../hri/hri_dac_e54.h:
+
+../hri/hri_dmac_e54.h:
+
+../hri/hri_dsu_e54.h:
+
+../hri/hri_eic_e54.h:
+
+../hri/hri_evsys_e54.h:
+
+../hri/hri_freqm_e54.h:
+
+../hri/hri_gclk_e54.h:
+
+../hri/hri_gmac_e54.h:
+
+../hri/hri_hmatrixb_e54.h:
+
+../hri/hri_i2s_e54.h:
+
+../hri/hri_icm_e54.h:
+
+../hri/hri_mclk_e54.h:
+
+../hri/hri_nvmctrl_e54.h:
+
+../hri/hri_osc32kctrl_e54.h:
+
+../hri/hri_oscctrl_e54.h:
+
+../hri/hri_pac_e54.h:
+
+../hri/hri_pcc_e54.h:
+
+../hri/hri_pdec_e54.h:
+
+../hri/hri_pm_e54.h:
+
+../hri/hri_port_e54.h:
+
+../hri/hri_qspi_e54.h:
+
+../hri/hri_ramecc_e54.h:
+
+../hri/hri_rstc_e54.h:
+
+../hri/hri_rtc_e54.h:
+
+../hri/hri_sdhc_e54.h:
+
+../hri/hri_sercom_e54.h:
+
+../hri/hri_supc_e54.h:
+
+../hri/hri_tc_e54.h:
+
+../hri/hri_tcc_e54.h:
+
+../hri/hri_trng_e54.h:
+
+../hri/hri_usb_e54.h:
+
+../hri/hri_wdt_e54.h:
+
+../hal/utils/include/err_codes.h:
+
+../hpl/port/hpl_gpio_base.h:
+
+../hal/utils/include/utils_assert.h:
+
+../Config/hpl_port_config.h:
+
+../hal/include/hal_usart_sync.h:
+
+../hal/include/hal_io.h:
+
+../hal/include/hpl_usart_sync.h:
+
+../hal/include/hpl_usart.h:
