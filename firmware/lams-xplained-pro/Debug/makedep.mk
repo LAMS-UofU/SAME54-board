@@ -62,7 +62,13 @@ hpl\sdhc\hpl_sdhc.c
 
 hpl\sercom\hpl_sercom.c
 
-lidar.c
+lidar\lidar.c
+
+lidar\lidar_debug.c
+
+lidar\requests.c
+
+lidar\responses.c
 
 main.c
 
@@ -70,7 +76,9 @@ sd_mmc\sd_mmc.c
 
 sd_mmc_start.c
 
-servo.c
+servo\servo.c
+
+servo\servo_debug.c
 
 smart_eeprom.c
 

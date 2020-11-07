@@ -24,8 +24,8 @@ extern "C" {
 #include <hal_usart_sync.h>
 #include <hal_mci_sync.h>
 
-#include "servo.h"
-#include "lidar.h"
+#include "servo/servo.h"
+#include "lidar/lidar.h"
 
 extern struct usart_sync_descriptor STDIO_IO;
 extern struct mci_sync_desc SDHC_IO_BUS;

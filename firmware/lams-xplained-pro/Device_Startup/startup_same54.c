@@ -28,7 +28,7 @@
  */
 
 #include "same54.h"
-#include "lidar.h"
+#include "lidar/lidar.h"
 
 /* Initialize segments */
 extern uint32_t _sfixed;

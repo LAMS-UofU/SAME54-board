@@ -446,6 +446,9 @@
     <Compile Include="atmel_start_pins.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="common.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Config\conf_sd_mmc.h">
       <SubType>compile</SubType>
     </Compile>
@@ -851,10 +854,19 @@
     <Compile Include="hri\hri_wdt_e54.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="lidar.c">
+    <Compile Include="lidar\lidar.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="lidar.h">
+    <Compile Include="lidar\lidar.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="lidar\lidar_debug.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="lidar\requests.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="lidar\responses.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -875,10 +887,13 @@
     <Compile Include="sd_mmc_start.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="servo.c">
+    <Compile Include="servo\servo.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="servo.h">
+    <Compile Include="servo\servo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="servo\servo_debug.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="smart_eeprom.c">
@@ -934,6 +949,8 @@
     <Folder Include="hpl\sdhc\" />
     <Folder Include="hpl\sercom\" />
     <Folder Include="hri\" />
+    <Folder Include="lidar" />
+    <Folder Include="servo" />
     <Folder Include="sd_mmc\" />
     <Folder Include="stdio_redirect\" />
     <Folder Include="stdio_redirect\gcc\" />

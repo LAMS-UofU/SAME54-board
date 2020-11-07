@@ -377,15 +377,7 @@ void system_init(void)
 
 	SDHC_IO_BUS_init();
 
-	SERVO_PWM_CLOCK_init();
-
-	SERVO_PWM_PORT_init();
-
 	SERVO_PWM_init();
-
-	LIDAR_PWM_CLOCK_init();
-
-	LIDAR_PWM_PORT_init();
 
 	LIDAR_PWM_init();
 }
