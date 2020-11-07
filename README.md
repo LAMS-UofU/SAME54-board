@@ -22,7 +22,9 @@ Servo: PWM (PA07)
 
 [RPLiDAR A2M8 Datasheet](https://cdn.sparkfun.com/assets/e/a/f/9/8/LD208_SLAMTEC_rplidar_datasheet_A2M8_v1.0_en.pdf)
 
-[RPLiDAR A2M8 Communications Protocol](https://www.robotshop.com/media/files/pdf2/rpk-02-communication-protocol.pdf)
+[RPLiDAR A2M8 Communications Protocol v1.0](https://www.robotshop.com/media/files/pdf2/rpk-02-communication-protocol.pdf)
+
+[RPLiDAR A2M8 Communications Protocol v2.1](http://bucket.download.slamtec.com/ccb3c2fc1e66bb00bd4370e208b670217c8b55fa/LR001_SLAMTEC_rplidar_protocol_v2.1_en.pdf)
 
 [SPT5435-180 Specifications](http://www.spt-servo.com/Product/015234339.html)
 
