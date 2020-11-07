@@ -1,20 +1,21 @@
-#ifndef ATMEL_START_H_INCLUDED
-#define ATMEL_START_H_INCLUDED
+#ifndef START_H_
+#define START_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "driver_init.h"
-#include "stdio_start.h"
+#include "drivers.h"
+#include "stdio_redirect.h"
 #include "sd_mmc_start.h"
 
 /**
  * Initializes MCU, drivers and middleware in the project
  **/
-void atmel_start_init(void);
+void start_init(void);
 
 #ifdef __cplusplus
 }
-#endif
-#endif
+#endif /* __cplusplus */
+
+#endif /* START_H_ */

@@ -11,14 +11,24 @@ extern uint32_t byte_count;
 extern uint16_t buffer_length;
 extern uint8_t processing;
 extern volatile char DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
+extern volatile uint8_t lidar_timer;
+extern volatile uint8_t lidar_timing;
 
 /** 
   * "STOP" request has no response.
   */
 void LIDAR_RES_stop(void) 
 {
-    if (DEBUG)
-	    printf("LiDAR stopped\r\n");
+	if (!lidar_timer) {
+		lidar_timing = 0;
+		processing = 0;
+		if (DEBUG) {
+			if (SYSTICK_EN) 
+				printf("lidar_timer = %u\r\nLiDAR stopped\r\n", lidar_timer);
+			else 
+				printf("LiDAR stopped\r\n");
+		}
+	}
 }
 	
 /** 
@@ -31,8 +41,16 @@ void LIDAR_RES_stop(void)
   */
 void LIDAR_RES_reset(void) 
 {   
-    if (DEBUG)
-	    printf("LiDAR reset\r\n");
+	if (!lidar_timer) {
+		lidar_timing = 0;
+		processing = 0;
+		if (DEBUG) {
+			if (SYSTICK_EN)
+				printf("lidar_timer = %u\r\nLiDAR reset\r\n", lidar_timer);
+			else
+				printf("LiDAR stopped\r\n");
+		}
+	}
 }
 	
 /** 
@@ -68,7 +86,7 @@ void LIDAR_RES_scan(void)
 	
     if (DEBUG)
         if (scan_count % 16 == 0)
-            printf("gathered %0d/%0d scans...\r\n", scan_count, MAX_SCANS);
+            printf("gathered %0"PRIu32"/%0d scans...\r\n", scan_count, MAX_SCANS);
 	
 	/* Prints invalid responses...not all responses are supposed to valid, so no
 		 need to print these except for debugging */
@@ -145,7 +163,8 @@ void LIDAR_RES_express_scan(void)
 	}
 	
     if (DEBUG)
-	    printf("%0d invalid scans -- gathered %0d/%0d scans...\r\n", invalid_exp_scans, scan_count, MAX_SCANS);
+	    printf("%0"PRIu32" invalid scans -- gathered %0"PRIu32"/%0d scans...\r\n", 
+				invalid_exp_scans, scan_count, MAX_SCANS);
 }
 
 /**	

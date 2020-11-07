@@ -51,7 +51,6 @@ SUBDIRS :=  \
 ../hpl/doc_lite/ \
 ../hpl/gclk/ \
 ../hpl/mclk/ \
-../hpl/tc \
 ../hpl/osc32kctrl/ \
 ../hpl/oscctrl/ \
 ../hpl/pm/ \
@@ -61,18 +60,16 @@ SUBDIRS :=  \
 ../hpl/sercom/ \
 ../hri/ \
 ../lidar \
-../servo \
 ../sd_mmc/ \
+../servo \
 ../stdio_redirect/ \
 ../stdio_redirect/gcc/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../atmel_start.c \
 ../Device_Startup/startup_same54.c \
 ../Device_Startup/system_same54.c \
-../driver_init.c \
 ../examples/driver_examples.c \
 ../hal/src/hal_atomic.c \
 ../hal/src/hal_cache.c \
@@ -99,20 +96,22 @@ C_SRCS +=  \
 ../hpl/ramecc/hpl_ramecc.c \
 ../hpl/sdhc/hpl_sdhc.c \
 ../hpl/sercom/hpl_sercom.c \
+../sd_mmc/sd_mmc.c \
+../start.c \
+../drivers.c \
 ../lidar/lidar.c \
 ../lidar/lidar_debug.c \
 ../lidar/requests.c \
 ../lidar/responses.c \
 ../main.c \
-../sd_mmc/sd_mmc.c \
 ../sd_mmc_start.c \
 ../servo/servo.c \
 ../servo/servo_debug.c \
-../smart_eeprom.c \
+../eeprom.c \
+../stdio_redirect.c \
 ../stdio_redirect/gcc/read.c \
 ../stdio_redirect/gcc/write.c \
-../stdio_redirect/stdio_io.c \
-../stdio_start.c
+../stdio_redirect/stdio_io.c
 
 
 PREPROCESSING_SRCS += 
@@ -122,10 +121,8 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-atmel_start.o \
 Device_Startup/startup_same54.o \
 Device_Startup/system_same54.o \
-driver_init.o \
 examples/driver_examples.o \
 hal/src/hal_atomic.o \
 hal/src/hal_cache.o \
@@ -152,26 +149,26 @@ hpl/pm/hpl_pm.o \
 hpl/ramecc/hpl_ramecc.o \
 hpl/sdhc/hpl_sdhc.o \
 hpl/sercom/hpl_sercom.o \
+sd_mmc/sd_mmc.o \
+start.o \
+drivers.o \
 lidar/lidar.o \
 lidar/lidar_debug.o \
 lidar/requests.o \
 lidar/responses.o \
 main.o \
-sd_mmc/sd_mmc.o \
 sd_mmc_start.o \
 servo/servo.o \
 servo/servo_debug.o \
-smart_eeprom.o \
+eeprom.o \
+stdio_redirect.o \
 stdio_redirect/gcc/read.o \
 stdio_redirect/gcc/write.o \
-stdio_redirect/stdio_io.o \
-stdio_start.o
+stdio_redirect/stdio_io.o
 
 OBJS_AS_ARGS +=  \
-atmel_start.o \
 Device_Startup/startup_same54.o \
 Device_Startup/system_same54.o \
-driver_init.o \
 examples/driver_examples.o \
 hal/src/hal_atomic.o \
 hal/src/hal_cache.o \
@@ -198,26 +195,26 @@ hpl/pm/hpl_pm.o \
 hpl/ramecc/hpl_ramecc.o \
 hpl/sdhc/hpl_sdhc.o \
 hpl/sercom/hpl_sercom.o \
+sd_mmc/sd_mmc.o \
+start.o \
+drivers.o \
 lidar/lidar.o \
 lidar/lidar_debug.o \
 lidar/requests.o \
 lidar/responses.o \
 main.o \
-sd_mmc/sd_mmc.o \
 sd_mmc_start.o \
 servo/servo.o \
 servo/servo_debug.o \
-smart_eeprom.o \
+eeprom.o \
+stdio_redirect.o \
 stdio_redirect/gcc/read.o \
 stdio_redirect/gcc/write.o \
-stdio_redirect/stdio_io.o \
-stdio_start.o
+stdio_redirect/stdio_io.o
 
 C_DEPS +=  \
-atmel_start.d \
 Device_Startup/startup_same54.d \
 Device_Startup/system_same54.d \
-driver_init.d \
 examples/driver_examples.d \
 hal/src/hal_atomic.d \
 hal/src/hal_cache.d \
@@ -244,26 +241,26 @@ hpl/pm/hpl_pm.d \
 hpl/ramecc/hpl_ramecc.d \
 hpl/sdhc/hpl_sdhc.d \
 hpl/sercom/hpl_sercom.d \
+sd_mmc/sd_mmc.d \
+start.d \
+drivers.d \
 lidar/lidar.d \
 lidar/lidar_debug.d \
 lidar/requests.d \
 lidar/responses.d \
 main.d \
-sd_mmc/sd_mmc.d \
 sd_mmc_start.d \
 servo/servo.d \
 servo/servo_debug.d \
-smart_eeprom.d \
+eeprom.d \
+stdio_redirect.d \
 stdio_redirect/gcc/read.d \
 stdio_redirect/gcc/write.d \
-stdio_redirect/stdio_io.d \
-stdio_start.d
+stdio_redirect/stdio_io.d
 
 C_DEPS_AS_ARGS +=  \
-atmel_start.d \
 Device_Startup/startup_same54.d \
 Device_Startup/system_same54.d \
-driver_init.d \
 examples/driver_examples.d \
 hal/src/hal_atomic.d \
 hal/src/hal_cache.d \
@@ -290,20 +287,22 @@ hpl/pm/hpl_pm.d \
 hpl/ramecc/hpl_ramecc.d \
 hpl/sdhc/hpl_sdhc.d \
 hpl/sercom/hpl_sercom.d \
+sd_mmc/sd_mmc.d \
+start.d \
+drivers.d \
 lidar/lidar.d \
 lidar/lidar_debug.d \
 lidar/requests.d \
 lidar/responses.d \
 main.d \
-sd_mmc/sd_mmc.d \
 sd_mmc_start.d \
 servo/servo.d \
 servo/servo_debug.d \
-smart_eeprom.d \
+eeprom.d \
+stdio_redirect.d \
 stdio_redirect/gcc/read.d \
 stdio_redirect/gcc/write.d \
-stdio_redirect/stdio_io.d \
-stdio_start.d
+stdio_redirect/stdio_io.d
 
 OUTPUT_FILE_PATH +=lams-xplained-pro.elf
 
@@ -321,13 +320,6 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
-./atmel_start.o: .././atmel_start.c
-	@echo Building file: $<
-	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 Device_Startup/startup_same54.o: ../Device_Startup/startup_same54.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
@@ -336,13 +328,6 @@ Device_Startup/startup_same54.o: ../Device_Startup/startup_same54.c
 	
 
 Device_Startup/system_same54.o: ../Device_Startup/system_same54.c
-	@echo Building file: $<
-	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./driver_init.o: .././driver_init.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -531,6 +516,27 @@ hpl/sercom/hpl_sercom.o: ../hpl/sercom/hpl_sercom.c
 	@echo Finished building: $<
 	
 
+sd_mmc/sd_mmc.o: ../sd_mmc/sd_mmc.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./start.o: .././start.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./drivers.o: .././drivers.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 lidar/lidar.o: ../lidar/lidar.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
@@ -566,13 +572,6 @@ lidar/responses.o: ../lidar/responses.c
 	@echo Finished building: $<
 	
 
-sd_mmc/sd_mmc.o: ../sd_mmc/sd_mmc.c
-	@echo Building file: $<
-	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 ./sd_mmc_start.o: .././sd_mmc_start.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
@@ -594,7 +593,14 @@ servo/servo_debug.o: ../servo/servo_debug.c
 	@echo Finished building: $<
 	
 
-./smart_eeprom.o: .././smart_eeprom.c
+./eeprom.o: .././eeprom.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./stdio_redirect.o: .././stdio_redirect.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -616,13 +622,6 @@ stdio_redirect/gcc/write.o: ../stdio_redirect/gcc/write.c
 	
 
 stdio_redirect/stdio_io.o: ../stdio_redirect/stdio_io.c
-	@echo Building file: $<
-	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./stdio_start.o: .././stdio_start.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAME54P20A__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/cmcc" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sdhc" -I"../hpl/sercom" -I"../hpl/tc" -I"../hri" -I"../stdio_redirect" -I"../sd_mmc" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include"  -O1 -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m4 -c -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

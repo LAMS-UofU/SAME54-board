@@ -7,7 +7,7 @@
  */
 
 #include "driver_examples.h"
-#include "driver_init.h"
+#include "drivers.h"
 #include "utils.h"
 
 /**

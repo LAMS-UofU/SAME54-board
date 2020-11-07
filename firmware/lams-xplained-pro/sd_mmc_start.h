@@ -1,12 +1,5 @@
-/*
- * Code generated from Atmel Start.
- *
- * This file will be overwritten when reconfiguring your Atmel Start project.
- * Please copy examples or other code you want to keep to a separate file or main.c
- * to avoid loosing it when reconfiguring.
- */
-#ifndef SD_MMC_MAIN_H
-#define SD_MMC_MAIN_H
+#ifndef SD_MMC_START_H_
+#define SD_MMC_START_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,4 +18,4 @@ void sd_mmc_stack_init(void);
 }
 #endif /* __cplusplus */
 
-#endif /* SD_MMC_MAIN_H */
+#endif /* SD_MMC_START_H_ */

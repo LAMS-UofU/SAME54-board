@@ -2,16 +2,16 @@ format_version: '2'
 name: lams-xplained-pro
 versions:
   api: '1.0'
-  backend: 1.8.449
+  backend: 1.8.457
   commit: c39d50a8c7c22fe58c921178843d3cbb666dc04b
   content: unknown
   content_pack_name: unknown
   format: '2'
-  frontend: 1.8.449
-  packs_version_avr8: 1.0.1438
+  frontend: 1.8.457
+  packs_version_avr8: 1.0.1441
   packs_version_qtouch: unknown
   packs_version_sam: 1.0.1726
-  version_backend: 1.8.449
+  version_backend: 1.8.457
   version_frontend: ''
 board:
   identifier: SAME54XplainedPro
@@ -1345,5 +1345,11 @@ pads:
     definition: Atmel:SAME54_Drivers:0.0.1::SAME54P20A-AU::pad::PB25
     mode: Peripheral IO
     user_label: PB25
+    configuration: null
+  START_BTN:
+    name: PA27
+    definition: Atmel:SAME54_Drivers:0.0.1::SAME54P20A-AU::pad::PA27
+    mode: Digital output
+    user_label: START_BTN
     configuration: null
 toolchain_options: []

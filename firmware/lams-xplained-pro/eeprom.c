@@ -1,5 +1,5 @@
-#include <atmel_start.h>
-#include "smart_eeprom.h"
+#include "start.h"
+#include "eeprom.h"
 
 /* A specific byte pattern stored at the beginning of SmartEEPROM data area.
  * When the application comes from a reset, if it finds this signature,
@@ -127,7 +127,7 @@ void EEPROM_menu(void)
 	while (1) {
 		printf("%s", eeprom_menu_txt);
 	
-		if (scanf("%d", &user_selection) == 0) {
+		if (scanf("%"PRIu32"", &user_selection) == 0) {
 			/* If its not a number, flush stdin */
 			fflush(stdin);
 		}
@@ -185,14 +185,14 @@ void EEPROM_write(void)
 	uint8_t i        = 0;
 	
 	printf("\r\nEnter address >> ");
-	scanf("%d", &ee_addr);
+	scanf("%"PRIu32"", &ee_addr);
 	
 	if (ee_addr > SEEP_FINAL_BYTE_INDEX) {
 		printf("\r\nERROR: Address invalid. Try again \r\n");
 		return;
 	}
 	printf("\r\nEnter data >> ");
-	scanf("%d", &ee_data);
+	scanf("%"PRIu32"", &ee_data);
 	
 	SmartEEPROM8[ee_addr] = ee_data;
 	

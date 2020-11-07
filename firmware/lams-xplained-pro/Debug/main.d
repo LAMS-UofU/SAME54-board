@@ -1,6 +1,6 @@
-main.d main.o: .././main.c .././common.h ../atmel_start.h \
- ../driver_init.h ../atmel_start_pins.h ../hal/include/hal_gpio.h \
- ../hal/include/hpl_gpio.h ../hal/utils/include/compiler.h \
+main.d main.o: .././main.c .././common.h .././start.h .././drivers.h \
+ .././start_pins.h ../hal/include/hal_gpio.h ../hal/include/hpl_gpio.h \
+ ../hal/utils/include/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
@@ -143,8 +143,8 @@ main.d main.o: .././main.c .././common.h ../atmel_start.h \
  ../hal/include/hal_usart_sync.h ../hal/include/hal_io.h \
  ../hal/include/hpl_usart_sync.h ../hal/include/hpl_usart.h \
  ../hal/include/hal_mci_sync.h ../hal/include/hpl_mci_sync.h \
- ../hal/utils/include/utils.h ../servo/servo.h ../servo/../common.h \
- ../lidar/lidar.h ../lidar/../common.h ../stdio_start.h \
+ ../hal/utils/include/utils.h .././servo/servo.h .././servo/../common.h \
+ .././lidar/lidar.h .././lidar/../common.h .././stdio_redirect.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
@@ -168,21 +168,21 @@ main.d main.o: .././main.c .././common.h ../atmel_start.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_pthreadtypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\types.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\stdio.h \
- ../stdio_redirect/stdio_io.h ../sd_mmc_start.h \
+ ../stdio_redirect/stdio_io.h .././sd_mmc_start.h \
  ../Config/peripheral_clk_config.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
- .././driver_init.h .././smart_eeprom.h .././servo/servo.h \
- .././lidar/lidar.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
+ .././eeprom.h
 
 .././common.h:
 
-../atmel_start.h:
+.././start.h:
 
-../driver_init.h:
+.././drivers.h:
 
-../atmel_start_pins.h:
+.././start_pins.h:
 
 ../hal/include/hal_gpio.h:
 
@@ -544,15 +544,15 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 
 ../hal/utils/include/utils.h:
 
-../servo/servo.h:
+.././servo/servo.h:
 
-../servo/../common.h:
+.././servo/../common.h:
 
-../lidar/lidar.h:
+.././lidar/lidar.h:
 
-../lidar/../common.h:
+.././lidar/../common.h:
 
-../stdio_start.h:
+.././stdio_redirect.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 
@@ -602,7 +602,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../stdio_redirect/stdio_io.h:
 
-../sd_mmc_start.h:
+.././sd_mmc_start.h:
 
 ../Config/peripheral_clk_config.h:
 
@@ -612,10 +612,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h:
 
-.././driver_init.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h:
 
-.././smart_eeprom.h:
-
-.././servo/servo.h:
-
-.././lidar/lidar.h:
+.././eeprom.h:

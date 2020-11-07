@@ -15,6 +15,8 @@ extern uint32_t byte_count;
 extern uint16_t buffer_length;
 extern uint8_t processing;
 extern volatile char DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
+extern volatile uint8_t lidar_timer;
+extern volatile uint8_t lidar_timing;
 
 uint8_t lidar_menu_txt[] = "\r\n******** Enter choice ******** \r\n \
 1. Back to main menu\r\n \
@@ -68,11 +70,13 @@ void LIDAR_menu(void)
 				case 4:
 					printf("\r\nRequesting LiDAR stop\r\n");
 					LIDAR_REQ_stop();
+					processing = 1;
 					break;
 			
 				case 5:
 					printf("\r\nRequesting LiDAR reset\r\n");
 					LIDAR_REQ_reset();
+					processing = 1;
 					break;
 			
 				case 6:
@@ -125,6 +129,19 @@ void LIDAR_menu(void)
 void LIDAR_process(void)
 {
 	unsigned data_idx;
+	
+	/* STOP and RESET requests */
+	if (lidar_timing) {
+		switch (lidar_request) {
+			case LIDAR_REQ_STOP:
+				LIDAR_RES_stop();
+				break;
+			case LIDAR_REQ_RESET:
+				LIDAR_RES_reset();
+				break;
+		};
+		return;
+	}
 	
 	while (!usart_sync_is_rx_not_empty(&LIDAR_USART));
 	
@@ -194,6 +211,8 @@ void LIDAR_process(void)
 			case LIDAR_REQ_FORCE_SCAN:
 				LIDAR_RES_scan();
 				if (scan_count >= MAX_SCANS) {
+					LIDAR_PWM_stop();
+					LIDAR_REQ_stop();
 					LIDAR_print_scans();
 					break;
 				}
@@ -204,7 +223,7 @@ void LIDAR_process(void)
 				if (scan_count >= MAX_SCANS) {
 					LIDAR_PWM_stop();
 					LIDAR_REQ_stop();
-					LIDAR_print_cabins();
+					//LIDAR_print_cabins();
 					break;
 				}
 				return;

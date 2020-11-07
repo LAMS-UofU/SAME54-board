@@ -2,13 +2,9 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-atmel_start.c
-
 Device_Startup\startup_same54.c
 
 Device_Startup\system_same54.c
-
-driver_init.c
 
 examples\driver_examples.c
 
@@ -62,6 +58,12 @@ hpl\sdhc\hpl_sdhc.c
 
 hpl\sercom\hpl_sercom.c
 
+sd_mmc\sd_mmc.c
+
+start.c
+
+drivers.c
+
 lidar\lidar.c
 
 lidar\lidar_debug.c
@@ -72,21 +74,19 @@ lidar\responses.c
 
 main.c
 
-sd_mmc\sd_mmc.c
-
 sd_mmc_start.c
 
 servo\servo.c
 
 servo\servo_debug.c
 
-smart_eeprom.c
+eeprom.c
+
+stdio_redirect.c
 
 stdio_redirect\gcc\read.c
 
 stdio_redirect\gcc\write.c
 
 stdio_redirect\stdio_io.c
-
-stdio_start.c
 

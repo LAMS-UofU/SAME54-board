@@ -437,18 +437,6 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="atmel_start.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="atmel_start.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="atmel_start_pins.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="common.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Config\conf_sd_mmc.h">
       <SubType>compile</SubType>
     </Compile>
@@ -482,9 +470,6 @@
     <Compile Include="Config\peripheral_clk_config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Config\RTE_Components.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Config\stdio_redirect_config.h">
       <SubType>compile</SubType>
     </Compile>
@@ -492,12 +477,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Device_Startup\system_same54.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="driver_init.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="driver_init.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="examples\driver_examples.c">
@@ -731,12 +710,6 @@
     <Compile Include="hpl\sercom\hpl_sercom.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hpl\tc\tc_lite.c.bak">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="hpl\tc\tc_lite.h.bak">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="hri\hri_ac_e54.h">
       <SubType>compile</SubType>
     </Compile>
@@ -854,6 +827,36 @@
     <Compile Include="hri\hri_wdt_e54.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="sd_mmc\sd_mmc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sd_mmc\sd_mmc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sd_mmc\sd_mmc_protocol.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="start.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="start.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="start_pins.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="common.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Config\RTE_Components.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="drivers.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="drivers.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="lidar\lidar.c">
       <SubType>compile</SubType>
     </Compile>
@@ -872,15 +875,6 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="sd_mmc\sd_mmc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="sd_mmc\sd_mmc.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="sd_mmc\sd_mmc_protocol.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="sd_mmc_start.c">
       <SubType>compile</SubType>
     </Compile>
@@ -896,10 +890,16 @@
     <Compile Include="servo\servo_debug.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="smart_eeprom.c">
+    <Compile Include="eeprom.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="smart_eeprom.h">
+    <Compile Include="eeprom.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="stdio_redirect.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="stdio_redirect.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="stdio_redirect\gcc\read.c">
@@ -912,12 +912,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="stdio_redirect\stdio_io.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="stdio_start.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="stdio_start.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -940,7 +934,6 @@
     <Folder Include="hpl\doc_lite\" />
     <Folder Include="hpl\gclk\" />
     <Folder Include="hpl\mclk\" />
-    <Folder Include="hpl\tc" />
     <Folder Include="hpl\osc32kctrl\" />
     <Folder Include="hpl\oscctrl\" />
     <Folder Include="hpl\pm\" />
@@ -950,8 +943,8 @@
     <Folder Include="hpl\sercom\" />
     <Folder Include="hri\" />
     <Folder Include="lidar" />
-    <Folder Include="servo" />
     <Folder Include="sd_mmc\" />
+    <Folder Include="servo" />
     <Folder Include="stdio_redirect\" />
     <Folder Include="stdio_redirect\gcc\" />
   </ItemGroup>

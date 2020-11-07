@@ -16,6 +16,11 @@ extern uint8_t processing;
 /* Buffer for sending data to lidar */
 static char print_buffer[MAX_PRINT_BUFFER_SIZE];
 
+/* For "STOP" and "RESET" commands requiring waiting specific times before another
+   request is allowed */
+volatile uint8_t lidar_timer;
+volatile uint8_t lidar_timing;
+
 /**	
   * Request LiDAR to exit scanning state and enter idle state. No response!
   * Need to wait at least 1 millisecond before sending another request.
@@ -32,10 +37,13 @@ void LIDAR_REQ_stop(void)
 					 "%c%c", LIDAR_START_BYTE, LIDAR_REQ_STOP);
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
 	
-    /* Wait 1 ms */
-	delay_ms(1);
-	
-	LIDAR_RES_stop();
+    /* Wait 1 ms -- @see SysTick_Handler */
+	if (SYSTICK_EN) {
+		lidar_timer = 1;
+		lidar_timing = 1;	
+	} else {
+		delay_ms(1);
+	}
 }
 
 /** 
@@ -56,9 +64,12 @@ void LIDAR_REQ_reset(void)
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
 	
 	/* Wait 2 ms */
-    delay_ms(2);
-	
-	LIDAR_RES_reset();
+	if (SYSTICK_EN) {
+		lidar_timer = 2;
+		lidar_timing = 1;
+	} else {
+		delay_ms(2);
+	}
 }
 
 /** 

@@ -16,7 +16,7 @@ void SERVO_menu(void)
 	while (1) {
 		printf("%s", servo_menu_txt);
 		
-		if (scanf("%d", &user_selection) == 0) {
+		if (scanf("%"PRIu32"", &user_selection) == 0) {
 			/* If its not a number, flush stdin */
 			fflush(stdin);
 			continue;
@@ -31,15 +31,15 @@ void SERVO_menu(void)
 			
 			case 2:
 				printf("\r\nEnter angle >> ");
-				scanf("%d", &servo_angle);
-				printf("%d", servo_angle);
+				scanf("%"PRIu32"", &servo_angle);
+				printf("%"PRIu32"", servo_angle);
 			
 				if (servo_angle < 0 || servo_angle > 180) {
 					printf("\r\nERROR: Invalid angle. Angle must be between 0 and 180\r\n");
 					break;
 				}
 			
-				printf("\r\nSetting servo angle to %0d\r\n", servo_angle);
+				printf("\r\nSetting servo angle to %0"PRIu32"\r\n", servo_angle);
 				SERVO_set_angle(servo_angle);
 				break;
 			
