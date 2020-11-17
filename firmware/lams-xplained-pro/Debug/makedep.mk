@@ -6,11 +6,23 @@ Device_Startup\startup_same54.c
 
 Device_Startup\system_same54.c
 
+diskio\sdmmc_diskio.c
+
+drivers.c
+
+eeprom.c
+
 examples\driver_examples.c
+
+fatfs.c
+
+fatfs\src\ff.c
 
 hal\src\hal_atomic.c
 
 hal\src\hal_cache.c
+
+hal\src\hal_calendar.c
 
 hal\src\hal_delay.c
 
@@ -54,15 +66,17 @@ hpl\pm\hpl_pm.c
 
 hpl\ramecc\hpl_ramecc.c
 
+hpl\rtc\hpl_rtc.c
+
 hpl\sdhc\hpl_sdhc.c
 
 hpl\sercom\hpl_sercom.c
 
-sd_mmc\sd_mmc.c
+interrupts.c
 
-start.c
+lams_sd.c
 
-drivers.c
+lams_sd_debug.c
 
 lidar\lidar.c
 
@@ -74,13 +88,15 @@ lidar\responses.c
 
 main.c
 
-sd_mmc_start.c
+scan.c
+
+sd_mmc\sd_mmc.c
 
 servo\servo.c
 
 servo\servo_debug.c
 
-eeprom.c
+start.c
 
 stdio_redirect.c
 

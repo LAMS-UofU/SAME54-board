@@ -1,39 +1,20 @@
 #include "common.h"
 #include "eeprom.h"
+#include "scan.h"
 #include "servo/servo.h"
 #include "lidar/lidar.h"
+#include "lams_sd.h"
+#include "sd_mmc.h"
 
-uint32_t systick_count = 0;
-extern volatile uint8_t lidar_timer;
+volatile uint8_t status;
 
 uint8_t menu_txt[] = "\r\n******** Enter choice ******** \r\n \
 1. Reset device\r\n \
 2. EEPROM\r\n \
 3. Servo\r\n \
-4. LiDAR\r\n";
-
-/**
-  * HardFault Handler
-  */
-void HardFault_Handler(void)
-{
-	if (DEBUG)
-		printf("\r\n!!!!!!!! In HardFault_Handler !!!!!!!!\r\n");
-	while (1);
-}
-
-/**
-  *	SysTick Handler
-  */
-void SysTick_Handler(void)
-{
-	systick_count++;
-	if (lidar_timer > 0) {
-		if (DEBUG)
-			printf("lidar_timer = %u\r\n", lidar_timer);
-		lidar_timer--;
-	}
-}
+4. LiDAR\r\n \
+5. LAMS SD\r\n \
+6. 360-degree scan\r\n";
 
 /** 
   * Application entry point
@@ -42,9 +23,11 @@ int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
 	start_init();
+	
 	if (SYSTICK_EN)
 		SysTick_Config(12000UL); /* 12M ticks/second / 1k ticks/second = 12000 */
-	EEPROM_init();
+	
+	status = STATUS_IDLE;
 	
 	SERVO_set_angle(0);
 
@@ -79,6 +62,14 @@ int main(void)
 				
 				case 4:
 					LIDAR_menu();
+					break;
+				
+				case 5:
+					SD_menu();
+					break;
+				
+				case 6:
+					scan();
 					break;
 				
 				default:

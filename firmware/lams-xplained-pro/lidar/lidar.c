@@ -19,7 +19,7 @@ uint32_t invalid_exp_scans = 0;
 uint8_t lidar_request = 0;
 
 /* Number of bytes received for processing LiDAR responses */
-uint32_t byte_count = 0;
+volatile uint32_t byte_count = 0;
 uint16_t buffer_length = 0;
 uint8_t processing = 0;
 

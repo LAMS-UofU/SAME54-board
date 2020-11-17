@@ -1,7 +1,7 @@
 #ifndef LIDAR_H_
 #define LIDAR_H_
 
-#include "../common.h"
+#include "common.h"
 
 extern struct usart_sync_descriptor LIDAR_USART;
 
@@ -19,14 +19,15 @@ extern "C" {
 
 #define LIDAR_START_BYTE			0xA5
 #define LIDAR_RES_BYTE				0x5A
-#define LIDAR_REQ_STOP 				0x25
-#define LIDAR_REQ_RESET 			0x40
-#define LIDAR_REQ_SCAN				0x20
-#define LIDAR_REQ_EXPRESS_SCAN 		0x82
-#define LIDAR_REQ_FORCE_SCAN		0x21
-#define LIDAR_REQ_GET_INFO			0x50
-#define LIDAR_REQ_GET_HEALTH		0x52
-#define LIDAR_REQ_GET_SAMPLERATE	0x59
+
+#define LIDAR_STOP 					0x25
+#define LIDAR_RESET 				0x40
+#define LIDAR_SCAN					0x20
+#define LIDAR_EXPRESS_SCAN 			0x82
+#define LIDAR_FORCE_SCAN			0x21
+#define LIDAR_GET_INFO				0x50
+#define LIDAR_GET_HEALTH			0x52
+#define LIDAR_GET_SAMPLERATE		0x59
 
 #define LIDAR_SEND_MODE_SINGLE_RES	0x0
 #define LIDAR_SEND_MODE_MULTI_RES	0x1
@@ -34,8 +35,6 @@ extern "C" {
 #define MAX_PRINT_BUFFER_SIZE		256
 #define LIDAR_RESP_DESC_SIZE		7
 #define LIDAR_RESP_MAX_SIZE			128
-
-#define MAX_SCANS					1024
 
 /***************************************************************************/
 /*  DATA STRUCTURES					                                       */
@@ -96,7 +95,7 @@ void LIDAR_RES_reset(void);
 void LIDAR_RES_scan(void);
 void LIDAR_RES_express_scan(void);
 void LIDAR_RES_get_info(void);
-void LIDAR_RES_get_health(void);
+uint16_t LIDAR_RES_get_health(void);
 void LIDAR_RES_get_samplerate(void);
 
 void LIDAR_PWM_init(void);

@@ -1,3 +1,4 @@
+#include "common.h"
 #include "start.h"
 #include "eeprom.h"
 

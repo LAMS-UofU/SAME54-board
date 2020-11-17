@@ -19,9 +19,11 @@ extern "C" {
 
 #include "servo/servo.h"
 #include "lidar/lidar.h"
+#include "fatfs.h"
 
 extern struct usart_sync_descriptor STDIO_IO;
 extern struct mci_sync_desc SDHC_IO_BUS;
+extern struct calendar_descriptor CALENDER_INTERFACE;
 
 void STDIO_IO_PORT_init(void);
 void STDIO_IO_CLOCK_init(void);

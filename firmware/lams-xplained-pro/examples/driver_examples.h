@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+void CALENDER_INTERFACE_example(void);
+
 void LIDAR_USART_example(void);
 
 void STDIO_IO_example(void);

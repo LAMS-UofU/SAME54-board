@@ -1,7 +1,7 @@
 #ifndef SERVO_H_
 #define SERVO_H_
 
-#include "../common.h"
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

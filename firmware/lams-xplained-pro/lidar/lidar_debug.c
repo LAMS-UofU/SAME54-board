@@ -4,7 +4,7 @@ static void LIDAR_process(void);
 static void LIDAR_print_scans(void);
 static void LIDAR_print_cabins(void);
 
-/* See lidar.h for declarations */
+/* See lidar.c for declarations */
 extern response_descriptor resp_desc;
 extern cabin_data cabins[MAX_SCANS];
 extern scan_data scans[MAX_SCANS];
@@ -133,10 +133,10 @@ void LIDAR_process(void)
 	/* STOP and RESET requests */
 	if (lidar_timing) {
 		switch (lidar_request) {
-			case LIDAR_REQ_STOP:
+			case LIDAR_STOP:
 				LIDAR_RES_stop();
 				break;
-			case LIDAR_REQ_RESET:
+			case LIDAR_RESET:
 				LIDAR_RES_reset();
 				break;
 		};
@@ -186,7 +186,7 @@ void LIDAR_process(void)
 		default:
 			data_idx = byte_count - LIDAR_RESP_DESC_SIZE;
 			DATA_RESPONSE[data_idx] = LIDAR_USART_read_byte();
-			if (lidar_request == LIDAR_REQ_EXPRESS_SCAN) {
+			if (lidar_request == LIDAR_EXPRESS_SCAN) {
 				/* check sync -- 0xA */
                 if (data_idx == 0) { 
 					if ((DATA_RESPONSE[data_idx] >> 4) != 0x0A )
@@ -207,8 +207,8 @@ void LIDAR_process(void)
 	if (byte_count == (resp_desc.response_info & 0x3FFFFFFF) + LIDAR_RESP_DESC_SIZE) {
 		switch(lidar_request) {
 			/* RESET system to stop scans while debugging */
-			case LIDAR_REQ_SCAN:
-			case LIDAR_REQ_FORCE_SCAN:
+			case LIDAR_SCAN:
+			case LIDAR_FORCE_SCAN:
 				LIDAR_RES_scan();
 				if (scan_count >= MAX_SCANS) {
 					LIDAR_PWM_stop();
@@ -218,25 +218,25 @@ void LIDAR_process(void)
 				}
 				return;
 
-			case LIDAR_REQ_EXPRESS_SCAN:
+			case LIDAR_EXPRESS_SCAN:
 				LIDAR_RES_express_scan();
 				if (scan_count >= MAX_SCANS) {
 					LIDAR_PWM_stop();
 					LIDAR_REQ_stop();
-					//LIDAR_print_cabins();
+					LIDAR_print_cabins();
 					break;
 				}
 				return;
 			
-			case LIDAR_REQ_GET_INFO:
+			case LIDAR_GET_INFO:
 				LIDAR_RES_get_info();
 				break;
 
-			case LIDAR_REQ_GET_HEALTH:
+			case LIDAR_GET_HEALTH:
 				LIDAR_RES_get_health();
 				break;
 
-			case LIDAR_REQ_GET_SAMPLERATE:
+			case LIDAR_GET_SAMPLERATE:
 				LIDAR_RES_get_samplerate();
 				break;
 

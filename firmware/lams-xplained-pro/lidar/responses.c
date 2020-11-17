@@ -7,11 +7,11 @@ extern scan_data scans[MAX_SCANS];
 extern uint32_t scan_count;
 extern uint32_t invalid_exp_scans;
 extern uint8_t lidar_request;
-extern uint32_t byte_count;
+extern volatile uint32_t byte_count;
 extern uint16_t buffer_length;
 extern uint8_t processing;
 extern volatile char DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
-extern volatile uint8_t lidar_timer;
+extern volatile uint16_t lidar_timer;
 extern volatile uint8_t lidar_timing;
 
 /** 
@@ -22,12 +22,8 @@ void LIDAR_RES_stop(void)
 	if (!lidar_timer) {
 		lidar_timing = 0;
 		processing = 0;
-		if (DEBUG) {
-			if (SYSTICK_EN) 
-				printf("lidar_timer = %u\r\nLiDAR stopped\r\n", lidar_timer);
-			else 
-				printf("LiDAR stopped\r\n");
-		}
+		if (DEBUG) 
+			printf("LiDAR stopped\r\n");
 	}
 }
 	
@@ -44,12 +40,9 @@ void LIDAR_RES_reset(void)
 	if (!lidar_timer) {
 		lidar_timing = 0;
 		processing = 0;
-		if (DEBUG) {
-			if (SYSTICK_EN)
-				printf("lidar_timer = %u\r\nLiDAR reset\r\n", lidar_timer);
-			else
-				printf("LiDAR stopped\r\n");
-		}
+		if (DEBUG) 
+			printf("LiDAR reset\r\n");
+			
 	}
 }
 	
@@ -206,8 +199,9 @@ void LIDAR_RES_get_info(void)
   *		Byte Offset:	+0		status
   *		Order 8..0		+1		error_code[7:0]
   *						+2		error_code[15:8]	
+  *	@return uint16_t : error_code
   */
-void LIDAR_RES_get_health(void) 
+uint16_t LIDAR_RES_get_health(void) 
 {
 	char* status;
 	uint16_t error_code;  
@@ -221,15 +215,15 @@ void LIDAR_RES_get_health(void)
 	
 	error_code = DATA_RESPONSE[0] + ((unsigned)DATA_RESPONSE[1] << 8);
 	
-	if (error_code == 0) {
-        if (DEBUG)
-		    printf(" : LiDAR Health is %s!\r\n", status);
-    }
-	else {
-		if (DEBUG)
-            printf(" : LiDAR Health is %s!\r\n : Error code: %u\r\n", 
+    if (DEBUG) {
+		if (error_code == 0)
+			printf(" : LiDAR Health is %s!\r\n", status);
+		else 
+			printf(" : LiDAR Health is %s!\r\n : Error code: %u\r\n", 
 				    status, error_code);
     }
+	
+	return error_code;
 }
 
 /**	

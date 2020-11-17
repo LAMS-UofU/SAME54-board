@@ -89,13 +89,12 @@ void GPIO_init(void)
 	gpio_set_pin_function(LED0, GPIO_PIN_FUNCTION_OFF);
 	
 	gpio_set_pin_level(START_BTN, false);
-	gpio_set_pin_direction(START_BTN, GPIO_DIRECTION_OUT);
+	gpio_set_pin_direction(START_BTN, GPIO_DIRECTION_IN);
 	gpio_set_pin_function(START_BTN, GPIO_PIN_FUNCTION_OFF);
 	
 	gpio_set_pin_level(LED_STATUS, false);
 	gpio_set_pin_direction(LED_STATUS, GPIO_DIRECTION_OUT);
 	gpio_set_pin_function(LED_STATUS, GPIO_PIN_FUNCTION_OFF);
-	
 }
 
 void system_init(void)
@@ -103,6 +102,7 @@ void system_init(void)
 	init_mcu();
 
 	GPIO_init();
+	FATFS_CALENDAR_init();
 	LIDAR_USART_init();
 	STDIO_IO_init();
 	SDHC_IO_BUS_init();

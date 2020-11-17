@@ -1,6 +1,6 @@
-main.d main.o: .././main.c .././common.h .././start.h .././drivers.h \
- .././start_pins.h ../hal/include/hal_gpio.h ../hal/include/hpl_gpio.h \
- ../hal/utils/include/compiler.h \
+main.d main.o: .././main.c .././common.h .././start.h \
+ ../Config/peripheral_clk_config.h ../hal/include/hal_init.h \
+ ../hal/include/hpl_init.h ../hal/utils/include/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
@@ -134,29 +134,24 @@ main.d main.o: .././main.c .././common.h .././start.h .././drivers.h \
  ../hri/hri_sdhc_e54.h ../hri/hri_sercom_e54.h ../hri/hri_supc_e54.h \
  ../hri/hri_tc_e54.h ../hri/hri_tcc_e54.h ../hri/hri_trng_e54.h \
  ../hri/hri_usb_e54.h ../hri/hri_wdt_e54.h \
- ../hal/utils/include/err_codes.h ../hpl/port/hpl_gpio_base.h \
- ../hal/utils/include/utils_assert.h ../Config/hpl_port_config.h \
- ../hal/include/hal_delay.h ../hal/include/hpl_irq.h \
- ../hal/include/hpl_reset.h ../hal/include/hpl_sleep.h \
- ../hal/include/hal_init.h ../hal/include/hpl_init.h \
- ../hal/include/hal_io.h ../hal/include/hal_sleep.h \
- ../hal/include/hal_usart_sync.h ../hal/include/hal_io.h \
- ../hal/include/hpl_usart_sync.h ../hal/include/hpl_usart.h \
- ../hal/include/hal_mci_sync.h ../hal/include/hpl_mci_sync.h \
- ../hal/utils/include/utils.h .././servo/servo.h .././servo/../common.h \
- .././lidar/lidar.h .././lidar/../common.h .././stdio_redirect.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
+ ../hal/utils/include/err_codes.h ../hal/include/hal_usart_sync.h \
+ ../hal/include/hal_io.h ../hal/include/hpl_usart_sync.h \
+ ../hal/include/hpl_usart.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\reent.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_types.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_types.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\lock.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\stdlib.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\types.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\endian.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_endian.h \
@@ -168,25 +163,34 @@ main.d main.o: .././main.c .././common.h .././start.h .././drivers.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_pthreadtypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\types.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\stdio.h \
- ../stdio_redirect/stdio_io.h .././sd_mmc_start.h \
- ../Config/peripheral_clk_config.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\stdlib.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
+ ../hal/utils/include/utils.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
- .././eeprom.h
+ .././drivers.h .././start_pins.h ../hal/include/hal_gpio.h \
+ ../hal/include/hpl_gpio.h ../hpl/port/hpl_gpio_base.h \
+ ../hal/utils/include/utils_assert.h ../Config/hpl_port_config.h \
+ ../hal/include/hal_delay.h ../hal/include/hpl_irq.h \
+ ../hal/include/hpl_reset.h ../hal/include/hpl_sleep.h \
+ ../hal/include/hal_io.h ../hal/include/hal_sleep.h \
+ ../hal/include/hal_mci_sync.h ../hal/include/hpl_mci_sync.h \
+ .././servo/servo.h ../common.h .././lidar/lidar.h .././fatfs.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
+ ../hal/include/hal_calendar.h ../hal/include/hpl_calendar.h \
+ ../hal/utils/include/utils_list.h ../hal/include/hpl_irq.h \
+ ../fatfs/src/ff.h ../fatfs/src/ffconf.h ../Config/conf_fatfs.h \
+ ../fatfs/src/integer.h .././eeprom.h .././scan.h .././lams_sd.h \
+ ../sd_mmc/sd_mmc.h ../Config/conf_sd_mmc.h
 
 .././common.h:
 
 .././start.h:
 
-.././drivers.h:
+../Config/peripheral_clk_config.h:
 
-.././start_pins.h:
+../hal/include/hal_init.h:
 
-../hal/include/hal_gpio.h:
-
-../hal/include/hpl_gpio.h:
+../hal/include/hpl_init.h:
 
 ../hal/utils/include/compiler.h:
 
@@ -508,28 +512,6 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 
 ../hal/utils/include/err_codes.h:
 
-../hpl/port/hpl_gpio_base.h:
-
-../hal/utils/include/utils_assert.h:
-
-../Config/hpl_port_config.h:
-
-../hal/include/hal_delay.h:
-
-../hal/include/hpl_irq.h:
-
-../hal/include/hpl_reset.h:
-
-../hal/include/hpl_sleep.h:
-
-../hal/include/hal_init.h:
-
-../hal/include/hpl_init.h:
-
-../hal/include/hal_io.h:
-
-../hal/include/hal_sleep.h:
-
 ../hal/include/hal_usart_sync.h:
 
 ../hal/include/hal_io.h:
@@ -538,35 +520,15 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 
 ../hal/include/hpl_usart.h:
 
-../hal/include/hal_mci_sync.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h:
 
-../hal/include/hpl_mci_sync.h:
-
-../hal/utils/include/utils.h:
-
-.././servo/servo.h:
-
-.././servo/../common.h:
-
-.././lidar/lidar.h:
-
-.././lidar/../common.h:
-
-.././stdio_redirect.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\reent.h:
 
@@ -577,6 +539,16 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_types.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\lock.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\stdlib.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\types.h:
 
@@ -600,18 +572,76 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\stdio.h:
 
-../stdio_redirect/stdio_io.h:
-
-.././sd_mmc_start.h:
-
-../Config/peripheral_clk_config.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\stdlib.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\alloca.h:
+../hal/utils/include/utils.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h:
 
+.././drivers.h:
+
+.././start_pins.h:
+
+../hal/include/hal_gpio.h:
+
+../hal/include/hpl_gpio.h:
+
+../hpl/port/hpl_gpio_base.h:
+
+../hal/utils/include/utils_assert.h:
+
+../Config/hpl_port_config.h:
+
+../hal/include/hal_delay.h:
+
+../hal/include/hpl_irq.h:
+
+../hal/include/hpl_reset.h:
+
+../hal/include/hpl_sleep.h:
+
+../hal/include/hal_io.h:
+
+../hal/include/hal_sleep.h:
+
+../hal/include/hal_mci_sync.h:
+
+../hal/include/hpl_mci_sync.h:
+
+.././servo/servo.h:
+
+../common.h:
+
+.././lidar/lidar.h:
+
+.././fatfs.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
+
+../hal/include/hal_calendar.h:
+
+../hal/include/hpl_calendar.h:
+
+../hal/utils/include/utils_list.h:
+
+../hal/include/hpl_irq.h:
+
+../fatfs/src/ff.h:
+
+../fatfs/src/ffconf.h:
+
+../Config/conf_fatfs.h:
+
+../fatfs/src/integer.h:
+
 .././eeprom.h:
+
+.././scan.h:
+
+.././lams_sd.h:
+
+../sd_mmc/sd_mmc.h:
+
+../Config/conf_sd_mmc.h:
