@@ -476,9 +476,6 @@
     <Compile Include="common.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Config\conf_fatfs.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Config\conf_sd_mmc.h">
       <SubType>compile</SubType>
     </Compile>

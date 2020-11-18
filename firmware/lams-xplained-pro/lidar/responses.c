@@ -1,4 +1,6 @@
 #include "lidar.h"
+#include <string.h>
+#include <stdio.h>
 
 /* See lidar.h for declarations */
 extern response_descriptor resp_desc;
@@ -13,6 +15,8 @@ extern uint8_t processing;
 extern volatile char DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
 extern volatile uint16_t lidar_timer;
 extern volatile uint8_t lidar_timing;
+
+static char info[512];
 
 /** 
   * "STOP" request has no response.
@@ -172,13 +176,14 @@ void LIDAR_RES_express_scan(void)
   * When converting serial_number to text from hex, the least significant byte 
   *	prints first.
   */
-void LIDAR_RES_get_info(void) 
+char* LIDAR_RES_get_info(void) 
 {	
 	uint8_t model_id 		 = DATA_RESPONSE[0];
 	uint8_t firmware_minor	 = DATA_RESPONSE[1];
 	uint8_t firmware_major	 = DATA_RESPONSE[2];
 	uint8_t hardware_version = DATA_RESPONSE[3];
 	char serial_number[16]	 = {0};
+	char tmp_info[512] = "";
 	
 	/** Get hexadecimal string output */
 	int i, j=0;
@@ -186,12 +191,16 @@ void LIDAR_RES_get_info(void)
 		sprintf(&serial_number[j++], "%02X", DATA_RESPONSE[i+4]);
 	}
 	
-    if (DEBUG) {
-        printf(" : RPLiDAR Model ID: %u\r\n", model_id);	
-        printf(" : Firmware Version: %u.%u\r\n", firmware_major, firmware_minor);
-        printf(" : Hardware Version: %u\r\n", hardware_version);
-        printf(" : Serial Number: 0x%s\r\n", serial_number);
-    }
+	/* Format string to print as header in .lam file */
+	sprintf(tmp_info, "# RPLiDAR Model ID: %u\r\n", model_id);
+	strcpy(info, tmp_info);
+	sprintf(tmp_info, "# RPLiDAR Firmware Version: %u.%u\r\n", firmware_major, firmware_minor);
+	strcat(info, tmp_info);
+	sprintf(tmp_info, "# Hardware Version: %u\r\n", hardware_version);
+	strcat(info, tmp_info);
+	sprintf(tmp_info, "# Serial Number: 0x%s\r\n", serial_number);
+	strcat(info, tmp_info);
+	return info;
 }
 
 /**	

@@ -16,7 +16,9 @@ void FATFS_CALENDAR_init(void);
 
 DWORD get_fattime(void);
 
+void FATFS_sd_status(void);
 void FATFS_write_file(TCHAR* filename, char* data, uint32_t data_length);
+void FATFS_print_files(char* path);
 
 #ifdef __cplusplus
 }

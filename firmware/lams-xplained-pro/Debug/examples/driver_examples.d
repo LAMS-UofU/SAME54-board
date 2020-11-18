@@ -179,8 +179,7 @@ examples/driver_examples.d examples/driver_examples.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../hal/include/hal_calendar.h ../hal/include/hpl_calendar.h \
  ../hal/utils/include/utils_list.h ../hal/include/hpl_irq.h \
- ../fatfs/src/ff.h ../fatfs/src/ffconf.h ../Config/conf_fatfs.h \
- ../fatfs/src/integer.h
+ ../fatfs/src/ff.h ../fatfs/src/ffconf.h ../fatfs/src/integer.h
 
 ../examples/driver_examples.h:
 
@@ -633,7 +632,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../fatfs/src/ff.h:
 
 ../fatfs/src/ffconf.h:
-
-../Config/conf_fatfs.h:
 
 ../fatfs/src/integer.h:

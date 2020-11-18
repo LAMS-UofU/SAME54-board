@@ -6,7 +6,8 @@
 
 uint8_t sd_menu_txt[] = "\r\n ******** Enter choice ******** \r\n \
 1. Back to main menu\r\n \
-2. Write file\r\n";
+2. Write file\r\n \
+3. Get SD status\r\n";
 
 void SD_menu(void)
 {
@@ -40,6 +41,11 @@ void SD_menu(void)
 				printf("%s\r\n", data);
 				
 				FATFS_write_file(filename, data, 512);
+				break;
+			
+			case 3:
+				printf("\r\nRetrieving SD status\r\n");
+				FATFS_sd_status();
 				break;
 		}
 	}

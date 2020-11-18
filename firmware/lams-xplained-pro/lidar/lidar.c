@@ -1,4 +1,5 @@
 #include "lidar.h"
+#include <string.h>
 
 static void LIDAR_PWM_PORT_init(void);
 static void LIDAR_PWM_CLOCK_init(void);

@@ -178,9 +178,9 @@ main.d main.o: .././main.c .././common.h .././start.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../hal/include/hal_calendar.h ../hal/include/hpl_calendar.h \
  ../hal/utils/include/utils_list.h ../hal/include/hpl_irq.h \
- ../fatfs/src/ff.h ../fatfs/src/ffconf.h ../Config/conf_fatfs.h \
- ../fatfs/src/integer.h .././eeprom.h .././scan.h .././lams_sd.h \
- ../sd_mmc/sd_mmc.h ../Config/conf_sd_mmc.h
+ ../fatfs/src/ff.h ../fatfs/src/ffconf.h ../fatfs/src/integer.h \
+ .././eeprom.h .././scan.h .././lams_sd.h ../sd_mmc/sd_mmc.h \
+ ../Config/conf_sd_mmc.h
 
 .././common.h:
 
@@ -631,8 +631,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../fatfs/src/ff.h:
 
 ../fatfs/src/ffconf.h:
-
-../Config/conf_fatfs.h:
 
 ../fatfs/src/integer.h:
 
