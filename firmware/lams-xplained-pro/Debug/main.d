@@ -165,9 +165,22 @@ main.d main.o: .././main.c .././common.h ../hal/include/hal_usart_sync.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
  ../hal/include/hal_delay.h ../hal/include/hpl_irq.h \
  ../hal/include/hpl_reset.h ../hal/include/hpl_sleep.h .././start.h \
- .././eeprom.h .././scan.h .././servo/servo.h ../common.h \
- .././lidar/lidar.h .././lams_sd.h ../sd_mmc/sd_mmc.h \
- ../Config/conf_sd_mmc.h
+ .././eeprom.h .././scan.h .././drivers.h .././start_pins.h \
+ ../hal/include/hal_gpio.h ../hal/include/hpl_gpio.h \
+ ../hpl/port/hpl_gpio_base.h ../hal/utils/include/utils_assert.h \
+ ../Config/hpl_port_config.h ../hal/include/hal_init.h \
+ ../hal/include/hpl_init.h ../hal/include/hal_io.h \
+ ../hal/include/hal_sleep.h ../hal/include/hal_mci_sync.h \
+ ../hal/include/hpl_mci_sync.h .././servo/servo.h ../common.h \
+ .././lidar/lidar.h .././fatfs.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
+ ../hal/include/hal_calendar.h ../hal/include/hpl_calendar.h \
+ ../hal/utils/include/utils_list.h ../hal/include/hpl_irq.h \
+ ../fatfs/src/ff.h ../fatfs/src/ffconf.h ../fatfs/src/integer.h \
+ ../diskio/diskio.h ../hal/utils/include/err_codes.h .././lams_sd.h \
+ ../sd_mmc/sd_mmc.h ../Config/conf_sd_mmc.h
 
 .././common.h:
 
@@ -569,11 +582,63 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 .././scan.h:
 
+.././drivers.h:
+
+.././start_pins.h:
+
+../hal/include/hal_gpio.h:
+
+../hal/include/hpl_gpio.h:
+
+../hpl/port/hpl_gpio_base.h:
+
+../hal/utils/include/utils_assert.h:
+
+../Config/hpl_port_config.h:
+
+../hal/include/hal_init.h:
+
+../hal/include/hpl_init.h:
+
+../hal/include/hal_io.h:
+
+../hal/include/hal_sleep.h:
+
+../hal/include/hal_mci_sync.h:
+
+../hal/include/hpl_mci_sync.h:
+
 .././servo/servo.h:
 
 ../common.h:
 
 .././lidar/lidar.h:
+
+.././fatfs.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
+
+../hal/include/hal_calendar.h:
+
+../hal/include/hpl_calendar.h:
+
+../hal/utils/include/utils_list.h:
+
+../hal/include/hpl_irq.h:
+
+../fatfs/src/ff.h:
+
+../fatfs/src/ffconf.h:
+
+../fatfs/src/integer.h:
+
+../diskio/diskio.h:
+
+../hal/utils/include/err_codes.h:
 
 .././lams_sd.h:
 

@@ -39,8 +39,6 @@ static void reset_print_buffer(void);
 static char filename[12];   // filename format SCAN###.lam
 static char print_buffer[MAX_PRINT_BUFFER_SIZE];
 
-extern volatile uint8_t status;
-
 /* LIDAR variables - see lidar.c for init */
 extern write_data_s		sd_scan_data[MAX_SCANS];
 extern resp_desc_s		resp_desc;
@@ -78,6 +76,8 @@ static FILINFO finfo;
 	conf_data_t conf_count;
 	int i;
 	
+	gpio_toggle_pin_level(LED_STATUS);
+	
 	/* initialize SD card connection */
 	dstatus = disk_initialize(0);
 	if (dstatus)
@@ -105,6 +105,8 @@ static FILINFO finfo;
 	/* reset lidar */
 	LIDAR_REQ_reset();
 	delay_ms(500);
+	
+	gpio_toggle_pin_level(LED_STATUS);
 	
 	/* get lidar health */
 	LIDAR_REQ_get_health();
@@ -163,6 +165,8 @@ static FILINFO finfo;
 	/* format header data to look better */
 	format_header_file_data();
 	
+	gpio_toggle_pin_level(LED_STATUS);
+	
 	/* start scans */
 	LIDAR_PWM_start();
 	for (angle = 0; angle <= 180; angle+=2) {
@@ -179,6 +183,7 @@ static FILINFO finfo;
 		}
 		write_averaged_cabins();
 		scan_count = 0;
+		gpio_toggle_pin_level(LED_STATUS);
 	}
 	
 	/* all scans complete, stop processes */
@@ -194,7 +199,7 @@ static FILINFO finfo;
 	/* unmount SD */
 	f_mount(0, "", 0);
 	
-	status = STATUS_IDLE;
+	gpio_set_pin_level(LED_STATUS, true);
  }
 
 /**
@@ -203,8 +208,6 @@ static FILINFO finfo;
  uint8_t process(void)
  {
      unsigned data_idx;
-
-     status = STATUS_PROCESSING;
 
      if (!usart_sync_is_rx_not_empty(&LIDAR_USART))
 		return PROCESSING;
@@ -367,14 +370,14 @@ void average_cabins(uint8_t servo_angle)
 			for (i = 0; i < LEGACY_CABIN_COUNT; i++) {
 				/* sample 1 */
 				angle = (legacy_cabins[i].angle_value1 & 0x0F) / 8.0;
+				if (legacy_cabins[i].angle_value1 >> 4) angle = -angle;
 				if (legacy_cabins[i].distance1 > 0)
-					distance += sqrt(pow((double)legacy_cabins[i].distance1, 2.0) + 
-									 pow(angle, 2.0) );
+					distance += ( legacy_cabins[i].distance1 / cos(angle) );
 				/* sample 2 */
 				angle = (legacy_cabins[i].angle_value2 & 0x0F) / 8;
+				if (legacy_cabins[i].angle_value2 >> 4) angle = -angle;
 				if (legacy_cabins[i].distance2 > 0)
-					distance += sqrt(pow((double)legacy_cabins[i].distance2, 2.0) +
-									 pow(angle, 2.0) );
+					distance += ( legacy_cabins[i].distance2 / cos(angle) );
 			}
 			
 			distance /= (LEGACY_CABIN_COUNT * 2);
@@ -425,8 +428,6 @@ void scan_error(uint16_t error_code)
 		printf("\r\n[Scan Error]\r\n");
 
 	LIDAR_PWM_stop();
-
-	status = STATUS_ERROR;
 	
 	if (DEBUG) {
 		switch (error_code) {
@@ -472,7 +473,10 @@ void scan_error(uint16_t error_code)
 	}
 	
 	/* Error loop */
-	while (1);
+	while (1) {
+		gpio_toggle_pin_level(LED_STATUS);
+		delay_ms(100);
+	}
 }
 
 /**

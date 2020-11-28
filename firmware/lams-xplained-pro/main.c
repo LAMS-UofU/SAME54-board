@@ -2,12 +2,11 @@
 #include "start.h"
 #include "eeprom.h"
 #include "scan.h"
+#include "drivers.h"
 #include "servo/servo.h"
 #include "lidar/lidar.h"
 #include "lams_sd.h"
 #include "sd_mmc.h"
-
-volatile uint8_t status;
 
 uint8_t menu_txt[] = "\r\n******** Enter choice ******** \r\n \
 1. Reset device\r\n \
@@ -26,7 +25,7 @@ int main(void)
 	start_init();
 	delay_init(0);
 	
-    status = STATUS_IDLE;
+	gpio_set_pin_level(LED_STATUS, true);
 	SERVO_set_angle(0);
 
 	if (DEBUG) {
