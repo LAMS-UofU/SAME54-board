@@ -1,22 +1,19 @@
 #include "lidar.h"
+#include "common.h"
 
 static void LIDAR_process(void);
-static void LIDAR_print_scans(void);
-static void LIDAR_print_cabins(void);
 
 /* See lidar.c for declarations */
-extern response_descriptor resp_desc;
-extern cabin_data cabins[MAX_SCANS];
-extern scan_data scans[MAX_SCANS];
-extern uint32_t scan_count;
-extern uint32_t invalid_exp_scans;
-extern uint8_t lidar_request;
-extern uint32_t byte_count;
-extern uint16_t buffer_length;
-extern uint8_t processing;
-extern volatile char DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
-extern volatile uint8_t lidar_timer;
-extern volatile uint8_t lidar_timing;
+extern resp_desc_s		resp_desc;
+extern write_data_s     sd_scan_data[MAX_SCANS];
+extern conf_data_t		conf_data;
+extern uint32_t			scan_count;
+extern uint32_t			invalid_exp_scans;
+extern uint8_t			lidar_request;
+extern uint32_t			byte_count;
+extern uint16_t			buffer_length;
+extern uint8_t			processing;
+extern volatile char	DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
 
 uint8_t lidar_menu_txt[] = "\r\n******** Enter choice ******** \r\n \
 1. Back to main menu\r\n \
@@ -29,7 +26,29 @@ uint8_t lidar_menu_txt[] = "\r\n******** Enter choice ******** \r\n \
 8. Send force scan command\r\n \
 9. Send get_info command\r\n \
 A. Send get_health command\r\n \
-B. Send get_samplerate command\r\n";
+B. Send get_samplerate command\r\n \
+C. Send get_lidar_conf command\r\n \
+D. Send motor_speed_ctrl_command\r\n";
+
+uint8_t lidar_conf_menu[] = "\r\n******** Enter choice ******** \r\n \
+1. Back to lidar menu\r\n \
+2. SCAN_MODE_COUNT\r\n \
+3. SCAN_MODE_US_PER_SAMPLE\r\n \
+4. SCAN_MODE_MAX_DISTANCE\r\n \
+5. SCAN_MODE_ANS_TYPE\r\n \
+6. SCAN_MODE_TYPICAL\r\n \
+7. SCAN_MODE_NAME\r\n";
+
+uint8_t lidar_conf_scan_menu[] = "\r\n******** Enter choice ******** \r\n \
+1. Standard\r\n \
+2. Express\r\n \
+3. Boost\r\n \
+4. Stability\r\n";
+
+uint8_t lidar_exp_scan_menu[] = "\r\n******** Enter choice ******** \r\n \
+1. Standard\r\n \
+2. Boost\r\n \
+3. Stability\r\n";
 
 /**
   * Menu for LiDAR command options in order to test and see printouts for each
@@ -38,6 +57,7 @@ B. Send get_samplerate command\r\n";
 void LIDAR_menu(void)
 {
 	uint16_t user_selection = 0;
+	
 	while (1) {
 		if (processing)
 			LIDAR_process();
@@ -87,7 +107,7 @@ void LIDAR_menu(void)
 			
 				case 7:
 					printf("\r\nRequesting LiDAR start express scan\r\n");
-					LIDAR_REQ_express_scan();
+					LIDAR_REQ_express_scan(LIDAR_express_scan_menu());
 					processing = 1;
 					break;
 			
@@ -114,11 +134,138 @@ void LIDAR_menu(void)
 					LIDAR_REQ_get_samplerate();
 					processing = 1;
 					break;
+				
+				case 12:
+					LIDAR_conf_menu();
+					break;
+					
+				case 13:
+					break;
 			
 				default:
 					printf("\r\nInvalid option\r\n");
 					break;
 			}
+		}
+	}
+}
+
+void LIDAR_conf_menu(void)
+{
+	uint16_t user_selection = 0;
+	
+	while (1) {
+		if (processing)
+			LIDAR_process();
+		else {
+			printf("%s", lidar_conf_menu);
+		
+			if (scanf("%hx", &user_selection) == 0) {
+				/* If its not a number, flush stdin */
+				fflush(stdin);
+				continue;
+			}
+			
+			printf("\r\nSelected option is %d\r\n", (int)user_selection);
+		
+			switch (user_selection) {
+				case 1:
+					printf("\r\nReturning to lidar menu\r\n");
+					return;
+				
+				case 2:
+					printf("\r\nRequesting LiDAR configuration mode count\r\n");
+					LIDAR_REQ_get_lidar_conf(CONF_SCAN_MODE_COUNT, 0);
+					processing = 1;
+					break;
+				
+				case 3:
+					printf("\r\nRequesting LiDAR sample duration of scan mode\r\n");
+					LIDAR_REQ_get_lidar_conf(CONF_SCAN_MODE_US_PER_SAMPLE, LIDAR_conf_scan_menu());
+					processing = 1;
+					break;
+				
+				case 4:
+					printf("\r\nRequesting LiDAR scan mode max distance\r\n");
+					LIDAR_REQ_get_lidar_conf(CONF_SCAN_MODE_MAX_DISTANCE, LIDAR_conf_scan_menu());
+					processing = 1;
+					break;
+				
+				case 5:
+					printf("\r\nRequesting LiDAR start force scan\r\n");
+					LIDAR_REQ_get_lidar_conf(CONF_SCAN_MODE_ANS_TYPE, LIDAR_conf_scan_menu());
+					processing = 1;
+					break;
+				
+				case 6:
+					printf("\r\nRequesting LiDAR answer command type for scan mode\r\n");
+					LIDAR_REQ_get_lidar_conf(CONF_SCAN_MODE_TYPICAL, 0);
+					processing = 1;
+					break;
+				
+				case 7:
+					printf("\r\nRequesting LiDAR scan mode name\r\n");
+					LIDAR_REQ_get_lidar_conf(CONF_SCAN_MODE_NAME, LIDAR_conf_scan_menu());
+					processing = 1;
+					break;
+				
+				default:
+					printf("\r\nInvalid option\r\n");
+					break;
+			}
+		}
+	}
+}
+
+scan_mode_t LIDAR_conf_scan_menu(void)
+{
+	uint16_t user_selection = 0;
+	
+	while (1) {
+		printf("%s", lidar_conf_scan_menu);
+		
+		if (scanf("%hx", &user_selection) == 0) {
+			/* If its not a number, flush stdin */
+			fflush(stdin);
+			continue;
+		}
+		
+		printf("\r\nSelected option is %d\r\n", (int)user_selection);
+		
+		switch (user_selection) {
+			case 1: return SCAN_MODE_STANDARD;
+			case 2: return SCAN_MODE_EXPRESS;
+			case 3: return SCAN_MODE_BOOST;
+			case 4: return SCAN_MODE_STABILITY;
+			default:
+				printf("\r\nInvalid option\r\n");
+				break;
+		}
+	}
+}
+
+express_mode_t LIDAR_express_scan_menu(void)
+{
+	uint16_t user_selection = 0;
+	
+	while (1) {
+		printf("%s", lidar_conf_scan_menu);
+		
+		if (scanf("%hx", &user_selection) == 0) {
+			/* If its not a number, flush stdin */
+			fflush(stdin);
+			continue;
+		}
+		
+		printf("\r\nSelected option is %d\r\n", (int)user_selection);
+		
+		switch (user_selection) {
+			case 1: return EXPRESS_SCAN_STANDARD;
+			case 2: return EXPRESS_SCAN_BOOST;
+			case 3: return EXPRESS_SCAN_STABILITY;
+			default:
+			printf("\r\nInvalid option\r\n");
+			break;
 		}
 	}
 }
@@ -130,31 +277,24 @@ void LIDAR_process(void)
 {
 	unsigned data_idx;
 	
-	/* STOP and RESET requests */
-	if (lidar_timing) {
-		switch (lidar_request) {
-			case LIDAR_STOP:
-				LIDAR_RES_stop();
-				break;
-			case LIDAR_RESET:
-				LIDAR_RES_reset();
-				break;
-		};
-		return;
-	}
-	
 	while (!usart_sync_is_rx_not_empty(&LIDAR_USART));
 	
 	/* Process response descriptor */
 	switch (byte_count) {
 		case 0:
 			resp_desc.start1 = LIDAR_USART_read_byte();
-			byte_count++;
+			/* check sync -- 0xA5 */
+			if (resp_desc.start1 == 0xA5)
+				byte_count++;
 			return;
 		
 		case 1:
 			resp_desc.start2 = LIDAR_USART_read_byte();
-			byte_count++;
+			/* check sync -- 0x5A */
+			if (resp_desc.start2 != 0x5A)
+				byte_count--;
+			else
+				byte_count++;
 			return;
 		
 		case 2:
@@ -209,13 +349,12 @@ void LIDAR_process(void)
 			/* RESET system to stop scans while debugging */
 			case LIDAR_SCAN:
 			case LIDAR_FORCE_SCAN:
-				LIDAR_RES_scan();
-				if (scan_count >= MAX_SCANS) {
-					LIDAR_PWM_stop();
-					LIDAR_REQ_stop();
-					LIDAR_print_scans();
-					break;
-				}
+				//LIDAR_RES_scan();
+				//if (scan_count >= MAX_SCANS) {
+					//LIDAR_PWM_stop();
+					//LIDAR_REQ_stop();
+					//break;
+				//}
 				return;
 
 			case LIDAR_EXPRESS_SCAN:
@@ -223,13 +362,12 @@ void LIDAR_process(void)
 				if (scan_count >= MAX_SCANS) {
 					LIDAR_PWM_stop();
 					LIDAR_REQ_stop();
-					LIDAR_print_cabins();
 					break;
 				}
 				return;
 			
 			case LIDAR_GET_INFO:
-				LIDAR_RES_get_info();
+				printf("%s\r\n", LIDAR_RES_get_info());
 				break;
 
 			case LIDAR_GET_HEALTH:
@@ -239,6 +377,10 @@ void LIDAR_process(void)
 			case LIDAR_GET_SAMPLERATE:
 				LIDAR_RES_get_samplerate();
 				break;
+			
+			case LIDAR_GET_LIDAR_CONF:
+				LIDAR_RES_get_lidar_conf();
+				break;
 
 			default:
 				return;
@@ -246,29 +388,5 @@ void LIDAR_process(void)
 		byte_count = 0;
 		processing = 0;
 		return;
-	}
-}
-
-/**
-  *	Prints scan data
-  */ 
-void LIDAR_print_scans(void) 
-{
-	int i;
-	for (i=0; i<MAX_SCANS; i++) {
-		printf("{\"S[%04u]\":{\"Q\":%u,\"A\":%u,\"D\"%u}}\r\n",
-				i, scans[i].quality, scans[i].angle, scans[i].distance);
-	}	
-}
-
-/**
-  *	Prints cabin data
-  */ 	
-void LIDAR_print_cabins(void) 
-{
-	int i;
-	for (i=0; i<MAX_SCANS; i++) {
-		printf("{\"C[%04u]\":{\"S\":%u,\"SA\":%u,\"A1\":%u,\"A2\":%u,\"D1\":%u,\"D2\":%u}}\r\n",
-			   i, cabins[i].S, cabins[i].start_angle, cabins[i].angle_value1, cabins[i].angle_value2, cabins[i].distance1, cabins[i].distance2);
 	}
 }

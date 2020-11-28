@@ -144,8 +144,7 @@ examples/driver_examples.d examples/driver_examples.o: \
  ../hal/include/hal_usart_sync.h ../hal/include/hal_io.h \
  ../hal/include/hpl_usart_sync.h ../hal/include/hpl_usart.h \
  ../hal/include/hal_mci_sync.h ../hal/include/hpl_mci_sync.h \
- ../hal/utils/include/utils.h ../servo/servo.h ../common.h ../start.h \
- ../Config/peripheral_clk_config.h \
+ ../hal/utils/include/utils.h ../servo/servo.h ../common.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
@@ -173,13 +172,14 @@ examples/driver_examples.d examples/driver_examples.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\types.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
- ../drivers.h ../lidar/lidar.h ../fatfs.h \
+ ../lidar/lidar.h ../fatfs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../hal/include/hal_calendar.h ../hal/include/hpl_calendar.h \
  ../hal/utils/include/utils_list.h ../hal/include/hpl_irq.h \
- ../fatfs/src/ff.h ../fatfs/src/ffconf.h ../fatfs/src/integer.h
+ ../fatfs/src/ff.h ../fatfs/src/ffconf.h ../fatfs/src/integer.h \
+ ../diskio/diskio.h ../hal/utils/include/err_codes.h
 
 ../examples/driver_examples.h:
 
@@ -551,10 +551,6 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 
 ../common.h:
 
-../start.h:
-
-../Config/peripheral_clk_config.h:
-
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
@@ -609,8 +605,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h:
 
-../drivers.h:
-
 ../lidar/lidar.h:
 
 ../fatfs.h:
@@ -634,3 +628,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../fatfs/src/ffconf.h:
 
 ../fatfs/src/integer.h:
+
+../diskio/diskio.h:
+
+../hal/utils/include/err_codes.h:

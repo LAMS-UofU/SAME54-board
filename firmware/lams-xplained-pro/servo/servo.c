@@ -1,4 +1,6 @@
 #include "servo.h"
+#include "drivers.h"
+#include <peripheral_clk_config.h>
 
 #define SERVO_PWM_PERIOD_us		3030
 #define SERVO_PWM_MINIMUM_us	500

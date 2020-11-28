@@ -36,7 +36,7 @@ void SD_menu(void)
 				scanf("%s", filename);
 				printf("%s\r\n", filename);
 				
-				printf("Enter data >> ");
+				printf("Enter data (no whitespace) >> ");
 				scanf("%s", data);
 				printf("%s\r\n", data);
 				

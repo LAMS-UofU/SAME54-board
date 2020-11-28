@@ -1,27 +1,22 @@
 #include "lidar.h"
+#include "common.h"
+#include <string.h>
 
-static void LIDAR_reset_print_buffer(void);
+static void reset_print_buffer(void);
 
 /* See lidar.h for declarations */
-extern response_descriptor resp_desc;
-extern cabin_data cabins;
-extern scan_data scans;
-extern uint32_t scan_count;
-extern uint32_t invalid_exp_scans;
-extern uint8_t lidar_request;
-extern volatile uint32_t byte_count;
-extern uint16_t buffer_length;
-extern uint8_t processing;
+extern resp_desc_s		resp_desc;
+extern write_data_s		sd_scan_data[MAX_SCANS];
+extern conf_data_t		conf_data;
+extern uint32_t			scan_count;
+extern uint32_t			invalid_exp_scans;
+extern uint8_t			lidar_request;
+extern uint32_t			byte_count;
+extern uint16_t			buffer_length;
+extern volatile char	DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
 
 /* Buffer for sending data to lidar */
 static char print_buffer[MAX_PRINT_BUFFER_SIZE];
-
-/* For "STOP" and "RESET" commands requiring waiting specific times before another
-   request is allowed */
-volatile uint16_t lidar_timer;
-volatile uint8_t lidar_timing;
-
-volatile uint32_t start_time;
 
 /**	
   * Request LiDAR to exit scanning state and enter idle state. No response!
@@ -31,24 +26,19 @@ volatile uint32_t start_time;
   */
 void LIDAR_REQ_stop(void)
 {
-	if (DEBUG)
-		printf("\r\nRequesting LiDAR stop\r\n");
+	//if (DEBUG)
+		//printf("\r\nRequesting LiDAR stop\r\n");
 	
 	lidar_request = LIDAR_STOP;
 	byte_count = 0;
 	
-	LIDAR_reset_print_buffer();
+	reset_print_buffer();
 	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE, 
 					 "%c%c", LIDAR_START_BYTE, LIDAR_STOP);
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
 	
-    /* Wait 1 ms */
-	if (SYSTICK_EN) {
-		lidar_timer = 1;
-		lidar_timing = 1;	
-	} else {
-		delay_ms(1);
-	}
+    /* Need wait 1 ms - doesn't seem to always work, waiting 100 ms */
+	delay_ms(100);
 }
 
 /** 
@@ -66,18 +56,13 @@ void LIDAR_REQ_reset(void)
 	lidar_request = LIDAR_RESET;
 	byte_count = 0;
 	
-	LIDAR_reset_print_buffer();
+	reset_print_buffer();
 	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE, 
 					 "%c%c", LIDAR_START_BYTE, LIDAR_RESET);
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
 	
-	/* Wait 2 ms -- taking 0.7 seconds to reboot for some reason, giving full second */
-	if (SYSTICK_EN) {
-		lidar_timer = 1000;
-		lidar_timing = 1;
-	} else {
-		delay_ms(1000);
-	}
+	/* Wait 2 ms -- taking 0.7 seconds to reboot for some reason, giving half second */
+	delay_ms(500);
 }
 
 /** 
@@ -92,14 +77,12 @@ void LIDAR_REQ_scan(void)
 {
 	if (DEBUG)
 		printf("\r\nRequesting LiDAR start scan\r\n");
-	
-	start_time = systick_count;
-	
+
 	lidar_request = LIDAR_SCAN;
 	byte_count = 0;
 	scan_count = 0;
 	
-	LIDAR_reset_print_buffer();
+	reset_print_buffer();
 	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE, 
 							 "%c%c", LIDAR_START_BYTE, LIDAR_SCAN);
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
@@ -110,10 +93,10 @@ void LIDAR_REQ_scan(void)
   * Different from SCAN request as this will make LiDAR work at the sampling 
   * rate as high as it can be.  For RPLIDAR A2 and the device models support 
   * 4khz sampling rate, the host system is required to send this request to 
-  * let the RPLIDAR work at 4khz sampling rate and output measurement sample 
-  * data accordingly; for the device models with the 2khz sample rate (such as 
-  * RPLIDAR A1 series), this request will implement the same sampling rate as 
-  * the scan(SCAN) request.
+  * let the RPLIDAR work at 4khz to 8khz sampling rate (based on the specified 
+  *	mode) and output measurement sample data accordingly; for the device models 
+  *	with the 2khz sample rate (such as RPLIDAR A1 series), this request will 
+  * implement the same sampling rate as the scan(SCAN) request.
   *		Byte Order:	+0		Request Start Bit (0xA5)
   *					+1		LIDAR_REQ_EXPRESS_SCAN (0x82)	
   *					+2		Payload Size (0x5)
@@ -125,28 +108,25 @@ void LIDAR_REQ_scan(void)
   *					+8		checksum = 0 XOR 0xA5 XOR CmdType XOR PayloadSize XOR 
   * 							       Payload[0] XOR ... XOR Payload[n]
   */
-void LIDAR_REQ_express_scan(void)
+void LIDAR_REQ_express_scan(express_mode_t scan_mode)
 {	
-	if (DEBUG)
-		printf("\r\nRequesting LiDAR start express scan\r\n");
-	
-	start_time = systick_count;
-	
-	char working_mode = 0;
+	//if (DEBUG)
+		//printf("\r\nRequesting LiDAR start express scan\r\n");
+
 	char reserved_fields = 0;
 	char payload_size = 0x5;
-	char checksum = 0 ^ LIDAR_START_BYTE ^ LIDAR_EXPRESS_SCAN ^ payload_size;
+	char checksum = 0 ^ LIDAR_START_BYTE ^ LIDAR_EXPRESS_SCAN ^ scan_mode ^ payload_size;
 	
 	lidar_request = LIDAR_EXPRESS_SCAN;
 	invalid_exp_scans = 0;
     scan_count = 0;
 	byte_count = 0;
 	
-	LIDAR_reset_print_buffer();
+	reset_print_buffer();
 	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE, 
 						"%c%c%c", LIDAR_START_BYTE, LIDAR_EXPRESS_SCAN, payload_size); 
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
-	LIDAR_USART_send((uint8_t *)&working_mode, 1);
+	LIDAR_USART_send((uint8_t *)&scan_mode, 1);
 	LIDAR_USART_send((uint8_t *)&reserved_fields, 1);
 	LIDAR_USART_send((uint8_t *)&reserved_fields, 1);
 	LIDAR_USART_send((uint8_t *)&reserved_fields, 1);
@@ -164,14 +144,12 @@ void LIDAR_REQ_force_scan(void)
 {
 	if (DEBUG)
 		printf("\r\nRequesting LiDAR start force scan\r\n");
-	
-	start_time = systick_count;
-	
+
 	lidar_request = LIDAR_FORCE_SCAN;
 	byte_count = 0;
 	scan_count = 0;
 	
-	LIDAR_reset_print_buffer();
+	reset_print_buffer();
 	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE, 
 					 "%c%c", LIDAR_START_BYTE, LIDAR_FORCE_SCAN);
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
@@ -186,13 +164,11 @@ void LIDAR_REQ_get_info(void)
 {
 	if (DEBUG)
 		printf("\r\nRequesting LiDAR info\r\n");
-		
-	start_time = systick_count;
-	
+
 	lidar_request = LIDAR_GET_INFO;
 	byte_count = 0;
 	
-	LIDAR_reset_print_buffer();
+	reset_print_buffer();
 	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE, 
 					 "%c%c", LIDAR_START_BYTE, LIDAR_GET_INFO);
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
@@ -209,12 +185,10 @@ void LIDAR_REQ_get_health(void)
 	if (DEBUG)
 		printf("\r\nRequesting LiDAR health\r\n");
 		
-	start_time = systick_count;
-	
 	lidar_request = LIDAR_GET_HEALTH;
 	byte_count = 0;
 	
-	LIDAR_reset_print_buffer();
+	reset_print_buffer();
 	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE, 
 					 "%c%c", LIDAR_START_BYTE, LIDAR_GET_HEALTH);
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
@@ -231,22 +205,87 @@ void LIDAR_REQ_get_samplerate(void)
 	if (DEBUG)
 		printf("\r\nRequesting LiDAR samplerates\r\n");
 		
-	start_time = systick_count;
-	
 	lidar_request = LIDAR_GET_SAMPLERATE;
 	byte_count = 0;
 	
-	LIDAR_reset_print_buffer();
+	reset_print_buffer();
 	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE, 
 					 "%c%c", LIDAR_START_BYTE, LIDAR_GET_SAMPLERATE);
 	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
 }
 
+/** 
+  * Request LiDAR to send configuration data
+  *		Byte Order:	+0		Request Start Bit (0xA5)
+  *					+1		LIDAR_REQ_GET_LIDAR_CONF (0x84)
+  *					+2		Payload size (0x4)
+  *					+3		Config type[31:28]
+  *					+4		
+  */
+void LIDAR_REQ_get_lidar_conf(scan_mode_t scan_mode, conf_type_t conf_type)
+{
+	if (DEBUG)
+		printf("\r\nRequesting LiDAR configuration data\r\n");
+	
+	char payload_size = 0x0;
+	uint8_t ctype[4];
+	uint8_t payload[2] = {0};
+	int i;
+	
+	for (i=0; i<4; i++)
+		ctype[i] = conf_type << (i*8);
+	
+	
+	switch (conf_type) {
+		case CONF_SCAN_MODE_COUNT:
+			payload_size = 0x4;
+			break;
+		case CONF_SCAN_MODE_US_PER_SAMPLE:
+			payload_size = 0x6;
+			payload[0] = scan_mode;
+			payload[1] = scan_mode >> 8;
+			break;
+		case CONF_SCAN_MODE_MAX_DISTANCE:
+			payload_size = 0x6;
+			payload[0] = scan_mode;
+			payload[1] = scan_mode >> 8;
+			break;
+		case CONF_SCAN_MODE_ANS_TYPE:
+			payload_size = 0x6;
+			payload[0] = scan_mode;
+			payload[1] = scan_mode >> 8;
+			break;
+		case CONF_SCAN_MODE_TYPICAL:
+			payload_size = 0x4;
+			break;
+		case CONF_SCAN_MODE_NAME:
+			payload_size = 0x6;
+			payload[0] = scan_mode;
+			payload[1] = scan_mode >> 8;
+			break;
+	}
+	
+	char checksum = 0 ^ LIDAR_START_BYTE ^ LIDAR_GET_LIDAR_CONF ^ conf_type ^ 
+					payload_size ^ payload[0] ^ payload[1];
+	
+	lidar_request = LIDAR_GET_LIDAR_CONF;
+	byte_count = 0;
+	
+	reset_print_buffer();
+	buffer_length = snprintf(print_buffer, MAX_PRINT_BUFFER_SIZE,
+					"%c%c%c", LIDAR_START_BYTE, LIDAR_GET_LIDAR_CONF, payload_size);
+	LIDAR_USART_send((uint8_t *)print_buffer, buffer_length);
+	LIDAR_USART_send((uint8_t *)ctype, 4);
+	if (payload_size > 4) {
+		LIDAR_USART_send((uint8_t *)payload, 2);	
+	}
+	LIDAR_USART_send((uint8_t *)&checksum, 1);
+}
 
 /** 
   * Resets local print buffer.
   */
-void LIDAR_reset_print_buffer(void)
+void reset_print_buffer(void)
 {
 	int i;
 	for (i=0; i<MAX_PRINT_BUFFER_SIZE; i++)

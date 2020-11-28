@@ -1,102 +1,29 @@
 #include "lidar.h"
+#include "common.h"
 #include <string.h>
 #include <stdio.h>
+#include <ctype.h>
 
 /* See lidar.h for declarations */
-extern response_descriptor resp_desc;
-extern cabin_data cabins[MAX_SCANS];
-extern scan_data scans[MAX_SCANS];
-extern uint32_t scan_count;
-extern uint32_t invalid_exp_scans;
-extern uint8_t lidar_request;
-extern volatile uint32_t byte_count;
-extern uint16_t buffer_length;
-extern uint8_t processing;
-extern volatile char DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
-extern volatile uint16_t lidar_timer;
-extern volatile uint8_t lidar_timing;
+extern resp_desc_s      resp_desc;
+extern write_data_s		sd_scan_data[MAX_SCANS];
+extern conf_data_t		conf_data;
+extern uint32_t			scan_count;
+extern uint32_t			invalid_exp_scans;
+extern uint8_t			lidar_request;
+extern uint32_t			byte_count;
+extern uint16_t			buffer_length;
+extern volatile char	DATA_RESPONSE[LIDAR_RESP_MAX_SIZE];
+
+legacy_cabin_data_s  legacy_cabins[LEGACY_CABIN_COUNT] = {0};
+ultra_cabin_data_s   ultra_cabins[EXT_CABIN_COUNT] = {0};
+dense_cabin_data_s   dense_cabins[DENSE_CABIN_COUNT] = {0};
 
 static char info[512];
 
 /** 
-  * "STOP" request has no response.
-  */
-void LIDAR_RES_stop(void) 
-{
-	if (!lidar_timer) {
-		lidar_timing = 0;
-		processing = 0;
-		if (DEBUG) 
-			printf("LiDAR stopped\r\n");
-	}
-}
-	
-/** 
-  * "RESET" request has no response. 
-  *
-  * Note: If no command sent after 2ms, sends back partial info resulting in:
-  *           RP LIDAR System.\r\n
-  *           Firmware Ver 1.27 - rc9, HW Ver 5\r\n
-  *           Model: 28\r\n
-  */
-void LIDAR_RES_reset(void) 
-{   
-	if (!lidar_timer) {
-		lidar_timing = 0;
-		processing = 0;
-		if (DEBUG) 
-			printf("LiDAR reset\r\n");
-			
-	}
-}
-	
-/** 
-  * Process "SCAN" or "FORCE SCAN" request's response
-  *
-  * Response descriptor: A5 5A 05 00 00 40 81
-  * 
-  *		Byte Offset:	+0		quality, ~start, start
-  *		Order 8..0		+1		angle[6:0], check
-  *						+2		angle_q6[14:7]
-  *						+3		distance_q2[7:0]
-  *						+4		distance_q2[15:8]
-  */
-void LIDAR_RES_scan(void) 
-{
-	/* check[0] - start
-	   check[1] - ~start
-	   check[2] - check	 */
-	uint8_t check = ((DATA_RESPONSE[0] & 0x3) << 1) | (DATA_RESPONSE[1] & 0x1);
-	uint16_t angle = ((uint16_t)DATA_RESPONSE[1] >> 1) + 
-									 ((uint16_t)DATA_RESPONSE[2] << 7);
-	uint16_t distance = DATA_RESPONSE[3] + ((uint16_t)DATA_RESPONSE[4] << 8);
-	
-	/* Decrement byte_count so next scan rewrites same DATA_RESPONSE bytes */
-	byte_count -= 5;
-	
-	/* Checking: check=1, ~start=0, start=1 */
-	if (check == 0x5 || check == 0x6) {
-		scans[scan_count].quality = DATA_RESPONSE[0] >> 2;
-		scans[scan_count].angle = angle;
-		scans[scan_count++].distance = distance;
-	}
-	
-    if (DEBUG)
-        if (scan_count % 16 == 0)
-            printf("gathered %0"PRIu32"/%0d scans...\r\n", scan_count, MAX_SCANS);
-	
-	/* Prints invalid responses...not all responses are supposed to valid, so no
-		 need to print these except for debugging */
-	/*
-    else {
-	    printf("Invalid response: C=%u, !S=%u, S=%u\r\n",
-		        (check >> 3), ((check >> 2) & 0x1), (check & 0x1));
-	}
-    */
-}
-
-/** 
-  * Process "EXPRESS_SCAN" request's response
+  * Process "EXPRESS_SCAN" Legacy Version request's response
+  * Returns 1 if valid scan, 0 otherwise
   *
   * Response descriptor: A5 5A 54 00 00 40 82
   *
@@ -104,26 +31,46 @@ void LIDAR_RES_scan(void)
   *		Order 8..0		+1		sync2 (0x5), checksum[7:4]
   *						+2		start_angle_q6[7:0]
   *						+3		start, start_angle_q6[14:8]
-  *						+4		cabin[0]
+  *
+  *			   Legacy:	+4		cabin[0]
   *						+9		cabin[1]
   *								...
   *						+79		cabin[15]
-  *	Cabin Bytes Offset:	+0		distance1[6:0], angle_val1[4] (sign)
+  *
+  *			 Extended:	+4		ultra_cabin[0]
+  *						+8		ultra_cabin[1]
+  *								...
+  *						+128	ultra_cabin[31]
+  *
+  *				Dense:	+4		cabin[0]
+  *						+9		cabin[1]
+  *								...
+  *						+79		cabin[40]
+  *
+  *		Bytes Offset:	
+  *			   Legacy:	+0		distance1[6:0], angle_val1[4] (sign)
   *						+1		distance1[14:7]
   *						+2		distance2[6:0], angle_val2[4] (sign)
   *						+3		distance2[14:7]
   *						+4		angle_val2[3:0], angle_val1[3:0]
+  *
+  *			 Extended:	+0		predict2[9:2]		
+  *						+1		predict2[1:0], predict1[9:4]
+  *						+2		predict1[3:0], major[11:8]
+  *						+3		major[7:0]
+  *	
+  *				Dense:	+0		distance[15:0]
   */
-void LIDAR_RES_express_scan(void) 
+uint8_t LIDAR_RES_express_scan(void) 
 { 
 	uint8_t calc_checksum;
-	uint8_t PAYLOAD_SIZE=84, CABIN_COUNT=16, CABIN_START=4, CABIN_BYTE_COUNT=5;
+	uint8_t PAYLOAD_SIZE=(resp_desc.response_info & 0x3FFFFFFF), CABIN_START=4;
 	uint16_t i, pos;
 	
 	uint8_t checksum = ((uint8_t)DATA_RESPONSE[1] << 4) | ((uint8_t)DATA_RESPONSE[0] & 0x0F);
-	uint16_t start_angle = DATA_RESPONSE[2] | (((uint8_t)DATA_RESPONSE[3] & 0x7F) << 8);
-	uint8_t S_flag = DATA_RESPONSE[3] >> 7;
-	
+	uint16_t start_angle = (uint8_t)DATA_RESPONSE[2] | (((uint8_t)DATA_RESPONSE[3] & 0x7F) << 8);
+	uint8_t S_flag = (uint8_t)DATA_RESPONSE[3] >> 7;
+
     /* Decrement byte count so next scan rewrites same DATA_RESPONSE bytes */
 	byte_count -= PAYLOAD_SIZE;
 	
@@ -133,35 +80,55 @@ void LIDAR_RES_express_scan(void)
 		calc_checksum ^= DATA_RESPONSE[i];
 		
 	if (checksum != calc_checksum) {
-		/*
-        if (invalid_exp_scans % 100 == 0) {
-			printf("Invalid checksum! Given: %u -- Calculated: %u\r\n", checksum, calc_checksum);
-			printf("First 8: 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X\r\n", 
-					DATA_RESPONSE[0], DATA_RESPONSE[1], DATA_RESPONSE[2], DATA_RESPONSE[3], 
-					DATA_RESPONSE[4], DATA_RESPONSE[5], DATA_RESPONSE[6], DATA_RESPONSE[7]);
-		}
-        */
 		invalid_exp_scans++;
-		return;
+		return 0;
 	}
-	
-	for (i=0; i<CABIN_COUNT; i++) {
-		pos = CABIN_START+(CABIN_BYTE_COUNT*i);
-		cabins[scan_count].S = S_flag;
-		cabins[scan_count].distance1 = ((uint8_t)DATA_RESPONSE[pos+0] >> 1) | 
-											((uint8_t)DATA_RESPONSE[pos+1] << 7);
-		cabins[scan_count].distance2 = (DATA_RESPONSE[pos+2] >> 1) |
-											((uint8_t)DATA_RESPONSE[pos+3] << 7);
-		cabins[scan_count].angle_value1 = (((uint8_t)DATA_RESPONSE[pos+0] & 0x1) << 4) |
-											((uint8_t)DATA_RESPONSE[pos+4] >> 4);
-		cabins[scan_count].angle_value2 = (((uint8_t)DATA_RESPONSE[pos+2] & 0x1) << 4) |
-											(DATA_RESPONSE[pos+4] & 0x0F);
-		cabins[scan_count++].start_angle = start_angle;
-	}
-	
-    if (DEBUG)
-	    printf("%0"PRIu32" invalid scans -- gathered %0"PRIu32"/%0d scans...\r\n", 
-				invalid_exp_scans, scan_count, MAX_SCANS);
+
+    switch (resp_desc.data_type) {
+        
+        /* Legacy Version */
+        case EXPRESS_SCAN_LEGACY_VER:
+            for (i = 0; i < LEGACY_CABIN_COUNT; i++) {
+                pos = CABIN_START + (LEGACY_CABIN_BYTE_COUNT * i);
+				legacy_cabins[i].start_angle = start_angle;
+                legacy_cabins[i].distance1 =    ( (uint8_t)DATA_RESPONSE[pos+0] >> 1 ) |
+												( (uint8_t)DATA_RESPONSE[pos+1] << 7 );
+				legacy_cabins[i].distance2 =	( (uint8_t)DATA_RESPONSE[pos+2] >> 1 ) |
+												( (uint8_t)DATA_RESPONSE[pos+3] << 7 );
+                legacy_cabins[i].angle_value1 = (((uint8_t)DATA_RESPONSE[pos+0] & 0x1 ) << 4) |
+												( (uint8_t)DATA_RESPONSE[pos+4] & 0x0F );
+				legacy_cabins[i].angle_value2 = (((uint8_t)DATA_RESPONSE[pos+2] & 0x1 ) << 4) |
+												( (uint8_t)DATA_RESPONSE[pos+4] >> 4 );
+            }
+            break;
+        
+        /* Extended Version */
+		case EXPRESS_SCAN_EXTENDED_VER:
+			for (i = 0; i < EXT_CABIN_COUNT; i++) {
+				pos = CABIN_START + (EXT_CABIN_BYTE_COUNT * i);
+				ultra_cabins[i].S = S_flag;
+				ultra_cabins[i].start_angle = start_angle;
+				ultra_cabins[i].predict2 =  ( (uint8_t)DATA_RESPONSE[pos+0] << 2 ) |
+										    ( (uint8_t)DATA_RESPONSE[pos+1] >> 6 );
+				ultra_cabins[i].predict1 =  (((uint8_t)DATA_RESPONSE[pos+1] & 0x3F ) << 4 ) |
+										    ( (uint8_t)DATA_RESPONSE[pos+2] >> 4 );
+				ultra_cabins[i].major =     ( (uint8_t)DATA_RESPONSE[pos+2] << 8 ) |
+											( (uint8_t)DATA_RESPONSE[pos+3] );
+			}
+			break;
+		
+		/* Dense Version */
+		case EXPRESS_SCAN_DENSE_VER:
+			for (i = 0; i < DENSE_CABIN_COUNT; i++) {
+				pos = CABIN_START + (DENSE_CABIN_BYTE_COUNT * i);
+				dense_cabins[i].S = S_flag;
+				dense_cabins[i].distance =  ( (uint8_t)DATA_RESPONSE[pos+0] << 8) |
+											( (uint8_t)DATA_RESPONSE[pos+1]);
+				dense_cabins[i].start_angle = start_angle;
+			}
+			break;
+    }
+	return 1;
 }
 
 /**	
@@ -186,9 +153,9 @@ char* LIDAR_RES_get_info(void)
 	char tmp_info[512] = "";
 	
 	/** Get hexadecimal string output */
-	int i, j=0;
-	for (i=15; i>=0; i--) {
-		sprintf(&serial_number[j++], "%02X", DATA_RESPONSE[i+4]);
+	int i;
+	for (i=0; i<15; i++) {
+		sprintf(&serial_number[i], "%02X", DATA_RESPONSE[i+4]);
 	}
 	
 	/* Format string to print as header in .lam file */
@@ -250,4 +217,82 @@ void LIDAR_RES_get_samplerate(void)
 		printf(" : Express Scan Samplerate: %u\r\n", 
 			    DATA_RESPONSE[2] + ((unsigned)DATA_RESPONSE[3] << 8));
     }
+}
+
+/** 
+  * Process "GET_LIDAR_CONF" request's response
+  *		Byte Offset:	+0		configuration type
+  *						+1		payload[0]
+  *						+2		payload[1]
+  *								...
+  *						+(n+4)	payload[n]	
+  */
+void LIDAR_RES_get_lidar_conf(void)
+{
+	int i;
+	uint32_t conf_type = (uint8_t)DATA_RESPONSE[0] | ((uint8_t)DATA_RESPONSE[1] << 8) |
+						 ((uint8_t)DATA_RESPONSE[2] << 16) | ((uint8_t)DATA_RESPONSE[3] << 24);
+	
+	switch (conf_type) {
+		case CONF_SCAN_MODE_COUNT:
+			conf_data.resp1 = ( ((uint8_t)DATA_RESPONSE[4]) | 
+								((uint8_t)DATA_RESPONSE[5] << 8) );
+			if (DEBUG)
+				printf(" : %u scan modes supported\r\n", conf_data.resp1);
+			return;
+				
+		case CONF_SCAN_MODE_US_PER_SAMPLE:
+			conf_data.resp2 = ( ((uint8_t)DATA_RESPONSE[4])       |
+								((uint8_t)DATA_RESPONSE[5] << 8 ) |
+								((uint8_t)DATA_RESPONSE[6] << 16) |
+								((uint8_t)DATA_RESPONSE[7] << 24) );
+			conf_data.resp2 = conf_data.resp2 / (1 << 8);
+			if (DEBUG) 
+				printf(" : Specified scan mode costs %"PRIu32" us per sample\r\n", conf_data.resp2);
+			return;
+		
+		case CONF_SCAN_MODE_MAX_DISTANCE:
+			conf_data.resp2 = ( ((uint8_t)DATA_RESPONSE[4])       |
+								((uint8_t)DATA_RESPONSE[5] << 8 ) |
+								((uint8_t)DATA_RESPONSE[6] << 16) |
+								((uint8_t)DATA_RESPONSE[7] << 24) );
+			conf_data.resp2 = conf_data.resp2 / (1 << 8);
+			if (DEBUG)
+				printf(" : Specified scan mode has a max measuring distance of %"PRIu32" m\r\n", conf_data.resp2);
+			return;
+		
+		case CONF_SCAN_MODE_ANS_TYPE:
+			conf_data.resp0 = (uint8_t)DATA_RESPONSE[4];
+			if (DEBUG) {
+				switch (conf_data.resp0) {
+					case ANS_TYPE_STANDARD:
+						printf(" : Specified scan mode returns data in rplidar_resp_measurement_node_t\r\n");
+						break;
+					case ANS_TYPE_EXPRESS:
+						printf(" : Specified scan mode returns data in capsuled format\r\n");
+						break;
+					case ANS_TYPE_CONF:
+						printf(" : Specified scan mode returns data in ultra capsuled format\r\n");
+						break;
+					default:
+						printf(" : Specified scan mode returns data in unspecified format (0x%02X)\r\n", conf_data.resp0);
+				}
+			}
+			return;
+		
+		case CONF_SCAN_MODE_TYPICAL:
+			conf_data.resp1 = ( ((uint8_t)DATA_RESPONSE[4]) |
+								((uint8_t)DATA_RESPONSE[5] << 8) );
+			if (DEBUG)
+				printf(" : Typical scan mode id of LiDAR is %"PRIu16"\r\n", conf_data.resp1);
+			conf_data.resp1 = conf_data.resp1;
+			return;
+		
+		case CONF_SCAN_MODE_NAME:
+			for (i=0; i<(resp_desc.response_info & 0x3FFFFFFF); i++)
+				conf_data.resp3[i] = toupper(DATA_RESPONSE[i+4]);
+			if (DEBUG)
+				printf(" : Specified scan mode name is %s\r\n", conf_data.resp3);
+			return;
+	}
 }

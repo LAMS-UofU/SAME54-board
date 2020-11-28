@@ -1,6 +1,8 @@
 #include "common.h"
 #include "sd_mmc.h"
 
+extern struct mci_sync_desc SDHC_IO_BUS;
+
 /* Card Detect (CD) pin settings */
 static sd_mmc_detect_t SDMMC_ACCESS_cd[CONF_SD_MMC_MEM_CNT] = {
 	{-1, CONF_SD_MMC_0_CD_DETECT_VALUE},

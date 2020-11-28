@@ -1,4 +1,7 @@
 #include "lidar.h"
+#include "common.h"
+#include "drivers.h"
+#include <peripheral_clk_config.h>
 #include <string.h>
 
 static void LIDAR_PWM_PORT_init(void);
@@ -8,9 +11,10 @@ static void LIDAR_USART_CLOCK_init(void);
 
 struct usart_sync_descriptor LIDAR_USART;
 
-response_descriptor resp_desc = {0};
-cabin_data cabins[MAX_SCANS] = {0};
-scan_data scans[MAX_SCANS] = {0};
+resp_desc_s		resp_desc = {0};
+write_data_s	sd_scan_data[MAX_SCANS] = {0};
+conf_data_t		conf_data = { .resp2 = 0 };
+uint8_t			processing = 0;
 
 /* Scan counts so not to print/transfer data while scanning */
 uint32_t scan_count = 0;
@@ -22,7 +26,6 @@ uint8_t lidar_request = 0;
 /* Number of bytes received for processing LiDAR responses */
 volatile uint32_t byte_count = 0;
 uint16_t buffer_length = 0;
-uint8_t processing = 0;
 
 /* Preserve response bytes */
 volatile char DATA_RESPONSE[LIDAR_RESP_MAX_SIZE] = {0};
@@ -47,7 +50,7 @@ void LIDAR_PWM_CLOCK_init(void)
 	hri_gclk_write_PCHCTRL_reg(GCLK, 
 							   TC4_GCLK_ID, 
 							   CONF_GCLK_TC4_SRC | 
-                                    (1 << GCLK_PCHCTRL_CHEN_Pos));
+                               (1 << GCLK_PCHCTRL_CHEN_Pos));
 }
 
 /**

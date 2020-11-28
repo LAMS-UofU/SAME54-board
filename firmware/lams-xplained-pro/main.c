@@ -1,4 +1,5 @@
 #include "common.h"
+#include "start.h"
 #include "eeprom.h"
 #include "scan.h"
 #include "servo/servo.h"
@@ -23,12 +24,9 @@ int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
 	start_init();
+	delay_init(0);
 	
-	if (SYSTICK_EN)
-		SysTick_Config(12000UL); /* 12M ticks/second / 1k ticks/second = 12000 */
-	
-	status = STATUS_IDLE;
-	
+    status = STATUS_IDLE;
 	SERVO_set_angle(0);
 
 	if (DEBUG) {
@@ -76,9 +74,15 @@ int main(void)
 					printf("\r\nInvalid option \r\n");
 					break;
 			}
+		} 
+	} 
+    /* DEBUG = 0 */
+    else {
+		while (1) {
+			scan();
 		}
 	}
-
+	
 	/* Execution should not come here during normal operation */
     return (EXIT_FAILURE);
 }

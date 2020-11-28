@@ -1,6 +1,7 @@
 #include "common.h"
 #include "start.h"
 #include "eeprom.h"
+#include "drivers.h"
 
 /* A specific byte pattern stored at the beginning of SmartEEPROM data area.
  * When the application comes from a reset, if it finds this signature,

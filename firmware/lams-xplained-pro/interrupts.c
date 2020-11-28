@@ -1,5 +1,6 @@
 #include <RTE_Components.h>
 #include "common.h"
+#include "drivers.h"
 
 extern volatile uint16_t lidar_timer;
 extern volatile uint8_t status;
@@ -97,34 +98,4 @@ void HardFault_Handler_C(unsigned int * hardfault_args, unsigned int lr_value)
 		gpio_toggle_pin_level(LED_STATUS);
 		delay_ms(BLINK_ERROR);
 	}
-}
-
-/**
-  *	SysTick Handler
-  */
-void SysTick_Handler(void)
-{
-	systick_count++;
-	
-	/* LIDAR STOP and RESET requests/responses */
-	if (lidar_timer > 0) {
-		//if (DEBUG) {
-			//printf("lidar_timer = %u\r\n", lidar_timer);
-		//}
-		lidar_timer--;
-	}
-	
-	switch (status) {
-		case STATUS_IDLE: /* Solid light */
-			gpio_set_pin_level(LED_STATUS, true);
-			break;
-		case STATUS_PROCESSING:
-			if (systick_count % BLINK_PROCESSING == 0)
-				gpio_toggle_pin_level(LED_STATUS);
-			break;
-		case STATUS_ERROR:
-			if (systick_count % BLINK_ERROR == 0)
-				gpio_toggle_pin_level(LED_STATUS);
-			break;
-	};
 }
