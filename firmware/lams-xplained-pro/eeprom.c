@@ -47,9 +47,11 @@ void invert_seep_byte(uint8_t index)
 
 	/* Read the data, invert it, and write it back */
 	data_8 = SmartEEPROM8[index];
-	printf("\r\nData at test address %d is = %d\r\n", index, (int)data_8);
+	if (LAMS_DEBUG)
+		printf("\r\nData at test address %d is = %d\r\n", index, (int)data_8);
 	SmartEEPROM8[index] = !data_8;
-	printf("\r\nInverted the data at test address and written\r\n");
+	if (LAMS_DEBUG)
+		printf("\r\nInverted the data at test address and written\r\n");
 }
 
 
@@ -64,7 +66,8 @@ int8_t verify_seep_signature(void)
 
 	/* If SBLK fuse is not configured, inform the user and wait here */
 	if (!(hri_nvmctrl_read_SEESTAT_SBLK_bf(NVMCTRL))) {
-		printf("\r\nPlease configure SBLK fuse to allocate SmartEEPROM area\r\n");
+		if (LAMS_DEBUG)
+			printf("\r\nPlease configure SBLK fuse to allocate SmartEEPROM area\r\n");
 		while (1);
 	}
 
@@ -84,12 +87,14 @@ void print_hex_array(void *mem, uint16_t len)
 	uint16_t       i;
 	unsigned char *p = (unsigned char *)mem;
 
-	for (i = 0; i < len; i++) {
-		printf("%02d ", p[i]);
-		if ((i % 8 == 0) && i)
-			printf("\r\n");
+	if (LAMS_DEBUG) {
+		for (i = 0; i < len; i++) {
+			printf("%02d ", p[i]);
+			if ((i % 8 == 0) && i)
+				printf("\r\n");
+		}
+		printf("\r\n");
 	}
-	printf("\r\n");
 }
 
 
@@ -99,16 +104,20 @@ void print_hex_array(void *mem, uint16_t len)
 void EEPROM_init(void)
 {
 	if (ERR_NONE == verify_seep_signature()) {
-		printf("\r\nSmartEEPROM contains valid data \r\n");
+		if (LAMS_DEBUG)
+			printf("\r\nSmartEEPROM contains valid data \r\n");
 	} else {
-		printf("\r\nStoring signature to SmartEEPROM address 0x00 to 0x03\r\n");
+		if (LAMS_DEBUG)
+			printf("\r\nStoring signature to SmartEEPROM address 0x00 to 0x03\r\n");
 		while (hri_nvmctrl_get_SEESTAT_BUSY_bit(NVMCTRL));
 		SmartEEPROM32[0] = SMEE_CUSTOM_SIG;
 	}
-	printf("\r\nFuse values for SBLK = %d, PSZ = %d. See the table 'SmartEEPROM Virtual \
-		Size in Bytes' in the Datasheet to calculate total available bytes \r\n",
-		(int)hri_nvmctrl_read_SEESTAT_SBLK_bf(NVMCTRL),
-		(int)hri_nvmctrl_read_SEESTAT_PSZ_bf(NVMCTRL));
+	if (LAMS_DEBUG) {
+		printf("\r\nFuse values for SBLK = %d, PSZ = %d. See the table 'SmartEEPROM Virtual \
+			Size in Bytes' in the Datasheet to calculate total available bytes \r\n",
+			(int)hri_nvmctrl_read_SEESTAT_SBLK_bf(NVMCTRL),
+			(int)hri_nvmctrl_read_SEESTAT_PSZ_bf(NVMCTRL));
+	}
 
 	/* Toggle a SmartEEPROM byte and give indication with LED0 on SAM E54 Xpro */
 	invert_seep_byte(SEEP_TEST_ADDR);

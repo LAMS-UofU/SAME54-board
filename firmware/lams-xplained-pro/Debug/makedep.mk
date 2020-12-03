@@ -90,6 +90,8 @@ main.c
 
 scan.c
 
+scan_utils.c
+
 sd_mmc\sd_mmc.c
 
 servo\servo.c

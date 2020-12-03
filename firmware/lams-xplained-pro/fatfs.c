@@ -4,11 +4,13 @@
 
 struct calendar_descriptor CALENDER_INTERFACE;
 
-static FATFS   fatfs;
-static FIL	   fptr;
-static FILINFO finfo;
-static FRESULT fresult;
-static DIR	   fdir;
+FATFS   fatfs;
+FIL     fptr;
+DSTATUS dstatus;
+FRESULT fresult;
+UINT    bwritten;
+FILINFO finfo;
+DIR		fdir;
 
 /**
   *	Initializes calendar clock for FATFS
@@ -113,11 +115,31 @@ void FATFS_print_files(char* path)
 	UINT s1, s2;
 	FATFS *fs = &fatfs;
 	
+	/* initialize SD card connection */
+	dstatus = disk_initialize(0);
+	if (dstatus != RES_OK) {
+		printf("%s\r\n", DISKIO_dstatus_desc(dstatus));
+		return;
+	}
+	
+	/* mount SD card */
+	fresult = f_mount(&fatfs, path, 0);
+	if (fresult != FR_OK) {
+		printf("%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
 	fresult = f_opendir(&fdir, path);
 	if (fresult) {
 		printf("%s\r\n", FATFS_fresult_desc(fresult)); 
 		return; 
 	}
+	
+	printf("\tD - Directory\r\n");
+	printf("\tR - Read-Only\r\n");
+	printf("\tH - Hidden\r\n");
+	printf("\tS - System\r\n");
+	printf("\tA - Archive\r\n");
 	
 	p1 = s1 = s2 = 0;
 	
@@ -155,7 +177,211 @@ void FATFS_print_files(char* path)
 		printf(", %10lu bytes free\r\n", p1 * fs->csize * 512);
 	else
 		printf("%s\r\n", FATFS_fresult_desc(fresult));
+	
+	/* unmount SD */
+	f_mount(0, "", 0);
 }
+
+void FATFS_remove_file(TCHAR* fname)
+{
+	/* initialize SD card connection */
+	dstatus = disk_initialize(0);
+	if (dstatus != RES_OK) {
+		printf("\r\n%s\r\n", DISKIO_dstatus_desc(dstatus));
+		return;
+	}
+	
+	/* mount SD card */
+	fresult = f_mount(&fatfs, "/", 0);
+	if (fresult != FR_OK) {
+		printf("\r\n%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
+	fresult = f_unlink(fname);
+	if (fresult == FR_OK)
+		printf("Successfully removed %s\r\n", fname);
+	else
+		printf("\r\nCould not removed %s: %s\r\n", fname, FATFS_fresult_desc(fresult));
+	
+	/* unmount SD */
+	f_mount(0, "", 0);
+}
+
+void FATFS_rename_file(TCHAR* fname, TCHAR* new_fname)
+{
+	/* initialize SD card connection */
+	dstatus = disk_initialize(0);
+	if (dstatus != RES_OK) {
+		printf("\r\n%s\r\n", DISKIO_dstatus_desc(dstatus));
+		return;
+	}
+	
+	/* mount SD card */
+	fresult = f_mount(&fatfs, "/", 0);
+	if (fresult != FR_OK) {
+		printf("%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
+	fresult = f_rename(fname, new_fname);
+	if (fresult == FR_OK)
+		printf("Successfully renamed %s to %s\r\n", fname, new_fname);
+	else
+		printf("\r\nCould not rename %s: %s\r\n", fname, FATFS_fresult_desc(fresult));
+	
+	/* unmount SD */
+	f_mount(0, "", 0);
+}
+
+/**
+  *	Delete empty files -- up to 100 before breaks
+  */
+void FATFS_remove_empty_files(void)
+{
+	TCHAR empty_files[100][13];
+	int i, empty_num = 0;
+	
+	/* initialize SD card connection */
+	dstatus = disk_initialize(0);
+	if (dstatus != RES_OK) {
+		printf("\r\n%s\r\n", DISKIO_dstatus_desc(dstatus));
+		return;
+	}
+	
+	/* mount SD card */
+	fresult = f_mount(&fatfs, "/", 0);
+	if (fresult != FR_OK) {
+		printf("\r\n%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
+	fresult = f_opendir(&fdir, "/");
+	if (fresult) {
+		printf("%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
+	while(1) {
+		fresult = f_readdir(&fdir, &finfo);
+		if ((fresult != FR_OK) || !finfo.fname[0])
+			break;
+		
+		if ( (finfo.fsize == 0) && (!(finfo.fattrib & AM_SYS)) ) {
+			for (i = 0; i < 12; i++)
+				empty_files[empty_num][i] = finfo.fname[i];
+			empty_num++;
+		}
+	}
+	
+	for(i = 0; i < empty_num; i++)
+		FATFS_remove_file(empty_files[i]);
+	
+	/* unmount SD */
+	f_mount(0, "", 0);
+}
+
+/**
+  * fix numbering for 100 files
+  */
+void FATFS_fix_numbering(void)
+{
+	int i, filenum = 0;
+	TCHAR filename[12];
+	TCHAR files[100][13];
+	
+	/* initialize SD card connection */
+	dstatus = disk_initialize(0);
+	if (dstatus != RES_OK) {
+		printf("\r\n%s\r\n", DISKIO_dstatus_desc(dstatus));
+		return;
+	}
+	
+	/* mount SD card */
+	fresult = f_mount(&fatfs, "/", 0);
+	if (fresult != FR_OK) {
+		printf("\r\n%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
+	fresult = f_opendir(&fdir, "/");
+	if (fresult) {
+		printf("%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
+	while(1) {
+		fresult = f_readdir(&fdir, &finfo);
+		if ((fresult != FR_OK) || !finfo.fname[0])
+			break;
+		
+		/* get filenames */
+		if (!(finfo.fattrib & AM_SYS)) { 
+			for (i = 0; i < 13; i++)
+				files[filenum][i] = finfo.fname[i];
+			filenum++;
+		}
+	}
+	
+	/* rename file to +1 of previous filenum */
+	for (i = 0; i < filenum; i++) {
+		sprintf(filename, "SCAN%03u.LAM", i + 1);
+		FATFS_rename_file(files[i], filename);	
+	}
+	
+	/* unmount SD */
+	f_mount(0, "", 0);
+}
+
+void FATFS_add_hundred(void)
+{
+	int i, filenum = 0;
+	TCHAR filename[12];
+	TCHAR files[100][13];
+	
+	/* initialize SD card connection */
+	dstatus = disk_initialize(0);
+	if (dstatus != RES_OK) {
+		printf("\r\n%s\r\n", DISKIO_dstatus_desc(dstatus));
+		return;
+	}
+	
+	/* mount SD card */
+	fresult = f_mount(&fatfs, "/", 0);
+	if (fresult != FR_OK) {
+		printf("\r\n%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
+	fresult = f_opendir(&fdir, "/");
+	if (fresult) {
+		printf("%s\r\n", FATFS_fresult_desc(fresult));
+		return;
+	}
+	
+	while(1) {
+		fresult = f_readdir(&fdir, &finfo);
+		if ((fresult != FR_OK) || !finfo.fname[0])
+		break;
+		
+		/* get filenames */
+		if (!(finfo.fattrib & AM_SYS)) {
+			for (i = 0; i < 13; i++)
+			files[filenum][i] = finfo.fname[i];
+			filenum++;
+		}
+	}
+	
+	/* rename file to +1 of previous filenum */
+	for (i = 0; i < filenum; i++) {
+		sprintf(filename, "SCAN%03u.LAM", i + 101);
+		FATFS_rename_file(files[i], filename);
+	}
+	
+	/* unmount SD */
+	f_mount(0, "", 0);
+}
+
 
 /**
   *	Return string based on file result
@@ -190,7 +416,7 @@ char* FATFS_fresult_desc(FRESULT res)
 /**
   *	Return string based on disk status
   */
-char* FATFS_dstatus_desc(DSTATUS status)
+char* DISKIO_dstatus_desc(DSTATUS status)
 {
 	switch (status) {
 		case STA_NOINIT:  return "Disk not initialized";

@@ -20,8 +20,16 @@ DWORD get_fattime(void);
 void FATFS_sd_status(void);
 void FATFS_write_file(TCHAR*, char*, uint32_t);
 void FATFS_print_files(char*);
+
+void FATFS_remove_file(TCHAR*);
+void FATFS_rename_file(TCHAR*, TCHAR*);
+
+void FATFS_remove_empty_files(void);
+void FATFS_fix_numbering(void);
+void FATFS_add_hundred(void);
+
 char* FATFS_fresult_desc(FRESULT);
-char* FATFS_dstatus_desc(DSTATUS);
+char* DISKIO_dstatus_desc(DSTATUS);
 
 #ifdef __cplusplus
 }

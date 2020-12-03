@@ -1,4 +1,5 @@
 #include "servo.h"
+#include "common.h"
 #include "drivers.h"
 #include <peripheral_clk_config.h>
 
@@ -10,6 +11,8 @@
 
 static void SERVO_PWM_PORT_init(void);
 static void SERVO_PWM_CLOCK_init(void);
+
+extern volatile uint32_t timer;
 
 /**
   *	Initializes PWM port for servo
@@ -77,7 +80,7 @@ void SERVO_PWM_init(void)
   * 
   * @param int : angle to set servo to
   */ 
-void SERVO_set_angle(int angle)
+void SERVO_set_angle(double angle)
 {
 	double angle_ratio = angle / 180.0;
 	uint16_t pwm_spread = SERVO_PWM_MAXIMUM_us - SERVO_PWM_MINIMUM_us;
@@ -92,6 +95,37 @@ void SERVO_set_angle(int angle)
 	}
 	hri_tc_wait_for_sync(TC1, TC_SYNCBUSY_SWRST);
 	
-	hri_tccount16_write_CC_reg(TC1, 1, angle_val);	
-	hri_tc_write_CTRLA_ENABLE_bit(TC1, 1 << TC_CTRLA_ENABLE_Pos); 
+	hri_tccount16_write_CC_reg(TC1, 1, angle_val);
+	hri_tc_write_CTRLA_ENABLE_bit(TC1, 1 << TC_CTRLA_ENABLE_Pos);
+}
+
+/**
+  *	Was hoping it would smooth the transitions -- these servos suck too much
+  */
+void SERVO_linear_transition_angle(double angle)
+{
+	double angle_ratio = angle / 180.0;
+	uint16_t pwm_spread = SERVO_PWM_MAXIMUM_us - SERVO_PWM_MINIMUM_us;
+	double angle_us = SERVO_PWM_MINIMUM_us + (double)(angle_ratio * pwm_spread);
+	uint16_t val = 0, angle_val = (angle_us * SERVO_PWM_COUNT) / SERVO_PWM_PERIOD_us;
+	
+	while (val != angle_val) {
+		if (!hri_tc_is_syncing(TC1, TC_SYNCBUSY_SWRST)) {
+			if (hri_tc_get_CTRLA_reg(TC1, TC_CTRLA_ENABLE)) {
+				hri_tc_clear_CTRLA_ENABLE_bit(TC1);
+				hri_tc_wait_for_sync(TC1, TC_SYNCBUSY_ENABLE);
+			}
+		}
+		hri_tc_wait_for_sync(TC1, TC_SYNCBUSY_SWRST);
+		
+		val = hri_tccount16_read_CC_reg(TC1, 1);
+		if (val > angle_val)
+			hri_tccount16_write_CC_reg(TC1, 1, --val);
+		else if (val < angle_val)
+			hri_tccount16_write_CC_reg(TC1, 1, ++val);
+		hri_tc_write_CTRLA_ENABLE_bit(TC1, 1 << TC_CTRLA_ENABLE_Pos);
+		
+		timer = 1;
+		while (timer);
+	}
 }

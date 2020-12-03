@@ -137,14 +137,13 @@ examples/driver_examples.d examples/driver_examples.o: \
  ../hri/hri_usb_e54.h ../hri/hri_wdt_e54.h \
  ../hal/utils/include/err_codes.h ../hpl/port/hpl_gpio_base.h \
  ../hal/utils/include/utils_assert.h ../Config/hpl_port_config.h \
- ../hal/include/hal_delay.h ../hal/include/hpl_irq.h \
- ../hal/include/hpl_reset.h ../hal/include/hpl_sleep.h \
  ../hal/include/hal_init.h ../hal/include/hpl_init.h \
  ../hal/include/hal_io.h ../hal/include/hal_sleep.h \
- ../hal/include/hal_usart_sync.h ../hal/include/hal_io.h \
- ../hal/include/hpl_usart_sync.h ../hal/include/hpl_usart.h \
- ../hal/include/hal_mci_sync.h ../hal/include/hpl_mci_sync.h \
- ../hal/utils/include/utils.h ../servo/servo.h ../common.h \
+ ../hal/include/hpl_sleep.h ../hal/include/hal_usart_sync.h \
+ ../hal/include/hal_io.h ../hal/include/hpl_usart_sync.h \
+ ../hal/include/hpl_usart.h ../hal/include/hal_mci_sync.h \
+ ../hal/include/hpl_mci_sync.h ../hal/utils/include/utils.h \
+ ../servo/servo.h ../common.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
@@ -517,14 +516,6 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 
 ../Config/hpl_port_config.h:
 
-../hal/include/hal_delay.h:
-
-../hal/include/hpl_irq.h:
-
-../hal/include/hpl_reset.h:
-
-../hal/include/hpl_sleep.h:
-
 ../hal/include/hal_init.h:
 
 ../hal/include/hpl_init.h:
@@ -532,6 +523,8 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAME54_DFP\1.1.134\include
 ../hal/include/hal_io.h:
 
 ../hal/include/hal_sleep.h:
+
+../hal/include/hpl_sleep.h:
 
 ../hal/include/hal_usart_sync.h:
 

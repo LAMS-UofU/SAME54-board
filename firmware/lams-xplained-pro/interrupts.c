@@ -2,10 +2,9 @@
 #include "common.h"
 #include "drivers.h"
 
-extern volatile uint16_t lidar_timer;
+extern volatile uint32_t systick_count;
+extern volatile uint32_t timer;
 extern volatile uint8_t status;
-
-volatile uint32_t systick_count = 0;
 
 void HardFault_Handler(void) __attribute__( ( naked ) );
 void HardFault_Handler_C(unsigned * svc_args, unsigned int lr_value);
@@ -94,8 +93,35 @@ void HardFault_Handler_C(unsigned int * hardfault_args, unsigned int lr_value)
 	printf(" | Misc\r\n");
 	printf(" | | LR/EXC_RETURN= 0x%04X\r\n", (unsigned)lr_value);
 	
-	while (1) {
-		gpio_toggle_pin_level(LED_STATUS);
-		delay_ms(BLINK_ERROR);
+	while (1);
+}
+
+/**
+  *	SysTick Handler
+  */
+void SysTick_Handler(void)
+{
+	systick_count++;
+	
+	if (timer > 0) {
+		if (LAMS_DEBUG) {
+			if (timer % 1000 == 0)
+				printf("%"PRIu32".", (uint32_t)(timer / 1000));
+		}
+		timer--;
 	}
+	
+	switch (status) {
+		case STATUS_IDLE: /* Solid light */
+			gpio_set_pin_level(LED_STATUS, true);
+			break;
+		case STATUS_PROCESSING:
+			if (systick_count % BLINK_PROCESSING == 0)
+				gpio_toggle_pin_level(LED_STATUS);
+			break;
+		case STATUS_ERROR:
+			if (systick_count % BLINK_ERROR == 0)
+				gpio_toggle_pin_level(LED_STATUS);
+			break;
+	};
 }

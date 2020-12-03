@@ -11,10 +11,10 @@ static void LIDAR_USART_CLOCK_init(void);
 
 struct usart_sync_descriptor LIDAR_USART;
 
-resp_desc_s		resp_desc = {0};
-write_data_s	sd_scan_data[MAX_SCANS] = {0};
-conf_data_t		conf_data = { .resp2 = 0 };
-uint8_t			processing = 0;
+resp_desc_s				resp_desc = {0};
+volatile write_data_s	sd_scan_data[MAX_SCANS] = {0};
+conf_data_t				conf_data = { .resp2 = 0 };
+uint8_t					processing = 0;
 
 /* Scan counts so not to print/transfer data while scanning */
 uint32_t scan_count = 0;
@@ -22,6 +22,7 @@ uint32_t invalid_exp_scans = 0;
 
 /* Preserved value of which request was given until new request is sent */
 uint8_t lidar_request = 0;
+uint8_t lidar_config = 0;
 
 /* Number of bytes received for processing LiDAR responses */
 volatile uint32_t byte_count = 0;
@@ -188,4 +189,24 @@ uint8_t LIDAR_USART_read_byte(void)
 	
 	io_read(io, &buf, 1);
 	return buf;
+}
+
+/**
+  *	Returns string representation of request number
+  */
+char* request_str_repr(uint8_t req)
+{
+	switch (req) {
+		case LIDAR_STOP:				return "LIDAR_STOP"; 
+		case LIDAR_RESET:				return "RESET";
+		case LIDAR_SCAN:				return "SCAN";
+		case LIDAR_EXPRESS_SCAN:		return "EXPRESS_SCAN";
+		case LIDAR_FORCE_SCAN:			return "FORCE_SCAN";
+		case LIDAR_GET_INFO:			return "GET_INFO";
+		case LIDAR_GET_HEALTH:			return "GET_HEALTH";
+		case LIDAR_GET_SAMPLERATE:		return "GET_SAMPLERATE";
+		case LIDAR_GET_LIDAR_CONF:		return "GET_LIDAR_CONF";
+		case LIDAR_MOTOR_SPEED_CTRL:	return "MOTOR_SPEED_CTRL";
+	}
+	return "INVALID REQUEST GIVEN";
 }

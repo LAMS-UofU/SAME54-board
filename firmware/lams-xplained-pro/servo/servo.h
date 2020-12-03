@@ -8,7 +8,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 void SERVO_PWM_init(void);
-void SERVO_set_angle(int angle);
+void SERVO_set_angle(double);
+void SERVO_linear_transition_angle(double);
 
 /* Debug method */
 void SERVO_menu(void);

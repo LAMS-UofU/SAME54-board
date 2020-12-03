@@ -8,6 +8,10 @@
 #include "lams_sd.h"
 #include "sd_mmc.h"
 
+volatile uint32_t systick_count;
+volatile uint32_t timer;
+volatile uint8_t  status;
+
 uint8_t menu_txt[] = "\r\n******** Enter choice ******** \r\n \
 1. Reset device\r\n \
 2. EEPROM\r\n \
@@ -23,12 +27,17 @@ int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
 	start_init();
-	delay_init(0);
+	//delay_init(0);
+	SysTick_Config(12000UL); /* 12M ticks/seconds / 1k ticks/second = 120000 */
 	
-	gpio_set_pin_level(LED_STATUS, true);
+	status = STATUS_IDLE;
+	
+	printf("\r\nLAMS_DEBUG = %u\r\n", LAMS_DEBUG);
+	
+	gpio_set_pin_level(LED_STATUS, 0);
 	SERVO_set_angle(0);
 
-	if (DEBUG) {
+	if (LAMS_DEBUG) {
 		printf("\r\n\r\n========LiDAR Automated Mapping System (LAMS)========\r\n");
 
 		while (1) {
@@ -75,7 +84,7 @@ int main(void)
 			}
 		} 
 	} 
-    /* DEBUG = 0 */
+    /* LAMS_DEBUG = 0 */
     else {
 		while (1) {
 			scan();

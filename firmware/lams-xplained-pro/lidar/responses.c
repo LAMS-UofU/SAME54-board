@@ -191,7 +191,7 @@ uint16_t LIDAR_RES_get_health(void)
 	
 	error_code = DATA_RESPONSE[0] + ((unsigned)DATA_RESPONSE[1] << 8);
 	
-    if (DEBUG) {
+    if (LAMS_DEBUG) {
 		if (error_code == 0)
 			printf(" : LiDAR Health is %s!\r\n", status);
 		else 
@@ -211,7 +211,7 @@ uint16_t LIDAR_RES_get_health(void)
   */
 void LIDAR_RES_get_samplerate(void)
 {
-    if (DEBUG) {
+    if (LAMS_DEBUG) {
 	    printf(" : Standard Scan Samplerate: %u\r\n", 
 			    DATA_RESPONSE[0] + ((unsigned)DATA_RESPONSE[1] << 8));
 		printf(" : Express Scan Samplerate: %u\r\n", 
@@ -237,7 +237,7 @@ void LIDAR_RES_get_lidar_conf(void)
 		case CONF_SCAN_MODE_COUNT:
 			conf_data.resp1 = ( ((uint8_t)DATA_RESPONSE[4]) | 
 								((uint8_t)DATA_RESPONSE[5] << 8) );
-			if (DEBUG)
+			if (LAMS_DEBUG)
 				printf(" : %u scan modes supported\r\n", conf_data.resp1);
 			return;
 				
@@ -247,7 +247,7 @@ void LIDAR_RES_get_lidar_conf(void)
 								((uint8_t)DATA_RESPONSE[6] << 16) |
 								((uint8_t)DATA_RESPONSE[7] << 24) );
 			conf_data.resp2 = conf_data.resp2 / (1 << 8);
-			if (DEBUG) 
+			if (LAMS_DEBUG) 
 				printf(" : Specified scan mode costs %"PRIu32" us per sample\r\n", conf_data.resp2);
 			return;
 		
@@ -257,13 +257,13 @@ void LIDAR_RES_get_lidar_conf(void)
 								((uint8_t)DATA_RESPONSE[6] << 16) |
 								((uint8_t)DATA_RESPONSE[7] << 24) );
 			conf_data.resp2 = conf_data.resp2 / (1 << 8);
-			if (DEBUG)
+			if (LAMS_DEBUG)
 				printf(" : Specified scan mode has a max measuring distance of %"PRIu32" m\r\n", conf_data.resp2);
 			return;
 		
 		case CONF_SCAN_MODE_ANS_TYPE:
 			conf_data.resp0 = (uint8_t)DATA_RESPONSE[4];
-			if (DEBUG) {
+			if (LAMS_DEBUG) {
 				switch (conf_data.resp0) {
 					case ANS_TYPE_STANDARD:
 						printf(" : Specified scan mode returns data in rplidar_resp_measurement_node_t\r\n");
@@ -283,7 +283,7 @@ void LIDAR_RES_get_lidar_conf(void)
 		case CONF_SCAN_MODE_TYPICAL:
 			conf_data.resp1 = ( ((uint8_t)DATA_RESPONSE[4]) |
 								((uint8_t)DATA_RESPONSE[5] << 8) );
-			if (DEBUG)
+			if (LAMS_DEBUG)
 				printf(" : Typical scan mode id of LiDAR is %"PRIu16"\r\n", conf_data.resp1);
 			conf_data.resp1 = conf_data.resp1;
 			return;
@@ -291,7 +291,7 @@ void LIDAR_RES_get_lidar_conf(void)
 		case CONF_SCAN_MODE_NAME:
 			for (i=0; i<(resp_desc.response_info & 0x3FFFFFFF); i++)
 				conf_data.resp3[i] = toupper(DATA_RESPONSE[i+4]);
-			if (DEBUG)
+			if (LAMS_DEBUG)
 				printf(" : Specified scan mode name is %s\r\n", conf_data.resp3);
 			return;
 	}

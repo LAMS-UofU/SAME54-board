@@ -968,6 +968,12 @@
     <Compile Include="scan.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="scan_utils.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="scan_utils.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="sd_mmc\sd_mmc.c">
       <SubType>compile</SubType>
     </Compile>

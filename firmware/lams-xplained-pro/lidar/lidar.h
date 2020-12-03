@@ -151,9 +151,8 @@ typedef struct {
 	lidar angle	(deg)	- 32 bits */
 typedef struct write_data {
 	uint8_t repeated_n;
-	uint16_t lidar_angle_int;
-	uint16_t lidar_angle_precision;
-	uint8_t servo_angle;
+	double servo_angle;
+	char servo_angle_str[32];
 	char distance[32];
 	char lidar_angle[32];
 } write_data_s;
@@ -196,6 +195,8 @@ void LIDAR_PWM_stop(void);
 void LIDAR_USART_init(void);
 void LIDAR_USART_send(uint8_t *, uint16_t);
 uint8_t LIDAR_USART_read_byte(void);
+
+char* request_str_repr(uint8_t);
 
 #ifdef __cplusplus
 }
