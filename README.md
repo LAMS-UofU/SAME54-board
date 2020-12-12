@@ -1,6 +1,6 @@
 # LAMS 
 
-...description...
+In these files, you will find the software, datasheets and PCB design for the LAMS project. We integrated multiple peripherals to use with our needed devices such as: timers for the servo PWM signal, UART communications for the LiDAR, simple GPIO signals for a status LED, as well as a simple SysTick configuration to give precise timing measurements. 
 
 ## Pinouts
 
