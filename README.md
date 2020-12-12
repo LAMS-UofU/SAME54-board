@@ -4,7 +4,7 @@ In these files, you will find the software, datasheets and PCB design for the LA
 
 ## Pinouts
 
-![Block Diagram](block-diagram.png)
+![Block Diagram](lams-diagrams_block-diagram.png)
 
 LiDAR: Tx (PA04) / Rx (PA05) / PWM (PB09)
 
