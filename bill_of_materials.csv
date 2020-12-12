@@ -1,15 +1,33 @@
-Part,Quantity,Mouser Part #,Manufacturer Part #,Manufacturer,Description,Datasheet
-IC1,1,556-ATSAME54N20AAUT,ATSAME54N20A-AUT,Microchip,ARM Microcontrollers - MCU 120MHZ 1024KB FLASH 100 TQFP PKG IN 85C,https://www.mouser.com/ds/2/268/60001507A-1130176.pdf
-"R1,R3,R4,R5",4,71-CRCW1206J-100K-E3,CRCW1206100KJNEA,Vishay/Dale,Thick Film Resistors - SMD 1/4watt 100Kohms 5%,https://www.mouser.com/datasheet/2/427/dcrcwe3-1762152.pdf
-"R2,R6,R7,R8",4,71-CRCW1206J-10K-E3,CRCW120610K0JNEA,Vishay/Dale,Thick Film Resistors - SMD 1/4watt 10Kohms 5%,https://www.mouser.com/datasheet/2/427/dcrcwe3-1762152.pdf
-R9,1,71-CRCW1206J-330-E3,CRCW1206330RJNEA,Vishay/Dale,Thick Film Resistors - SMD 1/4watt 330ohms 5%,https://www.mouser.com/datasheet/2/427/dcrcwe3-1762152.pdf
-R10,1,71-CRCW1206J-1K-E3,CRCW12061K00JNEA,Vishay/Dale,Thick Film Resistors - SMD 1/4watt 1Kohms 5%,https://www.mouser.com/datasheet/2/427/dcrcwe3-1762152.pdf
-"C1,C3,C7,C8,C9,C11",6,603-AS1206KKX7YBB104,AS1206KKX7RYBB104,Yageo,Multilayer Ceramic Capacitors MLCC - SMD/SMT 0.1uF 10% 250V AEC-Q200,https://www.mouser.com/datasheet/2/447/yageodocoutput-1313910.pdf
-"C2,C4,C5",3,603-CC206KKX5R7BB106,CC1206KKX5R7BB106,Yageo,Multilayer Ceramic Capacitors MLCC - SMD/SMT 10uF 10% 16V,https://www.mouser.com/datasheet/2/447/UPY-GPHC_X5R_4V-to-50V_25-1131599.pdf
-C10,1,603-CC206KKX5R9BB475,CC1206KKX5R9BB475,Yageo,Multilayer Ceramic Capacitors MLCC - SMD/SMT 4.7M pF 10% 50 Volts,https://www.mouser.com/datasheet/2/447/UPY-GPHC_X5R_4V-to-50V_25-1131599.pdf
-FL1,1,81-BLA31AG221SN4D,BLA31AG221SN4D,Murata Electronics,"Murata Power Solutions Ferrite Bead, 3.2 x 1.6 x 0.8mm (3216), 220 impedance at 100 MHz",https://componentsearchengine.com/Datasheets/1/BLA31AG221SN4D.pdf
-J1,1,523-GSD09002SEU,GSD09002SEU,Amphenol,"Memory Card Connectors SD, 9 pos, 15U",https://www.arrow.com/en/products/gsd09002seu/amphenol
-J2,1,651-1985920 ,1985920,Phoenix Contact,"Screw terminal, 5mm pitch",https://www.mouser.com/datasheet/2/324/985920-1459071.pdf
-L1,1,81-LQH31MN100J03L,LQH31MN100J03L,Murata Electronics,Fixed Inductors 1206 10uH +/-5% Chip Inductor,https://www.mouser.com/datasheet/2/281/JELF243A-0162-1699505.pdf
-S1,1,612-LL3301BF065QJ,LL3301BF065QJ,E-Switch,Pushbutton Switches 50mA 12VDC F065 9.5mm J-Lead,http://spec_sheets.e-switch.com/specs/P010455.pdf
-"JP1,JP2,JP4,JP7",3,649-68001-121HLF ,68001-121HLF ,Amphenol FCI,"20-pin header, 2.54mm spacing",https://www.mouser.com/datasheet/2/18/68000-1266375.pdf
+Ref Part,Quantity,Mouser Part #,Manufacturer Part #,Manufacturer,Description
+IC1,1,556-ATSAME54N20AAUT,ATSAME54N20A-AUT,Microchip,ARM Microcontrollers - MCU 120MHZ 1024KB FLASH 100 TQFP PKG IN 85C
+U1,1,700-MAX20034ATIR/VY+,MAX20034ATIR/VY+,Maxim Integrated,"2.2MHz, 36V, Dual Buck Controller with 17Î¼A Quiescent Current"
+OSC1,1,581-CX3225CA12DKPSC1,CX3225CA12000D0KPSC1.,Kyocera,Crystals 12MHz 8pF 3.2x2.5x0.8mm
+J1,1,490-PJ-070BH-SMT-TR,PJ-070BH-SMT-TR,CUI Devices,"DC Power Connectors power jack, 2.5 x 5.5 mm, vertical, SMT, high current, 1 switch, T&R package"
+SD_CARD_CONN,1,523-GSD09002SEU,GSD09002SEU,Amphenol,"Memory Card Connectors SD, 9 pos, 15U"
+"RESET_BTN, START_BTN",2,612-LL3301BF065QJ,LL3301BF065QJ,E-Switch,Pushbutton Switches 50mA 12VDC F065 9.5mm J-Lead
+"C5,C6,C7,C8,C10,C11,C15,C16",8,80-C0603C104K5R,C0603C104K5RACTU,KEMET Corporation,Cap Ceramic 100nF 50V X7R 10% Pad SMD 0603 125Â°C T/R
+"C1,C4",2,80-C0603C472J5R,C0603C472J5RACTU,KEMET Corporation,Cap Ceramic 4.7nF 50V X7R 5% Pad SMD 0603 125Â°C T/R
+"C2,C3",2,581-04025A4R7JAT2A,04025A4R7JAT2A,AVX,Cap Ceramic 4.7pF 50V C0G 5% Pad SMD 0402 125Â°C T/R
+C9,1,81-GRM188R61E106KA3D,GRM188R61E106KA73D,Murata Electronics,Multilayer Ceramic Capacitors MLCC - SMD/SMT 10UF 25V 10% 0603
+"C12,C13",2,81-GRM1885C1H8R0CA1D,GRM1885C1H8R0CA01D,Murata Electronics,Multilayer Ceramic Capacitors MLCC - SMD/SMT 8pF 0603
+C14,1,81-GRM188R61C475KAJD,GRM188R61C475KAAJD,Murata Electronics,Multilayer Ceramic Capacitors MLCC - SMD/SMT 0603 4.7uF 16volts *Derate Voltage/Temp
+CBIAS,1,80-C1206C685K4R,C1206C685K4RACTU,KEMET Corporation,Cap Ceramic 6.8uF 16V X7R 10% Pad SMD 1206 125Â°C T/R
+"COUT1, CIN",5,810-C4532X7R1C336M,C4532X7R1C336M250KC,TDK,Multilayer Ceramic Capacitors MLCC - SMD/SMT 1812 16V 33uF X7R 20% T: 2.5mm
+COUT2,2,81-GRM31CR71A226ME5L,GRM31CR71A226ME15L,Murata Manufacturing,Cap 22uF 10V X7R 1206 20% 3.2mOhm 0.72nH Active
+"D1,D2",2,863-MBRS140T3G,MBRS140T3G,ON Semiconductor,Rectifier Diode Schottky Si 40V 1A 2-Pin SMB T/R
+LED_STATUS,1,710-155060VS75300,155060VS75300,Wurth Elektronik,Standard LEDs - SMD WL-SMSW Wtrclr SdVw Grn 2V 20mA 572nm
+"LED_RX,LED_TX",2,710-155060AS75300,155060VS75301,Wurth Elektronik,Standard LEDs - SMD WL-SMSW Wtrclr SdVw Amber 2V 20mA 610nm
+L1,1,652-SRP1238A-3R3M,SRP1238A-3R3M,Bourns,Fixed Inductors 3.3uH 20% SMD 1238 AEC-Q200
+L2,1,994-MSS1260-682MLB,MSS1260-682MLB,Coilcraft,Inductor 6.8 uH 20% 18.5mOhm max 3.8Arms @20C 5.9Arms @40C 7.4Asat @-10% 8.26Asat @-20% 8.8Asat @-30% 6.2mmHt 151.29mm^2 MSS1260 Active
+"M1,M2,M3,M4",4,863-NVMFS5C468NLFT1G,NVMFS5C468NLAFT1G,On Semi,MOSFET T6 40V NCH LL IN SO8FL
+R1,1,667-ERJ-2RKF1022X,ERJ-2RKF1022X,Panasonic,Res Thick Film 0402 10.2K Ohm 1% 0.1W(1/10W) Â±100ppm/Â°C Pad SMD Automotive T/R
+"R3,R4",2,667-ERJ-2GEJ513X,ERJ2GEJ513X,Panasonic,Res Thick Film 0402 51K Ohm 5% 0.1W(1/10W) Â±200ppm/Â°C Pad SMD Automotive T/R
+R2,1,667-ERJ-2RKF1052X,ERJ2RKF1052X,Panasonic,Res Thick Film 0402 10.5K Ohm 1% 0.1W(1/10W) Â±100ppm/Â°C Pad SMD Automotive T/R
+R5,1,667-ERJ-UP3F3300V,ERJ-UP3F3300V,Panasonic,Thick Film Resistors - SMD 0603 0.25W 1% 330ohm AEC-Q200
+"R6,R8,R12,R13,R15",5,667-ERJ-UP3F1002V,ERJ-UP3F1002V,Panasonic,Thick Film Resistors - SMD 0603 0.25W 1% 10Kohm AEC-Q200
+"R7,R9,R10,R11",4,667-ERJ-PA3F1003V,ERJ-PA3F1003V,Panasonic,Thick Film Resistors - SMD 0603 100Kohm 1% Anti-Surge AEC-Q200
+R14,1,667-ERJ-PA3F1001V,ERJ-PA3F1001V,Panasonic,Thick Film Resistors - SMD 0603 1Kohm 1% Anti-Surge AEC-Q200
+"R16,R17,R18",3,667-ERJ-UP3J101V,ERJ-UP3J101V,Panasonic,Thick Film Resistors - SMD 0603 0.25W 5% 100ohm AEC-Q200
+RCS1,1,667-ERJ-3LWFR010V,ERJ-3LWFR010V,Panasonic,Current Sense Resistors - SMD 0603 10mOhms 1% Curr Sens AEC-Q200
+RCS2,1,667-ERJ-8BWFR020V,ERJ8BWFR020V,Panasonic,Res Thick Film 1206 0.02 Ohm 1% 1W 0ppm/Â°C to 150ppm/Â°C Pad SMD Automotive T/R
+ROSC,1,667-ERJ-2RKF4642X,ERJ2RKF4642X,Panasonic,Res Thick Film 0402 46.4K Ohm 1% 0.1W(1/10W) Â±100ppm/Â°C Pad SMD Automotive T/R
